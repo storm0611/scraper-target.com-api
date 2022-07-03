@@ -4,6 +4,7 @@ from urllib.request import urlopen
 
 TARGET_HOME = "https://www.target.com"
 TARGET_ALL_CATEGORIES = "https://www.target.com/c/shop-all-categories/-/N-5xsxf"
+TARGET_PRODUCT = "https://www.target.com/p/huggies-little-movers-baby-disposable-diapers-select-size-and-count/-/A-82984217?preselect=53550899#lnk=sametab"
 
 target_url = TARGET_ALL_CATEGORIES
 

@@ -49,10 +49,10 @@ target_url = TARGET_PRODUCT
 # #
 # driver.quit()
 
-response = requests.get(target_url)
-time.sleep(10)
-soup = BeautifulSoup(response.text, "lxml")
-# page = urlopen(target_url)
+# response = requests.get(target_url)
+# time.sleep(10)
+# soup = BeautifulSoup(response.text, "lxml")
+page = urlopen(target_url)
 # html = page.read().decode("utf-8")
 # soup = BeautifulSoup(html, "html.parser")
 # # product_name = soup.select('h1[data-test="product-title"] span')[0].text
@@ -65,7 +65,13 @@ soup = BeautifulSoup(response.text, "lxml")
 # # print(product_category)
 # # product_description = soup.find_all("h3", string="Description")[0].parent.div.string
 # # print(product_description)
+html = page.read().decode("utf-8")
+soup = BeautifulSoup(html, "html.parser")
 product_price = soup.select('.kfATIS')
+while not len(product_price):
+    html = page.read().decode("utf-8")
+    soup = BeautifulSoup(html, "html.parser")
+    product_price = soup.select('.kfATIS')
 print(product_price)
 
 

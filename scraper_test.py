@@ -39,11 +39,11 @@ target_url = TARGET_PRODUCT
 page = urlopen(target_url)
 html = page.read().decode("utf-8")
 soup = BeautifulSoup(html, "html.parser")
-product_name = soup.select('h1[data-test="product-title"]').string
+product_name = soup.select('h1[data-test="product-title"]')
 print(product_name)
-product_price = soup.select('span[data-test="product-random-weight-price"]').string
+product_price = soup.select('span[data-test="product-random-weight-price"]')
 print(product_price)
-product_description = soup.select('div[data-test="item-details-discription"]').string
+product_description = soup.select('div[data-test="item-details-discription"]')
 print(product_description)
 prodcut_upc = soup.find_all("b", string="UPC").parent.string
 print(prodcut_upc)

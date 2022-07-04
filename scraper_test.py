@@ -49,19 +49,19 @@ target_url = TARGET_PRODUCT
 # driver.quit()
 
 page = urlopen(target_url)
-time.sleep(2)
+time.sleep(4)
 html = page.read().decode("utf-8")
 soup = BeautifulSoup(html, "html.parser")
-product_name = soup.select('h1[data-test="product-title"] span')[0].text
-print(product_name)
-prodcut_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
-print(prodcut_upc)
-product_image = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
-print(product_image)
-product_category = soup.select('.PWWrr:nth-child(2) > span > a > span')[0].text
-print(product_category)
-product_description = soup.find_all("h3", string="Description")[0].parent.div.string
-print(product_description)
+# product_name = soup.select('h1[data-test="product-title"] span')[0].text
+# print(product_name)
+# prodcut_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
+# print(prodcut_upc)
+# product_image = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
+# print(product_image)
+# product_category = soup.select('.PWWrr:nth-child(2) > span > a > span')[0].text
+# print(product_category)
+# product_description = soup.find_all("h3", string="Description")[0].parent.div.string
+# print(product_description)
 product_price = soup.select('span[data-test="product-random-weight-price"]')
 print(product_price)
 

@@ -34,13 +34,39 @@ TARGET_GIFT_CARDS = "/c/gift-cards/-/N-5xsxu"
 TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 
 
-target_url = TARGET_ALL_CATEGORIES
+target_url = TARGET_PRODUCT
 
 page = urlopen(target_url)
 html = page.read().decode("utf-8")
-
 soup = BeautifulSoup(html, "html.parser")
-items = soup.select("div.h-padding-h-tight")
-file = open('html.txt', 'rw', encoding='uft-8')
-file.write(items)
+product_name = soup.select('h1[data-test="product-title"]').string
+print(product_name)
+product_price = soup.select('span[data-test="product-random-weight-price"]').string
+print(product_price)
+product_description = soup.select('div[data-test="item-details-discription"]').string
+print(product_description)
+prodcut_upc = soup.find_all("b", string="UPC").parent.string
+print(prodcut_upc)
+product_image = soup.select('button[data-test="product-carousel-item-0"] img')['src']
+print(product_image)
+product_category = soup.select('.PWWrr:nth-child(2) > span > a > span').string
+print(product_category)
+
+
+
+# categories = soup.select('div.class_name a').href
+# for category in categories:
+#     category_page = urlopen(TARGET_HOMEPAGE + category)
+#     category_html = category_page.read().decode('utf-8')
+#     category_soup = BeautifulSoup(category_html, "html.parser")
+#     category_children = category_soup.select('div.children a').href
+#     for category_child in category_children:
+#         category_child_page = urlopen(TARGET_HOMEPAGE + category_child)
+#         category_child_html = category_child_page.read().decode('utf-8')
+#         category_child_soup = BeautifulSoup(category_child_html, "html.parser")
+#         xxx = category_child_soup.select('sdfsdfsfs').href
+
+# items = soup.select("div.h-padding-h-tight")
+# file = open('html.txt', 'rw', encoding='uft-8')
+# file.write(items)
 

@@ -41,11 +41,11 @@ html = page.read().decode("utf-8")
 soup = BeautifulSoup(html, "html.parser")
 product_name = soup.select('h1[data-test="product-title"] span')[0].text
 print(product_name)
-product_price = soup.select('span[data-test="product-price"]')
+product_price = soup.select('span[data-test="product-random-weight-price"]')
 print(product_price)
-product_description = soup.select('div[data-test="item-details-discription"]')
+product_description = soup.select('div', string="Description")
 print(product_description)
-prodcut_upc = soup.find_all("b", string="UPC").parent.string
+prodcut_upc = soup.find_all("b", string="UPC").parent
 print(prodcut_upc)
 product_image = soup.select('button[data-test="product-carousel-item-0"] img')['src']
 print(product_image)

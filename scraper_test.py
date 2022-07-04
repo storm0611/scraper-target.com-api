@@ -2,6 +2,8 @@ from attr import attr
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
+from selenium.webdriver import Chrome
+
 TARGET_HOMEPAGE = "https://www.target.com"
 TARGET_ALL_CATEGORIES = "https://www.target.com/c/shop-all-categories/-/N-5xsxf"
 TARGET_PRODUCT = "https://www.target.com/p/huggies-little-movers-baby-disposable-diapers-select-size-and-count/-/A-82984217?preselect=53550899#lnk=sametab"
@@ -36,22 +38,31 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 
 target_url = TARGET_PRODUCT
 
-page = urlopen(target_url)
-html = page.read().decode("utf-8")
-soup = BeautifulSoup(html, "html.parser")
-# product_name = soup.select('h1[data-test="product-title"] span')[0].text
-# print(product_name)
-# prodcut_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
-# print(prodcut_upc)
-# product_image = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
-# print(product_image)
-# product_category = soup.select('.PWWrr:nth-child(2) > span > a > span')[0].text
-# print(product_category)
-# product_description = soup.find_all("h3", string="Description")[0].parent.div.string
-# print(product_description)
+driver = Chrome(executable_path='c:/driver/chromedriver.exe')
+driver.get(TARGET_PRODUCT)
+#
+# Code to read data from HTML here
+elements = driver.find_element_by_css_selector(".kfATIS")
+print(elements)
+#
+driver.quit()
 
-product_price = soup.find_all("span")
-print(product_price)
+# page = urlopen(target_url)
+# html = page.read().decode("utf-8")
+# soup = BeautifulSoup(html, "html.parser")
+# # product_name = soup.select('h1[data-test="product-title"] span')[0].text
+# # print(product_name)
+# # prodcut_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
+# # print(prodcut_upc)
+# # product_image = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
+# # print(product_image)
+# # product_category = soup.select('.PWWrr:nth-child(2) > span > a > span')[0].text
+# # print(product_category)
+# # product_description = soup.find_all("h3", string="Description")[0].parent.div.string
+# # print(product_description)
+
+# product_price = soup.find_all("span")
+# print(product_price)
 
 
 

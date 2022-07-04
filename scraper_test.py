@@ -1,3 +1,4 @@
+from selenium.webdriver.chrome.options import Options
 from attr import attr
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
@@ -41,11 +42,18 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 
 target_url = TARGET_PRODUCT
 
-browser = webdriver.PhantomJS()
-browser.get(target_url)
-html = browser.page_source
-soup = BeautifulSoup(html, 'lxml')
-product_price = soup.select('.kfATIS')
+
+chrome_options = Options()
+chrome_options.add_argument("--headless")  # Opens the browser up in background
+
+with Chrome(options=chrome_options) as browser:
+    browser.get(target_url)
+    html = browser.page_source
+
+soup = BeautifulSoup(html, 'html.parser')
+containers = soup.findAll("span", {"class": "kfATIS"})
+print(containers)
+# product_price = soup.select('.kfATIS')
 
 
 # page = urlopen(target_url)

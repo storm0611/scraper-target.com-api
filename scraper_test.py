@@ -5,6 +5,7 @@ import requests
 import time
 
 from selenium.webdriver import Chrome
+from selenium import webdriver
 
 TARGET_HOMEPAGE = "https://www.target.com"
 TARGET_ALL_CATEGORIES = "https://www.target.com/c/shop-all-categories/-/N-5xsxf"
@@ -40,22 +41,17 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 
 target_url = TARGET_PRODUCT
 
-# driver = Chrome(executable_path='C:/Users/HOPELY/.wdm/drivers/chromedriver/win32/102.0.5005.61/chromedriver.exe')
-# driver.get(TARGET_PRODUCT)
-# #
-# # Code to read data from HTML here
-# elements = driver.find_element_by_css_selector(".kfATIS")
-# print(elements)
-# #
-# driver.quit()
+browser = webdriver.PhantomJS()
+browser.get(target_url)
+html = browser.page_source
+soup = BeautifulSoup(html, 'lxml')
+product_price = soup.select('.kfATIS')
 
-# response = requests.get(target_url)
-# time.sleep(10)
-# soup = BeautifulSoup(response.text, "lxml")
-page = urlopen(target_url)
-start = time.time()
+
+# page = urlopen(target_url)
 # html = page.read().decode("utf-8")
 # soup = BeautifulSoup(html, "html.parser")
+
 # # product_name = soup.select('h1[data-test="product-title"] span')[0].text
 # # print(product_name)
 # # prodcut_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
@@ -66,15 +62,9 @@ start = time.time()
 # # print(product_category)
 # # product_description = soup.find_all("h3", string="Description")[0].parent.div.string
 # # print(product_description)
-html = page.read().decode("utf-8")
-soup = BeautifulSoup(html, "html.parser")
-product_price = soup.select('.kfATIS')
-while not len(product_price):
-    html = page.read().decode("utf-8")
-    soup = BeautifulSoup(html, "html.parser")
-    product_price = soup.select('.kfATIS')
-print(product_price)
-print(time.time() - start)
+
+# product_price = soup.select('.kfATIS')
+# print(product_price)
 
 
 

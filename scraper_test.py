@@ -48,7 +48,7 @@ target_url = TARGET_PRODUCT
 
 def get_current_time(content):
     soup = bs4.BeautifulSoup(content, features="lxml")
-    price = soup.find(class_=".kfATIS")
+    price = soup.select('span[data-test="product-random-weight-price"]')
     return price
 
 

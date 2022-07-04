@@ -45,7 +45,7 @@ soup = BeautifulSoup(html, "html.parser")
 # print(product_price)
 # product_description = soup.select('div[data-test="item-details-discription"]')
 # print(product_description)
-prodcut_upc = soup.find_all("b", string="UPC")
+prodcut_upc = soup.find_all("b", string="UPC")[0].parent
 print(prodcut_upc)
 # product_image = soup.select('button[data-test="product-carousel-item-0"] img')['src']
 # print(product_image)

@@ -53,6 +53,7 @@ target_url = TARGET_PRODUCT
 # time.sleep(10)
 # soup = BeautifulSoup(response.text, "lxml")
 page = urlopen(target_url)
+start = time.time()
 # html = page.read().decode("utf-8")
 # soup = BeautifulSoup(html, "html.parser")
 # # product_name = soup.select('h1[data-test="product-title"] span')[0].text
@@ -73,6 +74,7 @@ while not len(product_price):
     soup = BeautifulSoup(html, "html.parser")
     product_price = soup.select('.kfATIS')
 print(product_price)
+print(time.time() - start)
 
 
 

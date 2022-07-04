@@ -1,15 +1,6 @@
 import pyppeteer
 import bs4
 import asyncio
-from selenium.webdriver.chrome.options import Options
-from attr import attr
-from bs4 import BeautifulSoup
-from urllib.request import urlopen
-import requests
-import time
-
-from selenium.webdriver import Chrome
-from selenium import webdriver
 
 TARGET_HOMEPAGE = "https://www.target.com"
 TARGET_ALL_CATEGORIES = "https://www.target.com/c/shop-all-categories/-/N-5xsxf"
@@ -45,7 +36,7 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 
 target_url = TARGET_PRODUCT
 
-async def main():
+async def scrap_upc_details(target_url):
     browser = await pyppeteer.launch()
     page = await browser.newPage()
     await page.goto(target_url)
@@ -64,64 +55,22 @@ async def main():
         await asyncio.sleep(1)
     product_name = soup.select('h1[data-test="product-title"] span')[0].text
     print(product_name)
-    prodcut_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
-    print(prodcut_upc)
-    product_image = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
-    print(product_image)
+    product_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
+    print(product_upc)
+    product_imageurl = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
+    print(product_imageurl)
     product_category = soup.select('.PWWrr:nth-child(2) > span > a > span')[0].text
     print(product_category)
     product_description = soup.find_all("h3", string="Description")[0].parent.div.string
     print(product_description)
     await browser.close()
+    return {"upc": product_upc,
+            "product_name": product_name,
+            "product_price": product_price.replace('$', ''),
+            "product_image": product_imageurl,
+            "product_description": product_description,
+            "product_category": product_category
+            }
+    
 
-asyncio.run(main())
-
-# chrome_options = Options()
-# chrome_options.add_argument("--headless")  # Opens the browser up in background
-
-# with Chrome(options=chrome_options) as browser:
-#     browser.get(target_url)
-#     html = browser.page_source
-
-# soup = BeautifulSoup(html, 'html.parser')
-# containers = soup.findAll("span", {"class": "kfATIS"})
-# print(containers)
-# product_price = soup.select('.kfATIS')
-
-
-# page = urlopen(target_url)
-# html = page.read().decode("utf-8")
-# soup = BeautifulSoup(html, "html.parser")
-
-# product_name = soup.select('h1[data-test="product-title"] span')[0].text
-# print(product_name)
-# prodcut_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
-# print(prodcut_upc)
-# product_image = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
-# print(product_image)
-# product_category = soup.select('.PWWrr:nth-child(2) > span > a > span')[0].text
-# print(product_category)
-# product_description = soup.find_all("h3", string="Description")[0].parent.div.string
-# print(product_description)
-
-# product_price = soup.select('.kfATIS')
-# print(product_price)
-
-
-
-# categories = soup.select('div.class_name a').href
-# for category in categories:
-#     category_page = urlopen(TARGET_HOMEPAGE + category)
-#     category_html = category_page.read().decode('utf-8')
-#     category_soup = BeautifulSoup(category_html, "html.parser")
-#     category_children = category_soup.select('div.children a').href
-#     for category_child in category_children:
-#         category_child_page = urlopen(TARGET_HOMEPAGE + category_child)
-#         category_child_html = category_child_page.read().decode('utf-8')
-#         category_child_soup = BeautifulSoup(category_child_html, "html.parser")
-#         xxx = category_child_soup.select('sdfsdfsfs').href
-
-# items = soup.select("div.h-padding-h-tight")
-# file = open('html.txt', 'rw', encoding='uft-8')
-# file.write(items)
-
+print(asyncio.run(scrap_upc_details(target_url)))

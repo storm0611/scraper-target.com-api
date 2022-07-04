@@ -48,7 +48,7 @@ soup = BeautifulSoup(html, "html.parser")
 # print(product_price)
 # product_description = soup.select('div[data-test="item-details-discription"]')
 # print(product_description)
-product_image = soup.select('button[data-test="product-carousel-item-0"] img')['src']
+product_image = soup.select('button[data-test="product-carousel-item-0"] img')
 print(product_image)
 # product_category = soup.select('.PWWrr:nth-child(2) > span > a > span').string
 # print(product_category)

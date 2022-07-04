@@ -41,7 +41,7 @@ html = page.read().decode("utf-8")
 soup = BeautifulSoup(html, "html.parser")
 product_name = soup.select('h1[data-test="product-title"] span')[0].text
 print(product_name)
-product_price = soup.select('span[data-test="product-random-weight-price"]')
+product_price = soup.select('span[data-test=product-random-weight-price]')[0].text
 print(product_price)
 product_description = soup.select('div[data-test="item-details-discription"]')
 print(product_description)

@@ -1,3 +1,6 @@
+import pyppeteer
+import bs4
+import asyncio
 from selenium.webdriver.chrome.options import Options
 from attr import attr
 from bs4 import BeautifulSoup
@@ -43,12 +46,23 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 target_url = TARGET_PRODUCT
 
 
-client = requests.Session()
+def get_current_time(content):
+    soup = bs4.BeautifulSoup(content, features="lxml")
+    price = soup.find(class_=".kfATIS")
+    return price
 
-html = client.get(target_url).content
-soup = BeautifulSoup(html, "lxml")
-csrf = soup.select(".kfATIS")
-print(csrf)
+
+async def main():
+    browser = await pyppeteer.launch()
+    page = await browser.newPage()
+    await page.goto(target_url)
+    for _ in range(30):
+        content = await page.content()
+        print(get_current_time(content))
+        await asyncio.sleep(1)
+    await browser.close()
+
+asyncio.run(main())
 
 # chrome_options = Options()
 # chrome_options.add_argument("--headless")  # Opens the browser up in background

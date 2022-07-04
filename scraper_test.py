@@ -45,21 +45,19 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 
 target_url = TARGET_PRODUCT
 
-
-def get_current_time(content):
-    soup = bs4.BeautifulSoup(content, features="lxml")
-    price = soup.select('span[data-test="product-random-weight-price"]')
-    return price
-
-
 async def main():
     browser = await pyppeteer.launch()
     page = await browser.newPage()
     await page.goto(target_url)
-    page.waitFor(4000)
-    for _ in range(30):
+    while True:
         content = await page.content()
-        print(get_current_time(content))
+        soup = bs4.BeautifulSoup(content, features="lxml")
+        try:
+            price = soup.select('span[data-test="product-random-weight-price"]')[0].string
+            break
+        except:
+            print(price)
+        print(price)
         await asyncio.sleep(1)
     await browser.close()
 

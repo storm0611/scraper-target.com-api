@@ -46,7 +46,7 @@ target_url = TARGET_PRODUCT
 client = requests.Session()
 
 html = client.get(target_url).content
-soup = BeautifulSoup(html)
+soup = BeautifulSoup(html, "lxml")
 csrf = soup.find(class_="kfATIS")
 print(csrf)
 

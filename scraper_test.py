@@ -49,7 +49,6 @@ target_url = TARGET_PRODUCT
 # #
 # driver.quit()
 
-start = time.now()
 response = requests.get(target_url)
 time.sleep(10)
 soup = BeautifulSoup(response.text, "lxml")

@@ -49,15 +49,14 @@ async def main():
     browser = await pyppeteer.launch()
     page = await browser.newPage()
     await page.goto(target_url)
-    while True:
+    while not len(price):
         content = await page.content()
         soup = bs4.BeautifulSoup(content, features="lxml")
         price = soup.select('span[data-test="product-random-weight-price"]')
-        if len(price):
-            price = price[0].string
-            print(price)
-            break
         print(price)
+        if len(price):
+            product_price = price[0].string
+            print(product_price)
         await asyncio.sleep(1)
     await browser.close()
 

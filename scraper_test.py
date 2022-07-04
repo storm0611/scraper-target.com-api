@@ -43,15 +43,15 @@ soup = BeautifulSoup(html, "html.parser")
 # print(product_name)
 # prodcut_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
 # print(prodcut_upc)
+# product_image = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
+# print(product_image)
 
 # product_price = soup.select('span[data-test="product-random-weight-price"]')
 # print(product_price)
 # product_description = soup.select('div[data-test="item-details-discription"]')
 # print(product_description)
-product_image = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
-print(product_image)
-# product_category = soup.select('.PWWrr:nth-child(2) > span > a > span').string
-# print(product_category)
+product_category = soup.select('.PWWrr:nth-child(2) > span > a > span')[0].text
+print(product_category)
 
 
 

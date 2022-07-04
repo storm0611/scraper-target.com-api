@@ -62,7 +62,7 @@ soup = BeautifulSoup(html, "html.parser")
 # print(product_category)
 # product_description = soup.find_all("h3", string="Description")[0].parent.div.string
 # print(product_description)
-product_price = soup.select('span[data-test="product-random-weight-price"]')
+product_price = soup.select('.kfATIS')
 print(product_price)
 
 

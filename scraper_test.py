@@ -50,7 +50,7 @@ soup = BeautifulSoup(html, "html.parser")
 # product_description = soup.find_all("h3", string="Description")[0].parent.div.string
 # print(product_description)
 
-product_price = soup.find_all("span", class_="kfATIS")
+product_price = soup.find_all("span")
 print(product_price)
 
 

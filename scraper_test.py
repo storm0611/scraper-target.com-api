@@ -47,7 +47,7 @@ client = requests.Session()
 
 html = client.get(target_url).content
 soup = BeautifulSoup(html, "lxml")
-csrf = soup.find(class_="kfATIS")
+csrf = soup.select(".kfATIS")
 print(csrf)
 
 # chrome_options = Options()

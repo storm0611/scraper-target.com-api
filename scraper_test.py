@@ -57,12 +57,12 @@ async def main():
     page = await browser.newPage()
     await page.goto(target_url)
     price = page.waitForSelector('span[data-test="product-random-weight-price"]')
-    print("ss"+ price)
-    for _ in range(30):
-        content = await page.content()
-        print(get_current_time(content))
-        await asyncio.sleep(1)
-    await browser.close()
+    print(price)
+    # for _ in range(30):
+    #     content = await page.content()
+    #     print(get_current_time(content))
+    #     await asyncio.sleep(1)
+    # await browser.close()
 
 asyncio.run(main())
 

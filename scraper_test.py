@@ -39,18 +39,18 @@ target_url = TARGET_PRODUCT
 page = urlopen(target_url)
 html = page.read().decode("utf-8")
 soup = BeautifulSoup(html, "html.parser")
-product_name = soup.select('h1[data-test="product-title"] span')[0].text
-print(product_name)
-product_price = soup.select('span[data-test="product-random-weight-price"]')
-print(product_price)
-product_description = soup.select('div', string="Description")
-print(product_description)
-prodcut_upc = soup.find_all("b", string="UPC").parent
+# product_name = soup.select('h1[data-test="product-title"] span')[0].text
+# print(product_name)
+# product_price = soup.select('span[data-test="product-random-weight-price"]')
+# print(product_price)
+# product_description = soup.select('div[data-test="item-details-discription"]')
+# print(product_description)
+prodcut_upc = soup.find_all("b", string="UPC")
 print(prodcut_upc)
-product_image = soup.select('button[data-test="product-carousel-item-0"] img')['src']
-print(product_image)
-product_category = soup.select('.PWWrr:nth-child(2) > span > a > span').string
-print(product_category)
+# product_image = soup.select('button[data-test="product-carousel-item-0"] img')['src']
+# print(product_image)
+# product_category = soup.select('.PWWrr:nth-child(2) > span > a > span').string
+# print(product_category)
 
 
 

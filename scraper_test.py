@@ -43,16 +43,23 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 target_url = TARGET_PRODUCT
 
 
-chrome_options = Options()
-chrome_options.add_argument("--headless")  # Opens the browser up in background
+client = requests.Session()
 
-with Chrome(options=chrome_options) as browser:
-    browser.get(target_url)
-    html = browser.page_source
+html = client.get(target_url).content
+soup = BeautifulSoup(html)
+csrf = soup.find(class_="kfATIS")
+print(csrf)
 
-soup = BeautifulSoup(html, 'html.parser')
-containers = soup.findAll("span", {"class": "kfATIS"})
-print(containers)
+# chrome_options = Options()
+# chrome_options.add_argument("--headless")  # Opens the browser up in background
+
+# with Chrome(options=chrome_options) as browser:
+#     browser.get(target_url)
+#     html = browser.page_source
+
+# soup = BeautifulSoup(html, 'html.parser')
+# containers = soup.findAll("span", {"class": "kfATIS"})
+# print(containers)
 # product_price = soup.select('.kfATIS')
 
 

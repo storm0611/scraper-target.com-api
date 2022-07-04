@@ -39,31 +39,34 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 
 target_url = TARGET_PRODUCT
 
-# driver = Chrome(executable_path='c:/driver/chromedriver.exe')
-# driver.get(TARGET_PRODUCT)
-# #
-# # Code to read data from HTML here
-# elements = driver.find_element_by_css_selector(".kfATIS")
-# print(elements)
-# #
-# driver.quit()
+driver = Chrome(executable_path='C:/Users/HOPELY/.wdm/drivers/chromedriver/win32/102.0.5005.61/chromedriver.exe')
+driver.get(TARGET_PRODUCT)
+#
+# Code to read data from HTML here
+elements = driver.find_element_by_css_selector(".kfATIS")
+print(elements)
+#
+driver.quit()
 
-page = urlopen(target_url)
-time.sleep(4)
-html = page.read().decode("utf-8")
-soup = BeautifulSoup(html, "html.parser")
-# product_name = soup.select('h1[data-test="product-title"] span')[0].text
-# print(product_name)
-# prodcut_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
-# print(prodcut_upc)
-# product_image = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
-# print(product_image)
-# product_category = soup.select('.PWWrr:nth-child(2) > span > a > span')[0].text
-# print(product_category)
-# product_description = soup.find_all("h3", string="Description")[0].parent.div.string
-# print(product_description)
-product_price = soup.select('.kfATIS')
-print(product_price)
+# start = time.now()
+# page = urlopen(target_url)
+# html = page.read().decode("utf-8")
+# soup = BeautifulSoup(html, "html.parser")
+# # product_name = soup.select('h1[data-test="product-title"] span')[0].text
+# # print(product_name)
+# # prodcut_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
+# # print(prodcut_upc)
+# # product_image = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
+# # print(product_image)
+# # product_category = soup.select('.PWWrr:nth-child(2) > span > a > span')[0].text
+# # print(product_category)
+# # product_description = soup.find_all("h3", string="Description")[0].parent.div.string
+# # print(product_description)
+# product_price = soup.select('.kfATIS')
+# while not len(product_price):
+#     product_price = soup.select('.kfATIS')
+# print()
+# print(product_price)
 
 
 

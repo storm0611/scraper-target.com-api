@@ -52,11 +52,11 @@ async def main():
     while True:
         content = await page.content()
         soup = bs4.BeautifulSoup(content, features="lxml")
-        try:
-            price = soup.select('span[data-test="product-random-weight-price"]')[0].string
-            break
-        except:
+        price = soup.select('span[data-test="product-random-weight-price"]')
+        if len(price):
+            price = price[0].string
             print(price)
+            break
         print(price)
         await asyncio.sleep(1)
     await browser.close()

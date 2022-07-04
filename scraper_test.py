@@ -73,4 +73,4 @@ async def scrap_upc_details(target_url):
             }
     
 
-print(asyncio.run(scrap_upc_details(target_url)))
+print(scrap_upc_details(target_url))

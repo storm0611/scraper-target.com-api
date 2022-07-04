@@ -1,6 +1,7 @@
 from attr import attr
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+import requests
 import time
 
 from selenium.webdriver import Chrome
@@ -39,16 +40,19 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 
 target_url = TARGET_PRODUCT
 
-driver = Chrome(executable_path='C:/Users/HOPELY/.wdm/drivers/chromedriver/win32/102.0.5005.61/chromedriver.exe')
-driver.get(TARGET_PRODUCT)
-#
-# Code to read data from HTML here
-elements = driver.find_element_by_css_selector(".kfATIS")
-print(elements)
-#
-driver.quit()
+# driver = Chrome(executable_path='C:/Users/HOPELY/.wdm/drivers/chromedriver/win32/102.0.5005.61/chromedriver.exe')
+# driver.get(TARGET_PRODUCT)
+# #
+# # Code to read data from HTML here
+# elements = driver.find_element_by_css_selector(".kfATIS")
+# print(elements)
+# #
+# driver.quit()
 
-# start = time.now()
+start = time.now()
+response = requests.get(target_url)
+time.sleep(10)
+soup = BeautifulSoup(response.text, "lxml")
 # page = urlopen(target_url)
 # html = page.read().decode("utf-8")
 # soup = BeautifulSoup(html, "html.parser")
@@ -62,11 +66,8 @@ driver.quit()
 # # print(product_category)
 # # product_description = soup.find_all("h3", string="Description")[0].parent.div.string
 # # print(product_description)
-# product_price = soup.select('.kfATIS')
-# while not len(product_price):
-#     product_price = soup.select('.kfATIS')
-# print()
-# print(product_price)
+product_price = soup.select('.kfATIS')
+print(product_price)
 
 
 

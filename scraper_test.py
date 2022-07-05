@@ -44,8 +44,10 @@ async def main():
     
     page = await browser.newPage()
     await page.goto("https://www.target.com")
-    while True:
-        content = await page.content()
+    # while True:
+    #     content = await page.content()
+    #     soup = bs4.BeautifulSoup(content, features="lxml")
+        
     
     
     # endpoint = browser.wsEndpoint()
@@ -82,7 +84,7 @@ async def main():
     #         })
     # print(categories)
     
-    await browser.close()
+    # await browser.close()
     
     
 

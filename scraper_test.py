@@ -60,9 +60,9 @@ async def scrap_upc_details():
         # soup = bs4.BeautifulSoup(str(comp), features="lxml")
         # soup = bs4.BeautifulSoup(soup.select(
         #    'div.children')[0], features="lxml")
-        contents = comp.select('div.children')
-        print(len(contents))
-        for category in contents:
+        children = comp.select('div.children')
+        print(len(children.contents))
+        for category in children.contents:
             category_name = category.a.text
             category_url = category.a['href']
             print(category_name, category_url)

@@ -60,7 +60,10 @@ async def scrap_upc_details():
         # soup = bs4.BeautifulSoup(str(comp), features="lxml")
         # soup = bs4.BeautifulSoup(soup.select(
         #    'div.children')[0], features="lxml")
-        children = comp.select('div.children')[0].contents
+        try:
+            children = comp.select('div.children')[0].contents
+        except:
+            children = comp.li
         print(len(children))
         for category in children:
             category_name = category.a.text

@@ -36,7 +36,7 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 
 target_url = TARGET_PRODUCT
 
-async def scrap_upc_details(target_url):
+async def scrap_upc_details():
     product_name = 'Not Found'
     product_price = 'Not Found'
     product_description = 'Not Found'
@@ -71,4 +71,4 @@ async def scrap_upc_details(target_url):
     
     
 
-print(asyncio.run(scrap_upc_details(target_url)))
+asyncio.run(scrap_upc_details())

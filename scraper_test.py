@@ -37,36 +37,51 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 target_url = TARGET_PRODUCT
 
 async def main():
-    browser = await pyppeteer.launch(handleSIGINT=False,
-                                     handleSIGTERM=False,
-                                     handleSIGHUP=False)
+    browser = await pyppeteer.launch(headless=False,
+                                handleSIGINT=False,
+                                handleSIGTERM=False,
+                                handleSIGHUP=False)
+    
     page = await browser.newPage()
-    await page.goto("https://www.target.com/c/shop-all-categories/-/N-5xsxf")
-    content = await page.content()
+    await page.goto("https://www.target.com")
+    while True:
+        content = await page.content()
+    
+    
+    # endpoint = browser.wsEndpoint()
+
+    # pyppeteer.connect(browserWSEndpoint=endpoint)
+    
+    # browser = await pyppeteer.launch(handleSIGINT=False,
+    #                                  handleSIGTERM=False,
+    #                                  handleSIGHUP=False)
+    
     # soup = bs4.BeautifulSoup(content, features="lxml")
     # content = soup.select('.bkUrcF')[0]
-    soup = bs4.BeautifulSoup(content, features="lxml")
-    components = soup.select('div[data-component-type="Browse - Manual"]')
-    print(len(components))
-    categories = []
-    for comp in components:
-        # soup = bs4.BeautifulSoup(str(comp), features="lxml")
-        # soup = bs4.BeautifulSoup(soup.select(
-        #    'div.children')[0], features="lxml")
-        try:
-            children = comp.select('div.children')[0].contents
-        except:
-            children = comp.select('ul')[0].contents
-        print(len(children))
-        for category in children:
-            category_name = category.a.text
-            category_url = category.a['href']
-            print(category_name, category_url)
-            categories.append({
-                'name': category_name,
-                'url': category_url
-            })
-    print(categories)
+    
+    # soup = bs4.BeautifulSoup(content, features="lxml")
+    # components = soup.select('div[data-component-type="Browse - Manual"]')
+    # print(len(components))
+    # categories = []
+    # for comp in components:
+    #     # soup = bs4.BeautifulSoup(str(comp), features="lxml")
+    #     # soup = bs4.BeautifulSoup(soup.select(
+    #     #    'div.children')[0], features="lxml")
+    #     try:
+    #         children = comp.select('div.children')[0].contents
+    #     except:
+    #         children = comp.select('ul')[0].contents
+    #     print(len(children))
+    #     for category in children:
+    #         category_name = category.a.text
+    #         category_url = category.a['href']
+    #         print(category_name, category_url)
+    #         categories.append({
+    #             'name': category_name,
+    #             'url': category_url
+    #         })
+    # print(categories)
+    
     await browser.close()
     
     

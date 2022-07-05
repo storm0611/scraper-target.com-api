@@ -63,7 +63,7 @@ async def scrap_upc_details():
         try:
             children = comp.select('div.children')[0].contents
         except:
-            children = comp.li
+            children = comp.select('ul')[0].contents
         print(len(children))
         for category in children:
             category_name = category.a.text

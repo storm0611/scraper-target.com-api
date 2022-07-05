@@ -53,7 +53,7 @@ async def scrap_upc_details():
     # soup = bs4.BeautifulSoup(content, features="lxml")
     # content = soup.select('.bkUrcF')[0]
     soup = bs4.BeautifulSoup(content, features="lxml")
-    components = soup.select('data-component-type="Browse - Manual"')
+    components = soup.select('div[data-component-type="Browse - Manual"]')
     print(len(components))
     categories = []
     for comp in components:

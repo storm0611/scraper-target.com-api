@@ -77,10 +77,10 @@ async def main():
     
     # categories = json.load(open(os.path.join("categories.json")))
     # print(categories)
-    # jsonString = json.dumps(categories)
-    # jsonFile = open("categories.json", "w")
-    # jsonFile.write(jsonString)
-    # jsonFile.close()
+    jsonString = json.dumps(categories)
+    jsonFile = open("categories.json", "w")
+    jsonFile.write(jsonString)
+    jsonFile.close()
     # end - finding categories list
     
     # start - finding subcategories or products list

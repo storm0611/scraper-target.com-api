@@ -96,7 +96,7 @@ async def main():
         print(len(products_grid))
         if len(products_grid):
         # start - finding products
-            print(soup.select('h2[data-test="resultsHeading"]')[0].text)
+            print(soup.select('h2[data-test="resultsHeading"]'))
             results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
             print(results_count)
             cnt = 0

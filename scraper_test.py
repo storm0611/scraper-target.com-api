@@ -50,9 +50,9 @@ async def main():
                                 handleSIGHUP=False)
     
     page = await browser.newPage()
-    # await page.goto("https://www.target.com/c/shop-all-categories/-/N-5xsxf")
-    # content = await page.content()
-    # soup = bs4.BeautifulSoup(content, features="lxml")
+    await page.goto("https://www.target.com/c/shop-all-categories/-/N-5xsxf")
+    content = await page.content()
+    soup = bs4.BeautifulSoup(content, features="lxml")
     
     # # start - finding categories list
     components = soup.select('div[data-component-type="Browse - Manual"]')

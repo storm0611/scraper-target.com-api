@@ -48,39 +48,39 @@ async def main():
                                 handleSIGINT=False,
                                 handleSIGTERM=False,
                                 handleSIGHUP=False)
-    
     page = await browser.newPage()
-    await page.goto("https://www.target.com/c/shop-all-categories/-/N-5xsxf")
-    content = await page.content()
-    soup = bs4.BeautifulSoup(content, features="lxml")
+    
+    # await page.goto("https://www.target.com/c/shop-all-categories/-/N-5xsxf")
+    # content = await page.content()
+    # soup = bs4.BeautifulSoup(content, features="lxml")
     
     # # start - finding categories list
-    components = soup.select('div[data-component-type="Browse - Manual"]')
-    print(len(components))
-    for comp in components:
-        # soup = bs4.BeautifulSoup(str(comp), features="lxml")
-        # soup = bs4.BeautifulSoup(soup.select(
-        #    'div.children')[0], features="lxml")
-        try:
-            children = comp.select('div.children')[0].contents
-        except:
-            children = comp.select('ul')[0].contents
-        print(len(children))
-        for category in children:
-            category_name = category.a.text
-            category_url = category.a['href']
-            print(category_name, category_url)
-            categories.append({
-                'name': category_name,
-                'url': category_url
-            })
+    # components = soup.select('div[data-component-type="Browse - Manual"]')
+    # print(len(components))
+    # for comp in components:
+    #     # soup = bs4.BeautifulSoup(str(comp), features="lxml")
+    #     # soup = bs4.BeautifulSoup(soup.select(
+    #     #    'div.children')[0], features="lxml")
+    #     try:
+    #         children = comp.select('div.children')[0].contents
+    #     except:
+    #         children = comp.select('ul')[0].contents
+    #     print(len(children))
+    #     for category in children:
+    #         category_name = category.a.text
+    #         category_url = category.a['href']
+    #         print(category_name, category_url)
+    #         categories.append({
+    #             'name': category_name,
+    #             'url': category_url
+    #         })
     
-    # categories = json.load(open(os.path.join("categories.json")))
-    # print(categories)
-    jsonString = json.dumps(categories)
-    jsonFile = open("categories.json", "w")
-    jsonFile.write(jsonString)
-    jsonFile.close()
+    categories = json.load(open(os.path.join("categories.json")))
+    print(categories)
+    # jsonString = json.dumps(categories)
+    # jsonFile = open("categories.json", "w")
+    # jsonFile.write(jsonString)
+    # jsonFile.close()
     # end - finding categories list
     
     # start - finding subcategories or products list
@@ -93,11 +93,14 @@ async def main():
         content = await page.content()
         soup = bs4.BeautifulSoup(content, features="lxml")
         products_grid = soup.select('div[data-test="product-grid"] section>div')
-        print(len(products_grid))
+        # print(len(products_grid))
         if len(products_grid):
         # start - finding products
-            print(soup.select('h2[data-test="resultsHeading"]'))
-            results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
+            # print(soup.select('h2[data-test="resultsHeading"]'))
+            try:
+                results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
+            except:
+                continue
             print(results_count)
             cnt = 0
             page_num = 0
@@ -114,6 +117,7 @@ async def main():
                 #     soup = bs4.BeautifulSoup(content, features="lxml")
                 #     products_grid = soup.select('div[data-test="product-grid"] section>div')
                 for item in products_grid[0].contents:
+                    print(item)
                     pro = item.select('a[data-test="product-title"]')[0]
                     product_name = pro.text
                     product_category = category_name

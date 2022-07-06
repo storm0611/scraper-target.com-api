@@ -3,6 +3,7 @@ import pyppeteer
 import bs4
 import asyncio
 import json
+import os
 
 TARGET_HOMEPAGE = "https://www.target.com"
 TARGET_ALL_CATEGORIES = "https://www.target.com/c/shop-all-categories/-/N-5xsxf"
@@ -48,52 +49,38 @@ async def main():
                                 handleSIGTERM=False,
                                 handleSIGHUP=False)
     
-    page = await browser.newPage()
-    await page.goto("https://www.target.com/c/shop-all-categories/-/N-5xsxf")
-    # endpoint = browser.wsEndpoint()
-
-    # pyppeteer.connect(browserWSEndpoint=endpoint)
-    # while True:
-    #     content = await page.content()
-    #     soup = bs4.BeautifulSoup(content, features="lxml")
-        
-    
-    
-    
-    # browser = await pyppeteer.launch(handleSIGINT=False,
-    #                                  handleSIGTERM=False,
-    #                                  handleSIGHUP=False)
-    content = await page.content()
+    # page = await browser.newPage()
+    # await page.goto("https://www.target.com/c/shop-all-categories/-/N-5xsxf")
+    # content = await page.content()
     # soup = bs4.BeautifulSoup(content, features="lxml")
-    # content = soup.select('.bkUrcF')[0]
     
-    soup = bs4.BeautifulSoup(content, features="lxml")
+    # # start - finding categories list
+    # components = soup.select('div[data-component-type="Browse - Manual"]')
+    # print(len(components))
+    # for comp in components:
+    #     # soup = bs4.BeautifulSoup(str(comp), features="lxml")
+    #     # soup = bs4.BeautifulSoup(soup.select(
+    #     #    'div.children')[0], features="lxml")
+    #     try:
+    #         children = comp.select('div.children')[0].contents
+    #     except:
+    #         children = comp.select('ul')[0].contents
+    #     print(len(children))
+    #     for category in children:
+    #         category_name = category.a.text
+    #         category_url = category.a['href']
+    #         print(category_name, category_url)
+    #         categories.append({
+    #             'name': category_name,
+    #             'url': category_url
+    #         })
     
-    # start - finding categories list
-    components = soup.select('div[data-component-type="Browse - Manual"]')
-    print(len(components))
-    for comp in components:
-        # soup = bs4.BeautifulSoup(str(comp), features="lxml")
-        # soup = bs4.BeautifulSoup(soup.select(
-        #    'div.children')[0], features="lxml")
-        try:
-            children = comp.select('div.children')[0].contents
-        except:
-            children = comp.select('ul')[0].contents
-        print(len(children))
-        for category in children:
-            category_name = category.a.text
-            category_url = category.a['href']
-            print(category_name, category_url)
-            categories.append({
-                'name': category_name,
-                'url': category_url
-            })
+    categories = json.load(open(os.path.join("categories.json")))
     print(categories)
-    jsonString = json.dumps(categories)
-    jsonFile = open("categories.json", "w")
-    jsonFile.write(jsonString)
-    jsonFile.close()
+    # jsonString = json.dumps(categories)
+    # jsonFile = open("categories.json", "w")
+    # jsonFile.write(jsonString)
+    # jsonFile.close()
     # end - finding categories list
     
     # start - finding subcategories or products list

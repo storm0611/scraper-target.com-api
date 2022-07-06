@@ -55,28 +55,28 @@ async def main():
     # soup = bs4.BeautifulSoup(content, features="lxml")
     
     # # start - finding categories list
-    # components = soup.select('div[data-component-type="Browse - Manual"]')
-    # print(len(components))
-    # for comp in components:
-    #     # soup = bs4.BeautifulSoup(str(comp), features="lxml")
-    #     # soup = bs4.BeautifulSoup(soup.select(
-    #     #    'div.children')[0], features="lxml")
-    #     try:
-    #         children = comp.select('div.children')[0].contents
-    #     except:
-    #         children = comp.select('ul')[0].contents
-    #     print(len(children))
-    #     for category in children:
-    #         category_name = category.a.text
-    #         category_url = category.a['href']
-    #         print(category_name, category_url)
-    #         categories.append({
-    #             'name': category_name,
-    #             'url': category_url
-    #         })
+    components = soup.select('div[data-component-type="Browse - Manual"]')
+    print(len(components))
+    for comp in components:
+        # soup = bs4.BeautifulSoup(str(comp), features="lxml")
+        # soup = bs4.BeautifulSoup(soup.select(
+        #    'div.children')[0], features="lxml")
+        try:
+            children = comp.select('div.children')[0].contents
+        except:
+            children = comp.select('ul')[0].contents
+        print(len(children))
+        for category in children:
+            category_name = category.a.text
+            category_url = category.a['href']
+            print(category_name, category_url)
+            categories.append({
+                'name': category_name,
+                'url': category_url
+            })
     
-    categories = json.load(open(os.path.join("categories.json")))
-    print(categories)
+    # categories = json.load(open(os.path.join("categories.json")))
+    # print(categories)
     # jsonString = json.dumps(categories)
     # jsonFile = open("categories.json", "w")
     # jsonFile.write(jsonString)

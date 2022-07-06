@@ -89,6 +89,8 @@ async def main():
                 'url': category_url
             })
     print(categories)
+    f = open("categories.json", mode="w")
+    f.write(categories)
     # end - finding categories list
     
     # start - finding subcategories or products list

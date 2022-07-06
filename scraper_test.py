@@ -281,8 +281,10 @@ async def main():
     
     # start - get information from products url
     if len(products):
-        for product in products:
-            print(product)
+        jsonString = json.dumps(products)
+        jsonFile = open("products.json", "w")
+        jsonFile.write(jsonString)
+        jsonFile.close()
     # end - get information from products url
     
     await browser.close()

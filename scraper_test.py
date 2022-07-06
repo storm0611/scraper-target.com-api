@@ -185,7 +185,10 @@ async def main():
             print(len(products_grid))
             if len(products_grid):
                 # start - finding products in subcategories
-                results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" "))
+                try:
+                    results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
+                except:
+                    continue
                 print(results_count)
                 cnt = 0
                 page_num = 0
@@ -202,10 +205,16 @@ async def main():
                     #     soup = bs4.BeautifulSoup(content, features="lxml")
                     #     products_grid = soup.select('div[data-test="product-grid"] section>div')
                     for item in products_grid[0].contents:
-                        pro = item.select('a[data-test="product-title"]')[0]
-                        product_name = pro.text
-                        product_category = category_name
-                        product_url = pro.get("href")
+                        # print(item)
+                        # print(item.text)
+                        # print(item.a['href'])
+                        # pro = item.select('a[data-test="product-title"]')[0]
+                        try:
+                            product_name = item.text
+                            product_category = category_name
+                            product_url = item.a['href']
+                        except:
+                            continue
                         products.append({
                             "category": product_category,
                             "name": product_name,

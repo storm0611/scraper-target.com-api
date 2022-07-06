@@ -116,7 +116,7 @@ async def main():
             while cnt <= results_count:
                 print(category_url + "?Nao=" + str(page_num * 24))
                 await page.goto(TARGET_HOMEPAGE + category_url + "?Nao=" + str(page_num * 24))
-                asyncio.sleep(2)
+                await asyncio.sleep(2)
                 content = await page.content()
                 soup = bs4.BeautifulSoup(content, features="lxml")
                 products_grid = soup.select('div[data-test="product-grid"] section>div')
@@ -177,7 +177,7 @@ async def main():
             subcategory_url = category['url']
             print(category)
             await page.goto(TARGET_HOMEPAGE + subcategory_url)
-            asyncio.sleep(2)
+            await asyncio.sleep(2)
             content = await page.content()
             soup = bs4.BeautifulSoup(content, features="lxml")
             products_grid = soup.select('div[data-test="product-grid"] section>div')
@@ -191,7 +191,7 @@ async def main():
                 while cnt <= results_count:
                     print(subcategory_url + "?Nao=" + str(page_num * 24))
                     await page.goto(TARGET_HOMEPAGE + subcategory_url + "?Nao=" + str(page_num * 24))
-                    asyncio.sleep(2)
+                    await asyncio.sleep(2)
                     content = await page.content()
                     soup = bs4.BeautifulSoup(content, features="lxml")
                     products_grid = soup.select('div[data-test="product-grid"] section>div')

@@ -96,6 +96,7 @@ async def main():
         print(len(products_grid))
         if len(products_grid):
         # start - finding products
+            print(soup.select('h2[data-test="resultsHeading"]')[0].text)
             results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
             print(results_count)
             cnt = 0
@@ -154,6 +155,10 @@ async def main():
                             'url': subcategory_url
                         })
             print(subcategories)
+            jsonString = json.dumps(subcategories)
+            jsonFile = open(category_name + "-subcategories.json", "w")
+            jsonFile.write(jsonString)
+            jsonFile.close()
         # end - finding subcategories
     # end - finding subcategories or products list
     if len(subcategories):

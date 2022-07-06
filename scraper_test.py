@@ -121,9 +121,12 @@ async def main():
                     # print(item.text)
                     # print(item.a['href'])
                     # pro = item.select('a[data-test="product-title"]')[0]
-                    product_name = item.text
-                    product_category = category_name
-                    product_url = item.a['href']
+                    try:
+                        product_name = item.text
+                        product_category = category_name
+                        product_url = item.a['href']
+                    except:
+                        continue
                     products.append({
                         "category": product_category,
                         "name": product_name,

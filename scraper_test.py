@@ -1,3 +1,4 @@
+from tarfile import CompressionError
 import pyppeteer
 import bs4
 import asyncio
@@ -37,54 +38,217 @@ TARGET_CLEARANCE = "/c/clearance/-/N-5q0ga"
 target_url = TARGET_PRODUCT
 
 async def main():
+    categories = []
+    subcategories = []
+    sub_subcategories = []
+    products = []
     browser = await pyppeteer.launch(headless=False,
                                 handleSIGINT=False,
                                 handleSIGTERM=False,
                                 handleSIGHUP=False)
     
     page = await browser.newPage()
-    await page.goto("https://www.target.com")
+    await page.goto("https://www.target.com/c/shop-all-categories/-/N-5xsxf")
+    # endpoint = browser.wsEndpoint()
+
+    # pyppeteer.connect(browserWSEndpoint=endpoint)
     # while True:
     #     content = await page.content()
     #     soup = bs4.BeautifulSoup(content, features="lxml")
         
     
     
-    # endpoint = browser.wsEndpoint()
-
-    # pyppeteer.connect(browserWSEndpoint=endpoint)
     
     # browser = await pyppeteer.launch(handleSIGINT=False,
     #                                  handleSIGTERM=False,
     #                                  handleSIGHUP=False)
-    
+    content = await page.content()
     # soup = bs4.BeautifulSoup(content, features="lxml")
     # content = soup.select('.bkUrcF')[0]
     
-    # soup = bs4.BeautifulSoup(content, features="lxml")
-    # components = soup.select('div[data-component-type="Browse - Manual"]')
-    # print(len(components))
-    # categories = []
-    # for comp in components:
-    #     # soup = bs4.BeautifulSoup(str(comp), features="lxml")
-    #     # soup = bs4.BeautifulSoup(soup.select(
-    #     #    'div.children')[0], features="lxml")
-    #     try:
-    #         children = comp.select('div.children')[0].contents
-    #     except:
-    #         children = comp.select('ul')[0].contents
-    #     print(len(children))
-    #     for category in children:
-    #         category_name = category.a.text
-    #         category_url = category.a['href']
-    #         print(category_name, category_url)
-    #         categories.append({
-    #             'name': category_name,
-    #             'url': category_url
-    #         })
-    # print(categories)
+    soup = bs4.BeautifulSoup(content, features="lxml")
     
-    # await browser.close()
+    # start - finding categories list
+    components = soup.select('div[data-component-type="Browse - Manual"]')
+    print(len(components))
+    for comp in components:
+        # soup = bs4.BeautifulSoup(str(comp), features="lxml")
+        # soup = bs4.BeautifulSoup(soup.select(
+        #    'div.children')[0], features="lxml")
+        try:
+            children = comp.select('div.children')[0].contents
+        except:
+            children = comp.select('ul')[0].contents
+        print(len(children))
+        for category in children:
+            category_name = category.a.text
+            category_url = category.a['href']
+            print(category_name, category_url)
+            categories.append({
+                'name': category_name,
+                'url': category_url
+            })
+    print(categories)
+    # end - finding categories list
+    
+    # start - finding subcategories or products list
+    for category in categories:
+        category_name = category['name']
+        category_url = category['url']
+        print(category)
+        await page.goto(category_url)
+        asyncio.sleep(2)
+        content = await page.content()
+        soup = bs4.BeautifulSoup(content, features="lxml")
+        products_grid = soup.select('div[data-test="product-grid"] section>div')
+        print(len(products_grid))
+        if len(products_grid):
+        # start - finding products
+            results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" "))
+            print(results_count)
+            cnt = 0
+            page_num = 0
+            while cnt <= results_count:
+                print(category_url + "?Nao=" + str(page_num * 24))
+                await page.goto(category_url + "?Nao=" + str(page_num * 24))
+                asyncio.sleep(2)
+                content = await page.content()
+                soup = bs4.BeautifulSoup(content, features="lxml")
+                products_grid = soup.select('div[data-test="product-grid"] section>div')
+                print(len(products_grid))
+                # if not len(products_grid):
+                #     content = await page.content()
+                #     soup = bs4.BeautifulSoup(content, features="lxml")
+                #     products_grid = soup.select('div[data-test="product-grid"] section>div')
+                for item in products_grid[0].contents:
+                    pro = item.select('a[data-test="product-title"]')[0]
+                    product_name = pro.text
+                    product_category = category_name
+                    product_url = pro.get("href")
+                    products.append({
+                        "category": product_category,
+                        "name": product_name,
+                        "url": product_url
+                    })
+                    print({
+                        "category": product_category,
+                        "name": product_name,
+                        "url": product_url
+                    })
+                    cnt += 1
+                page_num += 1
+        # end - finding products
+        else:
+        # start - finding subcategories
+            components = soup.select('div[data-component-type="Browse - Manual"]')
+            print(len(components))
+            if len(components):
+                for comp in components:
+                    # soup = bs4.BeautifulSoup(str(comp), features="lxml")
+                    # soup = bs4.BeautifulSoup(soup.select(
+                    #    'div.children')[0], features="lxml")
+                    try:
+                        children = comp.select('div.children')[0].contents
+                    except:
+                        children = comp.select('ul')[0].contents
+                    print(len(children))
+                    for subcategory in children:
+                        subcategory_name = subcategory.a.text
+                        subcategory_url = subcategory.a['href']
+                        print(subcategory_name, subcategory_url)
+                        subcategories.append({
+                            'parent': category['name'],
+                            'name': subcategory_name,
+                            'url': subcategory_url
+                        })
+            print(subcategories)
+        # end - finding subcategories
+    # end - finding subcategories or products list
+    if len(subcategories):
+    # start - finding products in subcategories
+        for category in subcategories:
+            category_name = category['parent']
+            subcategory_name = category['name']
+            subcategory_url = category['url']
+            print(category)
+            await page.goto(subcategory_url)
+            asyncio.sleep(2)
+            content = await page.content()
+            soup = bs4.BeautifulSoup(content, features="lxml")
+            products_grid = soup.select('div[data-test="product-grid"] section>div')
+            print(len(products_grid))
+            if len(products_grid):
+                # start - finding products in subcategories
+                results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" "))
+                print(results_count)
+                cnt = 0
+                page_num = 0
+                while cnt <= results_count:
+                    print(subcategory_url + "?Nao=" + str(page_num * 24))
+                    await page.goto(subcategory_url + "?Nao=" + str(page_num * 24))
+                    asyncio.sleep(2)
+                    content = await page.content()
+                    soup = bs4.BeautifulSoup(content, features="lxml")
+                    products_grid = soup.select('div[data-test="product-grid"] section>div')
+                    print(len(products_grid))
+                    # if not len(products_grid):
+                    #     content = await page.content()
+                    #     soup = bs4.BeautifulSoup(content, features="lxml")
+                    #     products_grid = soup.select('div[data-test="product-grid"] section>div')
+                    for item in products_grid[0].contents:
+                        pro = item.select('a[data-test="product-title"]')[0]
+                        product_name = pro.text
+                        product_category = category_name
+                        product_url = pro.get("href")
+                        products.append({
+                            "category": product_category,
+                            "name": product_name,
+                            "url": product_url
+                        })
+                        print({
+                            "category": product_category,
+                            "name": product_name,
+                            "url": product_url
+                        })
+                        cnt += 1
+                    page_num += 1
+            # end - finding products in subcategories
+            else:
+                # start - finding sub-subcategories
+                components = soup.select('div[data-component-type="Browse - Manual"]')
+                print(len(components))
+                if len(components):
+                    for comp in components:
+                        # soup = bs4.BeautifulSoup(str(comp), features="lxml")
+                        # soup = bs4.BeautifulSoup(soup.select(
+                        #    'div.children')[0], features="lxml")
+                        try:
+                            children = comp.select('div.children')[0].contents
+                        except:
+                            children = comp.select('ul')[0].contents
+                        print(len(children))
+                        for subcategory in children:
+                            subcategory_name = subcategory.a.text
+                            subcategory_url = subcategory.a['href']
+                            print(subcategory_name, subcategory_url)
+                            sub_subcategories.append({
+                                'parent': category_name,
+                                'name': subcategory_name,
+                                'url': subcategory_url
+                            })
+                print(subcategories)
+            # end - finding sub-subcategories
+    # end - finding sub-subcategories or products list in subcategories
+    if len(sub_subcategories):
+        print("sub_subcategories not empty")
+    
+    # start - get information from products url
+    if len(products):
+        for product in products:
+            print(product)
+    # end - get information from products url
+    
+    await browser.close()
     
     
 

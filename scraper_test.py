@@ -102,7 +102,7 @@ async def main():
         category_url = category['url']
         print(category)
         await page.goto(TARGET_HOMEPAGE + category_url)
-        asyncio.sleep(2)
+        await asyncio.sleep(2)
         content = await page.content()
         soup = bs4.BeautifulSoup(content, features="lxml")
         products_grid = soup.select('div[data-test="product-grid"] section>div')

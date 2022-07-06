@@ -44,6 +44,7 @@ async def main():
     subcategories = []
     sub_subcategories = []
     products = []
+    products_count = []
     browser = await pyppeteer.launch(
                                 handleSIGINT=False,
                                 handleSIGTERM=False,
@@ -89,7 +90,7 @@ async def main():
         category_url = category['url']
         print(category)
         await page.goto(TARGET_HOMEPAGE + category_url)
-        await asyncio.sleep(2)
+        await asyncio.sleep(5)
         content = await page.content()
         soup = bs4.BeautifulSoup(content, features="lxml")
         products_grid = soup.select('div[data-test="product-grid"] section>div')
@@ -105,9 +106,13 @@ async def main():
             cnt = 0
             page_num = 0
             while cnt <= results_count:
+                try:
+                    results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
+                except:
+                    break
                 print(category_url + "?Nao=" + str(page_num * 24))
                 await page.goto(TARGET_HOMEPAGE + category_url + "?Nao=" + str(page_num * 24))
-                await asyncio.sleep(2)
+                await asyncio.sleep(5)
                 content = await page.content()
                 soup = bs4.BeautifulSoup(content, features="lxml")
                 products_grid = soup.select('div[data-test="product-grid"] section>div')
@@ -139,6 +144,10 @@ async def main():
                     })
                     cnt += 1
                 page_num += 1
+            products_count.append({
+                'category': category_name,
+                'count': cnt
+            })
         # end - finding products
         else:
         # start - finding subcategories
@@ -178,7 +187,7 @@ async def main():
             subcategory_url = category['url']
             print(category)
             await page.goto(TARGET_HOMEPAGE + subcategory_url)
-            await asyncio.sleep(2)
+            await asyncio.sleep(5)
             content = await page.content()
             soup = bs4.BeautifulSoup(content, features="lxml")
             products_grid = soup.select('div[data-test="product-grid"] section>div')
@@ -193,9 +202,13 @@ async def main():
                 cnt = 0
                 page_num = 0
                 while cnt <= results_count:
+                    try:
+                        results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
+                    except:
+                        break
                     print(subcategory_url + "?Nao=" + str(page_num * 24))
                     await page.goto(TARGET_HOMEPAGE + subcategory_url + "?Nao=" + str(page_num * 24))
-                    await asyncio.sleep(2)
+                    await asyncio.sleep(5)
                     content = await page.content()
                     soup = bs4.BeautifulSoup(content, features="lxml")
                     products_grid = soup.select('div[data-test="product-grid"] section>div')
@@ -227,6 +240,10 @@ async def main():
                         })
                         cnt += 1
                     page_num += 1
+                products_count.append({
+                    "category": category_name,
+                    "count": cnt
+                })
             # end - finding products in subcategories
             else:
                 # start - finding sub-subcategories
@@ -243,15 +260,20 @@ async def main():
                             children = comp.select('ul')[0].contents
                         print(len(children))
                         for subcategory in children:
-                            subcategory_name = subcategory.a.text
-                            subcategory_url = subcategory.a['href']
-                            print(subcategory_name, subcategory_url)
+                            sub_subcategory_name = subcategory.a.text
+                            sub_subcategory_url = subcategory.a['href']
+                            print(sub_subcategory_name, sub_subcategory_url)
                             sub_subcategories.append({
                                 'parent': category_name,
-                                'name': subcategory_name,
-                                'url': subcategory_url
+                                'subcategory': subcategory_name,
+                                'name': sub_subcategory_name,
+                                'url': sub_subcategory_url
                             })
-                print(subcategories)
+                print(sub_subcategories)
+                jsonString = json.dumps(sub_subcategories)
+                jsonFile = open(category_name + "-" + subcategory_name + "-subcategories.json", "w")
+                jsonFile.write(jsonString)
+                jsonFile.close()
             # end - finding sub-subcategories
     # end - finding sub-subcategories or products list in subcategories
     if len(sub_subcategories):

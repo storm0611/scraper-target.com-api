@@ -2,6 +2,7 @@ from tarfile import CompressionError
 import pyppeteer
 import bs4
 import asyncio
+import json
 
 TARGET_HOMEPAGE = "https://www.target.com"
 TARGET_ALL_CATEGORIES = "https://www.target.com/c/shop-all-categories/-/N-5xsxf"
@@ -89,8 +90,10 @@ async def main():
                 'url': category_url
             })
     print(categories)
-    f = open("categories.json", mode="w")
-    f.write(categories)
+    jsonString = json.dumps(categories)
+    jsonFile = open("categories.json", "w")
+    jsonFile.write(jsonString)
+    jsonFile.close()
     # end - finding categories list
     
     # start - finding subcategories or products list

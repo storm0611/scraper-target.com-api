@@ -118,6 +118,8 @@ async def main():
                 #     products_grid = soup.select('div[data-test="product-grid"] section>div')
                 for item in products_grid[0].contents:
                     print(item)
+                    print(item.text)
+                    print(item.a['href'])
                     pro = item.select('a[data-test="product-title"]')[0]
                     product_name = pro.text
                     product_category = category_name

@@ -42,7 +42,7 @@ async def main():
     subcategories = []
     sub_subcategories = []
     products = []
-    browser = await pyppeteer.launch(headless=False,
+    browser = await pyppeteer.launch(
                                 handleSIGINT=False,
                                 handleSIGTERM=False,
                                 handleSIGHUP=False)

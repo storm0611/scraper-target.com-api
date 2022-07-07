@@ -197,7 +197,10 @@ async def update_db():
             subcategory_name = category['name']
             subcategory_url = category['url']
             print("subcategory=", category)
-            await page.goto(subcategory_url)
+            try:
+                await page.goto(subcategory_url)
+            except:
+                continue
             await asyncio.sleep(5)
             content = await page.content()
             soup = bs4.BeautifulSoup(content, features="lxml")
@@ -308,8 +311,93 @@ async def update_db():
     jsonFile.close()
     print("end - finding in subcategories")
     # end - finding sub-subcategories or products list in subcategories
+    
     if len(sub_subcategories):
-        print("sub_subcategories not empty")
+        # start - finding products in subcategories
+        print("start - finding products in subcategories")
+        for category in sub_subcategories:
+            category_name = category['parent']
+            subcategory_name = category['name']
+            subcategory_url = category['url']
+            print("subcategory=", category)
+            try:
+                await page.goto(subcategory_url)
+            except:
+                continue
+            await asyncio.sleep(5)
+            content = await page.content()
+            soup = bs4.BeautifulSoup(content, features="lxml")
+            products_grid = soup.select(
+                'div[data-test="product-grid"] section>div')
+            print("products_grid find?=", len(products_grid))
+            if len(products_grid):
+                # start - finding products in sub-subcategories
+                print("start - finding products in subcategories")
+                try:
+                    results_count = int(soup.select(
+                        'h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
+                except:
+                    continue
+                print("results_count=", results_count)
+                cnt = 0
+                page_num = 0
+                while cnt <= results_count:
+                    try:
+                        results_count = int(soup.select(
+                            'h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
+                    except:
+                        break
+                    # print(subcategory_url + "?Nao=" + str(page_num * 24))
+                    await page.goto(subcategory_url + "?Nao=" + str(page_num * 24))
+                    await asyncio.sleep(5)
+                    content = await page.content()
+                    soup = bs4.BeautifulSoup(content, features="lxml")
+                    products_grid = soup.select(
+                        'div[data-test="product-grid"] section>div')
+                    print("products_grid find?=", len(products_grid))
+                    # if not len(products_grid):
+                    #     content = await page.content()
+                    #     soup = bs4.BeautifulSoup(content, features="lxml")
+                    #     products_grid = soup.select('div[data-test="product-grid"] section>div')
+                    for item in products_grid[0].contents:
+                        # print(item)
+                        # print(item.text)
+                        # print(item.a['href'])
+                        # pro = item.select('a[data-test="product-title"]')[0]
+                        try:
+                            product_name = item.text
+                            product_category = category_name
+                            product_url = item.a['href']
+                        except:
+                            continue
+                        product_url = TARGET_HOMEPAGE + product_url
+                        products.append({
+                            "category": product_category,
+                            "name": product_name,
+                            "url": product_url
+                        })
+                        cnt += 1
+                        print("product=", cnt, {
+                            "category": product_category,
+                            "name": product_name,
+                            "url": product_url
+                        })
+                    page_num += 1
+                    print("page_num=", page_num)
+                products_count.append({
+                    "category": category_name,
+                    "count": cnt
+                })
+                print("products_count in this subcategory=", {
+                    "category": category_name,
+                    "count": cnt
+                })
+                print("end - finding products in subcategories")
+                # end - finding products in sub-subcategories
+            else:
+                pass
+    print("end - finding in sub_subcategories")
+    # end - finding sub-subcategories or products list in subcategories
 
     # start - get information from products url
     if len(products):

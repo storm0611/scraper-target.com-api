@@ -57,8 +57,8 @@ async def main():
                 'url': category_url
             })
     
-    categories = json.load(open(os.path.join("categories.json")))
-    print(categories)
+    # categories = json.load(open(os.path.join("categories.json")))
+    # print(categories)
     jsonString = json.dumps(categories)
     jsonFile = open("categories.json", "w")
     jsonFile.write(jsonString)
@@ -304,8 +304,9 @@ async def main():
         jsonFile.write(jsonString)
         jsonFile.close()
     # end - get information from products url
-    products_url = json.load(open(os.path.join("products_url.json")))
-    print("products_url=", products_url)
+    # products_url = json.load(open(os.path.join("products_url.json")))
+    # print("products_url=", products_url)
+    products_url = products
     products = []
     for item in products_url:
         product_category = item['category']

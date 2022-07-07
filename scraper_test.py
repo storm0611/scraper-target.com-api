@@ -167,7 +167,7 @@ async def update_db():
                             subcategory_url = subcategory.a['href']
                         except:
                             continue
-                        if subcategory_url.find("http") < 0:
+                        if subcategory_url.find("http") < 0 and subcategory_url.find(".com") < 0:
                             subcategory_url = TARGET_HOMEPAGE + subcategory_url
                         subcategories.append({
                             'parent': category_name,

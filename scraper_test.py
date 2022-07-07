@@ -164,11 +164,12 @@ async def main():
                         children = comp.select('ul')[0].contents
                     print(len(children))
                     for subcategory in children:
+                        print(subcategory)
                         subcategory_name = subcategory.a.text
                         subcategory_url = subcategory.a['href']
                         print(subcategory_name, subcategory_url)
                         subcategories.append({
-                            'parent': category['name'],
+                            'parent': category_name,
                             'name': subcategory_name,
                             'url': subcategory_url
                         })

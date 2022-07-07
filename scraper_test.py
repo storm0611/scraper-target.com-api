@@ -77,7 +77,7 @@ async def main():
     #         })
     
     categories = json.load(open(os.path.join("categories.json")))
-    print(categories)
+    # print(categories)
     # jsonString = json.dumps(categories)
     # jsonFile = open("categories.json", "w")
     # jsonFile.write(jsonString)
@@ -86,23 +86,24 @@ async def main():
     
     # start - finding subcategories or products list
     for category in categories:
+        print("category=", category)
         category_name = category['name']
         category_url = category['url']
-        print(category)
         await page.goto(TARGET_HOMEPAGE + category_url)
         await asyncio.sleep(5)
         content = await page.content()
         soup = bs4.BeautifulSoup(content, features="lxml")
         products_grid = soup.select('div[data-test="product-grid"] section>div')
-        # print(len(products_grid))
+        print("products_grid find?=", len(products_grid))
         if len(products_grid):
-        # start - finding products
+            # start - finding products in category
+            print("start - finding products in category")
             # print(soup.select('h2[data-test="resultsHeading"]'))
             try:
                 results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
             except:
                 continue
-            print(results_count)
+            print("results_count=", results_count)
             cnt = 0
             page_num = 0
             while cnt <= results_count:
@@ -110,13 +111,13 @@ async def main():
                     results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
                 except:
                     break
-                print(category_url + "?Nao=" + str(page_num * 24))
+                # print(category_url + "?Nao=" + str(page_num * 24))
                 await page.goto(TARGET_HOMEPAGE + category_url + "?Nao=" + str(page_num * 24))
                 await asyncio.sleep(5)
                 content = await page.content()
                 soup = bs4.BeautifulSoup(content, features="lxml")
                 products_grid = soup.select('div[data-test="product-grid"] section>div')
-                print(len(products_grid))
+                print("products_grid find?=", len(products_grid))
                 # if not len(products_grid):
                 #     content = await page.content()
                 #     soup = bs4.BeautifulSoup(content, features="lxml")
@@ -137,22 +138,29 @@ async def main():
                         "name": product_name,
                         "url": product_url
                     })
-                    print({
+                    cnt += 1
+                    print("product=", cnt,  {
                         "category": product_category,
                         "name": product_name,
                         "url": product_url
                     })
-                    cnt += 1
                 page_num += 1
+                print("page_num=", page_num)
             products_count.append({
                 'category': category_name,
                 'count': cnt
             })
-        # end - finding products
+            print("products_count in this category=", {
+                'category': category_name,
+                'count': cnt
+            })
+            print("end - finding products in category")
+            # end - finding products in category
         else:
-        # start - finding subcategories
+            # start - finding subcategories
+            print("start - finding subcategories in category")
             components = soup.select('div[data-component-type="Browse - Manual"]')
-            print(len(components))
+            print("components find?=", len(components))
             if len(components):
                 for comp in components:
                     # soup = bs4.BeautifulSoup(str(comp), features="lxml")
@@ -162,44 +170,55 @@ async def main():
                         children = comp.select('div.children')[0].contents
                     except:
                         children = comp.select('ul')[0].contents
-                    print(len(children))
+                    print("children_cnt=", len(children))
                     for subcategory in children:
-                        print(subcategory)
-                        subcategory_name = subcategory.a.text
-                        subcategory_url = subcategory.a['href']
-                        print(subcategory_name, subcategory_url)
+                        try:
+                            subcategory_name = subcategory.a.text
+                            subcategory_url = subcategory.a['href']
+                        except:
+                            continue
                         subcategories.append({
                             'parent': category_name,
                             'name': subcategory_name,
                             'url': subcategory_url
                         })
-            print(subcategories)
-            jsonString = json.dumps(subcategories)
-            jsonFile = open(category_name + "-subcategories.json", "w")
-            jsonFile.write(jsonString)
-            jsonFile.close()
-        # end - finding subcategories
-    # end - finding subcategories or products list
+                        print("subcategory=", {
+                            'parent': category_name,
+                            'name': subcategory_name,
+                            'url': subcategory_url
+                        })
+            print("end - finding subcategories in category")
+            # end - finding subcategories
+        
+        print("end - finding in category")
+        # end - finding subcategories or products list
+    print("subcategories=", subcategories)
+    jsonString = json.dumps(subcategories)
+    jsonFile = open("subcategories.json", "w")
+    jsonFile.write(jsonString)
+    jsonFile.close()
     if len(subcategories):
-    # start - finding products in subcategories
+        # start - finding products in subcategories
+        print("start - finding products in subcategories")
         for category in subcategories:
             category_name = category['parent']
             subcategory_name = category['name']
             subcategory_url = category['url']
-            print(category)
+            print("subcategory=", category)
             await page.goto(TARGET_HOMEPAGE + subcategory_url)
             await asyncio.sleep(5)
             content = await page.content()
             soup = bs4.BeautifulSoup(content, features="lxml")
             products_grid = soup.select('div[data-test="product-grid"] section>div')
-            print(len(products_grid))
+            print("products_grid find?=", len(products_grid))
             if len(products_grid):
                 # start - finding products in subcategories
+                print("start - finding products in subcategories")
                 try:
                     results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
                 except:
                     continue
-                print(results_count)
+                print("results_count=", results_count)
                 cnt = 0
                 page_num = 0
                 while cnt <= results_count:
@@ -207,13 +226,13 @@ async def main():
                         results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
                     except:
                         break
-                    print(subcategory_url + "?Nao=" + str(page_num * 24))
+                    # print(subcategory_url + "?Nao=" + str(page_num * 24))
                     await page.goto(TARGET_HOMEPAGE + subcategory_url + "?Nao=" + str(page_num * 24))
                     await asyncio.sleep(5)
                     content = await page.content()
                     soup = bs4.BeautifulSoup(content, features="lxml")
                     products_grid = soup.select('div[data-test="product-grid"] section>div')
-                    print(len(products_grid))
+                    print("products_grid find?=", len(products_grid))
                     # if not len(products_grid):
                     #     content = await page.content()
                     #     soup = bs4.BeautifulSoup(content, features="lxml")
@@ -234,22 +253,29 @@ async def main():
                             "name": product_name,
                             "url": product_url
                         })
-                        print({
+                        cnt += 1
+                        print("product=", cnt, {
                             "category": product_category,
                             "name": product_name,
                             "url": product_url
                         })
-                        cnt += 1
                     page_num += 1
+                    print("page_num=", page_num)
                 products_count.append({
                     "category": category_name,
                     "count": cnt
                 })
-            # end - finding products in subcategories
+                print("products_count in this subcategory=", {
+                    "category": category_name,
+                    "count": cnt
+                })
+                print("end - finding products in subcategories")
+                # end - finding products in subcategories
             else:
                 # start - finding sub-subcategories
+                print("start - finding sub-subcategories in subcategory")
                 components = soup.select('div[data-component-type="Browse - Manual"]')
-                print(len(components))
+                print("components find?=", len(components))
                 if len(components):
                     for comp in components:
                         # soup = bs4.BeautifulSoup(str(comp), features="lxml")
@@ -259,23 +285,33 @@ async def main():
                             children = comp.select('div.children')[0].contents
                         except:
                             children = comp.select('ul')[0].contents
-                        print(len(children))
+                        print("children_cnt=", len(children))
                         for subcategory in children:
-                            sub_subcategory_name = subcategory.a.text
-                            sub_subcategory_url = subcategory.a['href']
-                            print(sub_subcategory_name, sub_subcategory_url)
+                            try:
+                                sub_subcategory_name = subcategory.a.text
+                                sub_subcategory_url = subcategory.a['href']
+                            except:
+                                continue
                             sub_subcategories.append({
                                 'parent': category_name,
                                 'subcategory': subcategory_name,
                                 'name': sub_subcategory_name,
                                 'url': sub_subcategory_url
                             })
-                print(sub_subcategories)
-                jsonString = json.dumps(sub_subcategories)
-                jsonFile = open(category_name + "-" + subcategory_name + "-subcategories.json", "w")
-                jsonFile.write(jsonString)
-                jsonFile.close()
-            # end - finding sub-subcategories
+                            print("sub_subcategory=", {
+                                'parent': category_name,
+                                'subcategory': subcategory_name,
+                                'name': sub_subcategory_name,
+                                'url': sub_subcategory_url
+                            })
+                print("end - finding sub-subcategories in this subcategory")
+                # end - finding sub-subcategories
+    print("sub_subcategories=", sub_subcategories)
+    jsonString = json.dumps(sub_subcategories)
+    jsonFile = open("sub-subcategories.json", "w")
+    jsonFile.write(jsonString)
+    jsonFile.close()
+    print("end - finding in subcategories")
     # end - finding sub-subcategories or products list in subcategories
     if len(sub_subcategories):
         print("sub_subcategories not empty")

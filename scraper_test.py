@@ -416,6 +416,7 @@ async def get_price_name(target_url):
     content = await page.content()
     soup = bs4.BeautifulSoup(content, features="lxml")
     if len(soup.select('div[data-test="productNotFound"]')):
+        await browser.close()
         return {"upc": product_upc,
                 "product_name": product_name,
                 "product_price": product_price.replace('$', ''),
@@ -429,6 +430,7 @@ async def get_price_name(target_url):
         content = await page.content()
         soup = bs4.BeautifulSoup(content, features="lxml")
         if len(soup.select('div[data-test="productNotFound"]')):
+            await browser.close()
             return {"upc": product_upc,
                 "product_name": product_name,
                 "product_price": product_price.replace('$', ''),

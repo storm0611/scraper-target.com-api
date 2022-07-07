@@ -389,6 +389,7 @@ async def main():
     
     await browser.close()
     
+
     
 async def get_price_name(target_url):
     print("def get_price_name(target_url): " + target_url)

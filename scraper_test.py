@@ -32,37 +32,37 @@ async def main():
                                 handleSIGHUP=False)
     page = await browser.newPage()
     
-    # await page.goto("https://www.target.com/c/shop-all-categories/-/N-5xsxf")
-    # content = await page.content()
-    # soup = bs4.BeautifulSoup(content, features="lxml")
+    await page.goto("https://www.target.com/c/shop-all-categories/-/N-5xsxf")
+    content = await page.content()
+    soup = bs4.BeautifulSoup(content, features="lxml")
     
-    # # start - finding categories list
-    # components = soup.select('div[data-component-type="Browse - Manual"]')
-    # print(len(components))
-    # for comp in components:
-    #     # soup = bs4.BeautifulSoup(str(comp), features="lxml")
-    #     # soup = bs4.BeautifulSoup(soup.select(
-    #     #    'div.children')[0], features="lxml")
-    #     try:
-    #         children = comp.select('div.children')[0].contents
-    #     except:
-    #         children = comp.select('ul')[0].contents
-    #     print(len(children))
-    #     for category in children:
-    #         category_name = category.a.text
-    #         category_url = category.a['href']
-    #         print(category_name, category_url)
-    #         categories.append({
-    #             'name': category_name,
-    #             'url': category_url
-    #         })
+    # start - finding categories list
+    components = soup.select('div[data-component-type="Browse - Manual"]')
+    print(len(components))
+    for comp in components:
+        # soup = bs4.BeautifulSoup(str(comp), features="lxml")
+        # soup = bs4.BeautifulSoup(soup.select(
+        #    'div.children')[0], features="lxml")
+        try:
+            children = comp.select('div.children')[0].contents
+        except:
+            children = comp.select('ul')[0].contents
+        print(len(children))
+        for category in children:
+            category_name = category.a.text
+            category_url = category.a['href']
+            print(category_name, category_url)
+            categories.append({
+                'name': category_name,
+                'url': category_url
+            })
     
     categories = json.load(open(os.path.join("categories.json")))
-    # print(categories)
-    # jsonString = json.dumps(categories)
-    # jsonFile = open("categories.json", "w")
-    # jsonFile.write(jsonString)
-    # jsonFile.close()
+    print(categories)
+    jsonString = json.dumps(categories)
+    jsonFile = open("categories.json", "w")
+    jsonFile.write(jsonString)
+    jsonFile.close()
     # end - finding categories list
     
     # start - finding subcategories or products list
@@ -315,28 +315,15 @@ async def main():
         # await asyncio.sleep(5)
         # content = await page.content()
         # soup = bs4.BeautifulSoup(content, features="lxml")
+        print("def get_price_name(target_url): " + target_url)
         product_name = 'Not Found'
         product_price = 'Not Found'
         product_description = 'Not Found'
         # product_category = 'Not Found'
         product_upc = 'Not Found'
         product_imageurl = 'Not Found'
-        print("target_url=", target_url)
         if not target_url:
-            products.append({"upc": product_upc,
-                             "product_name": product_name,
-                             "product_price": product_price.replace('$', ''),
-                             "product_image": product_imageurl,
-                             "product_description": product_description,
-                             "product_category": product_category
-                             })
-            print("product=", {"upc": product_upc,
-                               "product_name": product_name,
-                               "product_price": product_price.replace('$', ''),
-                               "product_image": product_imageurl,
-                               "product_description": product_description,
-                               "product_category": product_category
-                               })
+            print("not target_url")
             # return {"upc": product_upc,
             #         "product_name": product_name,
             #         "product_price": product_price.replace('$', ''),
@@ -345,47 +332,69 @@ async def main():
             #         "product_category": product_category
             #         }
         else:
-            await page.goto(TARGET_HOMEPAGE + target_url)
+            await page.goto(target_url)
+            await asyncio.sleep(5)
             content = await page.content()
             soup = bs4.BeautifulSoup(content, features="lxml")
-            price = soup.select('span[data-test="product-random-weight-price"]')
-            # print(price)
-            while not len(price):
-                content = await page.content()
-                soup = bs4.BeautifulSoup(content, features="lxml")
+            if len(soup.select('div[data-test="productNotFound"]')):
+                products.append({"upc": product_upc,
+                                "product_name": product_name,
+                                "product_price": product_price.replace('$', ''),
+                                "product_image": product_imageurl,
+                                "product_description": product_description,
+                                "product_category": product_category
+                                })
+                
+                # return {"upc": product_upc,
+                #         "product_name": product_name,
+                #         "product_price": product_price.replace('$', ''),
+                #         "product_image": product_imageurl,
+                #         "product_description": product_description,
+                #         "product_category": product_category
+                #         }
+            else:
                 price = soup.select('span[data-test="product-random-weight-price"]')
                 # print(price)
-                if len(price):
-                    product_price = price[0].string
+                if not len(price):
+                    await asyncio.sleep(5)
+                    content = await page.content()
+                    soup = bs4.BeautifulSoup(content, features="lxml")
+                    price = soup.select('span[data-test="product-random-weight-price"]')
+                if not len(price):
+                    products.append({"upc": product_upc,
+                                     "product_name": product_name,
+                                     "product_price": product_price.replace('$', ''),
+                                     "product_image": product_imageurl,
+                                     "product_description": product_description,
+                                     "product_category": product_category
+                                     })
+                else:
+                    product_price = price[0].text
                     print(product_price)
-                await asyncio.sleep(1)
-            product_name = soup.select('h1[data-test="product-title"] span')[0].text
-            print(product_name)
-            product_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
-            print(product_upc)
-            product_imageurl = soup.select(
-                'button[data-test="product-carousel-item-0"] img')[0]['src']
-            print(product_imageurl)
-            # product_category = soup.select(
-            #     '.PWWrr:nth-child(2) > span > a > span')[0].text
-            # print(product_category)
-            product_description = soup.find_all("h3", string="Description")[
-                0].parent.div.string
-            print(product_description)
-            await browser.close()
-            return {"upc": product_upc,
-                    "product_name": product_name,
-                    "product_price": product_price.replace('$', ''),
-                    "product_image": product_imageurl,
-                    "product_description": product_description,
-                    "product_category": product_category
-                    }
-    
-    
-    
-    
-    
-    
+                    product_name = soup.select('h1[data-test="product-title"] span')[0].text
+                    print(product_name)
+                    product_upc = soup.find_all("b", string="UPC")[0].parent.text.split(' ')[1]
+                    print(product_upc)
+                    product_imageurl = soup.select('button[data-test="product-carousel-item-0"] img')[0]['src']
+                    print(product_imageurl)
+                    # product_category = soup.select('.PWWrr:nth-child(2) > span > a > span')[0].text
+                    # print(product_category)
+                    product_description = soup.find_all("h3", string="Description")[0].parent.div.text
+                    print(product_description)
+                    products.append({"upc": product_upc,
+                                     "product_name": product_name,
+                                     "product_price": product_price.replace('$', ''),
+                                     "product_image": product_imageurl,
+                                     "product_description": product_description,
+                                     "product_category": product_category
+                                     })
+        print("product=", {"upc": product_upc,
+                           "product_name": product_name,
+                           "product_price": product_price.replace('$', ''),
+                           "product_image": product_imageurl,
+                           "product_description": product_description,
+                           "product_category": product_category
+                           })
     
     await browser.close()
     
@@ -464,5 +473,4 @@ async def get_price_name(target_url):
             }
 
 
-# asyncio.run(main())
-print(asyncio.run(get_price_name("https://www.target.com/p/huggies-little-movers-baby-disposable-diapers-select-size-and-count/-/A-12345678?preselect=53550899#lnk=sametab")))
+asyncio.run(main())

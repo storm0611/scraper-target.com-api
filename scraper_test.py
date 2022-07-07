@@ -56,7 +56,7 @@ async def update_db():
         for category in children:
             category_name = category.a.text
             category_url = category.a['href']
-            if category_url.find("http") < 0:
+            if category_url.find("http") < 0 and category_url.find(".com") < 0:
                 category_url = TARGET_HOMEPAGE + category_url                
             print(category_name, category_url)
             categories.append({
@@ -121,7 +121,7 @@ async def update_db():
                         product_url = item.a['href']
                     except:
                         continue
-                    if product_url.find("http") < 0:
+                    if product_url.find("http") < 0 and product_url.find(".com") < 0:
                         product_url = TARGET_HOMEPAGE + product_url
                     products.append({
                         "category": product_category,
@@ -285,7 +285,7 @@ async def update_db():
                                 sub_subcategory_url = subcategory.a['href']
                             except:
                                 continue
-                            if sub_subcategory_url.find("http") < 0:
+                            if sub_subcategory_url.find("http") < 0 and sub_subcategory_url.find(".com") < 0:
                                 sub_subcategory_url = TARGET_HOMEPAGE + sub_subcategory_url
                             sub_subcategories.append({
                                 'parent': category_name,

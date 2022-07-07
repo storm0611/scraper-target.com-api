@@ -16,7 +16,7 @@ target_url = TARGET_PRODUCT
 
 async def main():
     
-    sys.stdout = open('log.txt', 'wa')
+    sys.stdout = open('log.txt', 'w+')
     print("---------------------------------------------------------------------------------------")
     print(datetime.datetime.today())
     print("====================================================================================")

@@ -74,7 +74,10 @@ async def update_db():
         print("category=", category)
         category_name = category['name']
         category_url = category['url']
-        await page.goto(TARGET_HOMEPAGE + category_url)
+        if category_url.find("http") < 0:
+            await page.goto(TARGET_HOMEPAGE + category_url)
+        else:
+            await page.goto(category_url)
         await asyncio.sleep(5)
         content = await page.content()
         soup = bs4.BeautifulSoup(content, features="lxml")

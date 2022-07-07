@@ -463,4 +463,4 @@ async def get_price_name(target_url):
 
 
 # asyncio.run(main())
-print(asyncio.run(get_price_name("https://www.target.com/p/huggies-little-movers-baby-disposable-diapers-select-size-and-count/-/A-82984217?preselect=53550899#lnk=sametab")))
+print(asyncio.run(get_price_name("https://www.target.com/p/huggies-little-movers-baby-disposable-diapers-select-size-and-count/-/A-12345678?preselect=53550899#lnk=sametab")))

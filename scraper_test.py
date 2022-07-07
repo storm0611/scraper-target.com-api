@@ -6,6 +6,7 @@ import json
 import os
 import sys
 import datetime
+import sqlite3
 
 TARGET_HOMEPAGE = "https://www.target.com"
 TARGET_ALL_CATEGORIES = "https://www.target.com/c/shop-all-categories/-/N-5xsxf"
@@ -14,7 +15,10 @@ TARGET_PRODUCT = "https://www.target.com/p/huggies-little-movers-baby-disposable
 
 target_url = TARGET_PRODUCT
 
-async def main():
+async def update_db():
+    
+    conn = sqlite3.connect('mydb.db')
+    cur = conn.cursor()
     
     sys.stdout = open('log.txt', 'w+')
     print("---------------------------------------------------------------------------------------")
@@ -398,6 +402,7 @@ async def main():
                            })
     
     await browser.close()
+    conn.close()
     
 
     
@@ -474,4 +479,4 @@ async def get_price_name(target_url):
             }
 
 
-asyncio.run(main())
+asyncio.run(update_db())

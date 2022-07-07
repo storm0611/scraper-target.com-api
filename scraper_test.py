@@ -412,13 +412,30 @@ async def get_price_name(target_url):
                                      handleSIGHUP=False)
     page = await browser.newPage()
     await page.goto(target_url)
+    await asyncio.sleep(5)
     content = await page.content()
     soup = bs4.BeautifulSoup(content, features="lxml")
+    if len(soup.select('div[data-test="productNotFound"]')):
+        return {"upc": product_upc,
+                "product_name": product_name,
+                "product_price": product_price.replace('$', ''),
+                "product_image": product_imageurl,
+                "product_description": product_description,
+                "product_category": product_category
+                }
     price = soup.select('span[data-test="product-random-weight-price"]')
     # print(price)
     while not len(price):
         content = await page.content()
         soup = bs4.BeautifulSoup(content, features="lxml")
+        if len(soup.select('div[data-test="productNotFound"]')):
+            return {"upc": product_upc,
+                "product_name": product_name,
+                "product_price": product_price.replace('$', ''),
+                "product_image": product_imageurl,
+                "product_description": product_description,
+                "product_category": product_category
+                }
         price = soup.select('span[data-test="product-random-weight-price"]')
         # print(price)
         if len(price):

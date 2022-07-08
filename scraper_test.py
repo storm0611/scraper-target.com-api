@@ -182,9 +182,10 @@ async def update_db():
             #             })
             print("end - finding subcategories in category")
             # end - finding subcategories
+        asyncio.sleep(600)
 
-        print("end - finding in category")
-        # end - finding subcategories or products list
+    print("end - finding in category")
+    # end - finding subcategories or products list
         
     subcategories = json.load(open(os.path.join("subcategories.json")))
     # print("subcategories=", subcategories)

@@ -138,8 +138,8 @@ async def update_db():
                     })
                 page_num += 1
                 print("page_num=", page_num)
-                if cnt % 1001 >= 1000:
-                    asyncio.sleep(600)
+                # if cnt % 1001 >= 1000:
+                #     asyncio.sleep(600)
             products_count.append({
                 'category': category_name,
                 'count': cnt
@@ -185,7 +185,7 @@ async def update_db():
             #             })
             print("end - finding subcategories in category")
             # end - finding subcategories
-        asyncio.sleep(600)
+        # asyncio.sleep(600)
 
     print("end - finding in category")
     # end - finding subcategories or products list

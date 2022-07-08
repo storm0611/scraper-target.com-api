@@ -64,12 +64,12 @@ async def update_db():
                 'url': category_url
             })
 
-    # categories = json.load(open(os.path.join("categories.json")))
-    # print(categories)
-    jsonString = json.dumps(categories)
-    jsonFile = open("categories.json", "w")
-    jsonFile.write(jsonString)
-    jsonFile.close()
+    categories = json.load(open(os.path.join("categories.json")))
+    print("categories=", categories)
+    # jsonString = json.dumps(categories)
+    # jsonFile = open("categories.json", "w")
+    # jsonFile.write(jsonString)
+    # jsonFile.close()
     # end - finding categories list
 
     # start - finding subcategories or products list
@@ -185,11 +185,12 @@ async def update_db():
 
         print("end - finding in category")
         # end - finding subcategories or products list
+    subcategories = json.load(open(os.path.join("subcategories.json")))
     print("subcategories=", subcategories)
-    jsonString = json.dumps(subcategories)
-    jsonFile = open("subcategories.json", "w")
-    jsonFile.write(jsonString)
-    jsonFile.close()
+    # jsonString = json.dumps(subcategories)
+    # jsonFile = open("subcategories.json", "w")
+    # jsonFile.write(jsonString)
+    # jsonFile.close()
     if len(subcategories):
         # start - finding products in subcategories
         print("start - finding products in subcategories")

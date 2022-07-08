@@ -137,6 +137,8 @@ async def update_db():
                     })
                 page_num += 1
                 print("page_num=", page_num)
+                if cnt % 1001 == 1000:
+                    asyncio.sleep(600)
             products_count.append({
                 'category': category_name,
                 'count': cnt

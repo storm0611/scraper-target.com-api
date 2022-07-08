@@ -106,10 +106,11 @@ async def update_db():
                 soup = bs4.BeautifulSoup(content, features="lxml")
                 products_grid = soup.select('div[data-test="product-grid"] section>div')
                 print("products_grid find?=", len(products_grid))
-                # if not len(products_grid):
-                #     content = await page.content()
-                #     soup = bs4.BeautifulSoup(content, features="lxml")
-                #     products_grid = soup.select('div[data-test="product-grid"] section>div')
+                if not len(products_grid):
+                    # content = await page.content()
+                    # soup = bs4.BeautifulSoup(content, features="lxml")
+                    # products_grid = soup.select('div[data-test="product-grid"] section>div')
+                    break
                 for item in products_grid[0].contents:
                     # print(item)
                     # print(item.text)

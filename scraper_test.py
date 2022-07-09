@@ -224,7 +224,7 @@ async def update_db():
             if len(products_grid):
                 # start - finding products in subcategories
                 print("start - finding products in subcategories")
-                print("results text = ", soup.select('h2[data-test="resultsHeading"]')[0].text)
+                # print("results text = ", soup.select('h2[data-test="resultsHeading"]')[0].text)
                 try:
                     results_count = int(soup.select('h2[data-test="resultsHeading"]')[0].text.split(" ")[0])
                 except:

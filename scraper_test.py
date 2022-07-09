@@ -1,6 +1,3 @@
-from ast import keyword
-from tarfile import CompressionError
-from pip import main
 import pyppeteer
 import bs4
 import asyncio
@@ -612,24 +609,227 @@ target_url = TARGET_PRODUCT
 
 
 # asyncio.run(update_db())
+API_URL1 = "https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1"
+API_URL2 = "https://redsky.target.com/redsky_aggregations/v1/web/pdp_client_v1"
+API_KEY = "9f36aeafbe60771e321a7cc95a78140772ab3e96"
 
-params = {
-    "key": "9f36aeafbe60771e321a7cc95a78140772ab3e96",
-    "channel": "WEB",
-    "count": "24",
-    "default_purchasability_filter": "false",
-    "include_sponsored": "true",
-    "keyword": "800897004071",
-    "offset": "0",
-    "page": "%2Fs%2F800897004071",
-    "platform": "desktop",
-    "pricing_store_id": "3991",
-    "useragent": "Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F103.0.0.0+Safari%2F537.36",
-    "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
-}
+def get_products_category(categories):
+    conn = sqlite3.connect('mydb.db')
+    cur = conn.cursor()
+    count = 28
+    products_info = []
+    for category in categories:
+        print("category=", category)
+        category_name = category['name']
+        category_url = category['url']
+        category_id = category_url.split('-')[-1]
+        print("category_id", category_id)
+        current_page = total_pages = 1
+        total_results = 0
+        offset = 0
+        cnt = 0
+        while current_page <= total_pages:
+            if cnt > total_results:
+                break
+            params1 = {
+                "key": API_KEY,
+                "channel": "WEB",
+                "count": str(count),
+                "default_purchasability_filter": "false",
+                "include_sponsored": "true",
+                "keyword": category_id,
+                "offset": str(offset),
+                "page": "%2Fs%2F" + category_id,
+                "platform": "desktop",
+                "pricing_store_id": "3991",
+                "useragent": "Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F103.0.0.0+Safari%2F537.36",
+                "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
+            }
+            response = requests.get(API_URL1, params=params1)
+            print(response.status_code)
+            searched = response.json()['data']['search']
+            overview = searched['search_response']["typed_metadata"]
+            print("overview=", overview)
+            current_page = overview['current_pages']
+            offset = overview['offset']
+            total_pages = overview['total_pages']
+            total_results = overview['total_results']
+            products = searched['products']
+            print("len(products)=", len(products))
+            for product in products:
+                url = product['item']['enrichment']['buy_url']
+                image = product['item']['enrichment']['images']['primary_image_url']
+                vender = product['item']['product_vendors'][0]['vendor_name']
+                tcin = product['tcin']
+                tcin_results = get_products_tcin(tcin)
+                products_info.append({
+                    "url": url,
+                    "upc": tcin_results['upc'],
+                    "tcin": tcin,
+                    "name": tcin_results['name'],
+                    "description": tcin_results['description'],
+                    "image": image,
+                    "category": category,
+                    "price_max": tcin_results['price_max'],
+                    "price_min": tcin_results['price_min'],
+                    "employee": vender,
+                })
+                print("product_info = ", {
+                    "url": url,
+                    "upc": tcin_results['upc'],
+                    "tcin": tcin,
+                    "name": tcin_results['name'],
+                    "description": tcin_results['description'],
+                    "image": image,
+                    "category": category,
+                    "price_max": tcin_results['price_max'],
+                    "price_min": tcin_results['price_min'],
+                    "employee": vender,
+                })
+                cnt += 1
+            offset += count
+    return(products_info)        
+    conn.close()
+        
+
+def get_products_upc(upc):
+    params1 = {
+        "key": API_KEY,
+        "channel": "WEB",
+        "count": "24",
+        "default_purchasability_filter": "false",
+        "include_sponsored": "true",
+        "keyword": str(upc),
+        "offset": "0",
+        "page": "%2Fs%2F" + str(upc),
+        "platform": "desktop",
+        "pricing_store_id": "3991",
+        "useragent": "Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F103.0.0.0+Safari%2F537.36",
+        "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
+    }
+    response = requests.get(API_URL1, params=params1)
+    print(response.status_code)
+    searched = response.json()['data']['search']
+    # print(searched)
+    products = searched['products']
+    category = searched['search_response']['facet_list'][0]['details'][0]['display_name']
+    for product in products:
+        url = product['item']['enrichment']['buy_url']
+        image = product['item']['enrichment']['images']['primary_image_url']
+        tcin = product['tcin']
+        params2 = {
+            "key": API_KEY,
+            "tcin": str(tcin),
+            "is_bot": "false",
+            "member_id": "0",
+            "pricing_store_id": "3991",
+            "has_pricing_store_id": "true",
+            "has_financing_options": "true",
+            "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E",
+            "has_size_context": "true",
+            "latitude": "50.130",
+            "longitude": "8.670",
+            "zip": "60323",
+            "state": "HE",
+            "channel": "WEB",
+            "page": "%2Fp%2FA-" + str(tcin)
+        }
+        response = requests.get(API_URL2, params=params2)
+        print(response.status_code)
+        product_info = response.json()['data']['product']
+        category_id = product_info['category']['parent_category_id']
+        barcode = upc
+        name = product_info['item']['product_description']['title']
+        description = product_info['item']['product_description']['downstream_description']
+        # vender = product_info['item']['product_vendors']['vendor_name']
+        price_max = product_info['price']['reg_retail_max']
+        price_min = product_info['price']['reg_retail_min']
+        # print("product info=", {
+        #     "url": url,
+        #     "upc": barcode,
+        #     "tcin": tcin,
+        #     "name": name,
+        #     "description": description,
+        #     "image": image,
+        #     "category": category,
+        #     "price_max": price_max,
+        #     "price_min": price_min,
+        #     # "employee": vender,
+        # })
+        return {
+            "url": url,
+            "upc": barcode,
+            "tcin": tcin,
+            "name": name,
+            "description": description,
+            "image": image,
+            "category": category,
+            "price_max": price_max,
+            "price_min": price_min,
+            # "employee": vender,
+        }
+        
+def get_products_tcin(tcin):
+    params2 = {
+        "key": API_KEY,
+        "tcin": str(tcin),
+        "is_bot": "false",
+        "member_id": "0",
+        "pricing_store_id": "3991",
+        "has_pricing_store_id": "true",
+        "has_financing_options": "true",
+        "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E",
+        "has_size_context": "true",
+        "latitude": "50.130",
+        "longitude": "8.670",
+        "zip": "60323",
+        "state": "HE",
+        "channel": "WEB",
+        "page": "%2Fp%2FA-" + str(tcin)
+    }
+    response = requests.get(API_URL2, params=params2)
+    print(response.status_code)
+    product_info = response.json()['data']['product']
+    children = product_info['children']
+    barcode = "Not Found"
+    for child in children:
+        if child['tcin'] == str(tcin):
+            barcode = child['item']['primary_barcode']
+            break
+    category_id = product_info['category']['parent_category_id']
+    # barcode = upc
+    name = product_info['item']['product_description']['title']
+    description = product_info['item']['product_description']['downstream_description']
+    # vender = product_info['item']['product_vendors']['vendor_name']
+    price_max = product_info['price']['reg_retail_max']
+    price_min = product_info['price']['reg_retail_min']
+    # print("product info=", {
+    #     "url": url,
+    #     "upc": barcode,
+    #     "tcin": tcin,
+    #     "name": name,
+    #     "description": description,
+    #     "image": image,
+    #     "category": category,
+    #     "price_max": price_max,
+    #     "price_min": price_min,
+    #     # "employee": vender,
+    # })
+    return {
+        # "url": url,
+        "upc": barcode,
+        "tcin": tcin,
+        "name": name,
+        "description": description,
+        # "image": image,
+        # "category": category,
+        "price_max": price_max,
+        "price_min": price_min,
+        # "employee": vender,
+    }
 
 if __name__ == '__main__':
-    # results = requests.get("https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1?key=9f36aeafbe60771e321a7cc95a78140772ab3e96&channel=WEB&count=24&default_purchasability_filter=false&include_sponsored=true&keyword=800897004071&offset=0&page=%2Fs%2F800897004071&platform=desktop&pricing_store_id=3991&useragent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F103.0.0.0+Safari%2F537.36&visitor_id=0181DBA81F220201B2C4F5C04CBA071E")
-    results = requests.get(SEARCH_URL, params=params)
-    print(results)
-    
+    # upc = input("Enter UPC:")
+    # print(get_products_upc(upc))
+    categories = json.load(open(os.path.join("categories.json")))
+    print(len(get_products_category(categories)))

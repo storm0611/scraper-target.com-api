@@ -669,7 +669,7 @@ def get_products_category(categories):
                     "name": tcin_results['name'],
                     "description": tcin_results['description'],
                     "image": image,
-                    "category": category,
+                    "category": category_name,
                     "price_max": tcin_results['price_max'],
                     "price_min": tcin_results['price_min'],
                     "employee": vender,
@@ -681,15 +681,15 @@ def get_products_category(categories):
                     "name": tcin_results['name'],
                     "description": tcin_results['description'],
                     "image": image,
-                    "category": category,
+                    "category": category_name,
                     "price_max": tcin_results['price_max'],
                     "price_min": tcin_results['price_min'],
                     "employee": vender,
                 })
                 cnt += 1
             offset += count
-    return(products_info)        
     conn.close()
+    return(products_info)        
         
 
 def get_products_upc(upc):
@@ -740,7 +740,11 @@ def get_products_upc(upc):
         category_id = product_info['category']['parent_category_id']
         barcode = upc
         name = product_info['item']['product_description']['title']
-        description = product_info['item']['product_description']['downstream_description']
+        try:
+            description = product_info['item']['product_description']['downstream_description']
+        except:
+            description = product_info['item']['product_description']['soft_bullet_description']
+            
         # vender = product_info['item']['product_vendors']['vendor_name']
         price_max = product_info['price']['reg_retail_max']
         price_min = product_info['price']['reg_retail_min']

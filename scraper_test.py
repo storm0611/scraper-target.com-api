@@ -5,6 +5,7 @@ import json
 import os
 import sys
 import datetime
+import time
 import sqlite3
 import requests
 
@@ -613,9 +614,53 @@ API_URL1 = "https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1"
 API_URL2 = "https://redsky.target.com/redsky_aggregations/v1/web/pdp_client_v1"
 API_KEY = "9f36aeafbe60771e321a7cc95a78140772ab3e96"
 
-def get_products_category(categories):
+today = datetime.datetime.today().strftime("%Y-%m-%d")
+
+def insert_into_table(product_info):
     conn = sqlite3.connect('mydb.db')
     cur = conn.cursor()
+    sql_query = "SELECT * FROM products WHERE upc=" + \
+        "'" + product_info['upc'] + "' or name=" + \
+        '"' + product_info['name'] + '"'
+    print(sql_query)
+    results = cur.execute(sql_query).fetchall()
+    if len(results):
+        id = results[0][0]
+        sql_query = "UPDATE products SET " + \
+                    "price=" + str(product_info['price_min']) + ", " +  \
+                    "update_date=" + "'" + today + "', " +  \
+                    " WHERE id=" + str(id)
+        print(sql_query)
+        cur.execute(sql_query)
+        conn.commit()
+    else:
+        sql_query = "INSERT INTO products (" + \
+            "url" + ", " + \
+            "tcin" + ", " + \
+            "upc" + ", " + \
+            "name" + ", " + \
+            "description" + ", " + \
+            "image" + ", " + \
+            "category" + ", " + \
+            "price" + ", " + \
+            "employee" + ", " + \
+            "open_date" + ", " + \
+            "close_date" + ") VALUES (" + \
+                '"' + product_info['url'] + '", ' + \
+                '"' + product_info['tcin'] + '", ' + \
+                '"' + product_info['upc'] + '", ' + \
+                '"' + product_info['name'] + '", ' + \
+                '"' + product_info['description'] + '", ' + \
+                '"' + product_info['image'] + '", ' + \
+                '"' + product_info['category'] + '", ' + \
+                '"' + product_info['price_min'] + '", ' + \
+                '"' + product_info['employee'] + '", ' + \
+                '"' + today + '", ' + \
+                '"' + today + '", ' + \
+            ")"
+    
+def get_products_category(categories):
+    
     count = 28
     products_info = []
     for category in categories:
@@ -670,6 +715,18 @@ def get_products_category(categories):
                     "description": tcin_results['description'],
                     "image": image,
                     "category": category_name,
+                    "price_max": str(tcin_results['price_max']),
+                    "price_min": str(tcin_results['price_min']),
+                    "employee": vender,
+                })
+                insert_into_table({
+                    "url": url,
+                    "upc": tcin_results['upc'],
+                    "tcin": tcin,
+                    "name": tcin_results['name'],
+                    "description": tcin_results['description'],
+                    "image": image,
+                    "category": category_name,
                     "price_max": tcin_results['price_max'],
                     "price_min": tcin_results['price_min'],
                     "employee": vender,
@@ -688,7 +745,7 @@ def get_products_category(categories):
                 })
                 cnt += 1
             offset += count
-    conn.close()
+            time.sleep(5)
     return(products_info)        
         
 

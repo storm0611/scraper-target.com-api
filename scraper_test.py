@@ -650,7 +650,7 @@ def get_products_category(categories):
             searched = response.json()['data']['search']
             overview = searched['search_response']["typed_metadata"]
             print("overview=", overview)
-            current_page = overview['current_pages']
+            current_page = overview['current_page']
             offset = overview['offset']
             total_pages = overview['total_pages']
             total_results = overview['total_results']

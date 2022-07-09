@@ -629,6 +629,6 @@ params = {
 }
 
 if __name__ == '__main__':
-    results = requests.get(SEARCH_URL, params=params)
+    results = requests.get("https://redsky.target.com/redsky_aggregations/v1/web/plp_search_v1?key=9f36aeafbe60771e321a7cc95a78140772ab3e96&channel=WEB&count=24&default_purchasability_filter=false&include_sponsored=true&keyword=800897004071&offset=0&page=%2Fs%2F800897004071&platform=desktop&pricing_store_id=3991&useragent=Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F103.0.0.0+Safari%2F537.36&visitor_id=0181DBA81F220201B2C4F5C04CBA071E")
     print(results)
     

@@ -258,7 +258,8 @@ async def update_db():
                             product_url = item.a['href']
                         except:
                             continue
-                        product_url = TARGET_HOMEPAGE + product_url
+                        if product_url.find("http") < 0 and product_url.find(".com") < 0:
+                            product_url = TARGET_HOMEPAGE + product_url
                         products.append({
                             "category": product_category,
                             "name": product_name,

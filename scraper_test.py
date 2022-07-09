@@ -631,13 +631,13 @@ def get_products_category(categories):
         while current_page <= total_pages:
             if cnt > total_results:
                 break
-            params1 = {
+            params3 = {
                 "key": API_KEY,
+                "category": category_id,
                 "channel": "WEB",
                 "count": str(count),
                 "default_purchasability_filter": "false",
                 "include_sponsored": "true",
-                "keyword": category_id,
                 "offset": str(offset),
                 "page": "%2Fs%2F" + category_id,
                 "platform": "desktop",
@@ -645,7 +645,7 @@ def get_products_category(categories):
                 "useragent": "Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F103.0.0.0+Safari%2F537.36",
                 "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
             }
-            response = requests.get(API_URL1, params=params1)
+            response = requests.get(API_URL1, params=params3)
             print(response.status_code)
             searched = response.json()['data']['search']
             overview = searched['search_response']["typed_metadata"]

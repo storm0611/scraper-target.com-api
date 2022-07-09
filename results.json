@@ -10,13 +10,13 @@
                         "expand": true,
                         "details": [{
                                 "display_name": "Beauty",
-                                "url": "keyword=792850155008&sort_by=relevance&count=24&offset=0&category=55r1x",
+                                "url": "keyword=3606000537460&sort_by=relevance&count=24&offset=0&category=55r1x",
                                 "value": "55r1x"
                             },
                             {
-                                "display_name": "Personal Care",
-                                "url": "keyword=792850155008&sort_by=relevance&count=24&offset=0&category=5xtzq",
-                                "value": "5xtzq"
+                                "display_name": "College",
+                                "url": "keyword=3606000537460&sort_by=relevance&count=24&offset=0&category=5q0g0",
+                                "value": "5q0g0"
                             }
                         ]
                     },
@@ -50,6 +50,18 @@
                         "display_name": "Shipping & Pickup",
                         "expand": false,
                         "details": [{
+                                "display_name": "buy online & pick up",
+                                "facet_id": "5zl7w",
+                                "url": "d_channel:buy online & pick up",
+                                "value": "buy online & pick up"
+                            },
+                            {
+                                "display_name": "in stores",
+                                "facet_id": "5zkty",
+                                "url": "d_channel:in stores",
+                                "value": "in stores"
+                            },
+                            {
                                 "display_name": "shipping",
                                 "facet_id": "5zktx",
                                 "url": "d_channel:shipping",
@@ -75,10 +87,10 @@
                         "display_name": "Type",
                         "expand": false,
                         "details": [{
-                            "display_name": "Lip Balms",
-                            "facet_id": "fb5b9",
-                            "url": "d_item_type_all:lip balms",
-                            "value": "lip balms"
+                            "display_name": "Face Moisturizer",
+                            "facet_id": "kxpty",
+                            "url": "d_item_type_all:face moisturizer",
+                            "value": "face moisturizer"
                         }]
                     },
                     {
@@ -87,10 +99,10 @@
                         "display_name": "Brand",
                         "expand": false,
                         "details": [{
-                            "display_name": "Burt's Bees",
-                            "facet_id": "5xwcx",
-                            "url": "d_brand_all:burt's bees",
-                            "value": "burt's bees"
+                            "display_name": "CeraVe",
+                            "facet_id": "55v99",
+                            "url": "d_brand_all:cerave",
+                            "value": "cerave"
                         }]
                     },
                     {
@@ -140,7 +152,7 @@
                 "typed_metadata": {
                     "count": 24,
                     "current_page": 1,
-                    "keyword": "792850155008",
+                    "keyword": "3606000537460",
                     "offset": 0,
                     "sort_by": "relevance",
                     "total_pages": 1,
@@ -184,162 +196,222 @@
             },
             "products": [{
                 "__typename": "ProductSummary",
-                "tcin": "13475659",
-                "original_tcin": "13475659",
+                "tcin": "14353569",
+                "original_tcin": "14353569",
                 "item": {
                     "relationship_type": "Variation Child",
                     "relationship_type_code": "VC",
                     "merchandise_classification": {
-                        "class_id": 5,
+                        "class_id": 12,
                         "department_id": 37
                     },
                     "eligibility_rules": {
-                        "add_on": {
+                        "scheduled_delivery": {
                             "is_active": true
                         }
                     },
                     "enrichment": {
-                        "buy_url": "https://www.target.com/p/burt-39-s-bees-lip-balm-beeswax-2ct/-/A-13475659",
+                        "buy_url": "https://www.target.com/p/cerave-face-moisturizer-with-sunscreen-am-facial-moisturizing-lotion-for-normal-to-dry-skin-spf-30-3-fl-oz/-/A-14353569",
                         "images": {
-                            "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_8edfbb16-1547-4f0f-9b07-470c08d59276",
+                            "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_c182ebd9-b8e2-4b24-b90f-9a1e45e4a369",
                             "alternate_image_urls": [
-                                "https://target.scene7.com/is/image/Target/GUEST_c38586e8-e977-42f1-bbb3-bf14edac0b13",
-                                "https://target.scene7.com/is/image/Target/GUEST_5c56b439-0947-430d-9327-209ecd91c89b",
-                                "https://target.scene7.com/is/image/Target/GUEST_9f486128-cf2f-4c4d-abfb-1e87478d9a82",
-                                "https://target.scene7.com/is/image/Target/GUEST_6ebd8f70-be9a-432e-97ed-bf5e543e792e",
-                                "https://target.scene7.com/is/image/Target/GUEST_fc258b6e-dbf7-4b92-bc01-035f0c96d17f",
-                                "https://target.scene7.com/is/image/Target/GUEST_5f124b9f-34a9-4387-9fe5-87e3dd32551d",
-                                "https://target.scene7.com/is/image/Target/GUEST_bf80a236-385d-4392-807a-d4466a98dfd9"
+                                "https://target.scene7.com/is/image/Target/GUEST_514520bc-1b72-4ffd-a5d4-090dc07fe949",
+                                "https://target.scene7.com/is/image/Target/GUEST_07fd63f5-de2b-41f9-9624-6972875e730f",
+                                "https://target.scene7.com/is/image/Target/GUEST_b6c70f35-81d1-4aa0-8277-d1c0217c4689",
+                                "https://target.scene7.com/is/image/Target/GUEST_2cce94f9-b7d0-4eab-b0e2-dd484d155963",
+                                "https://target.scene7.com/is/image/Target/GUEST_584cba70-3988-49e4-810f-66d1259805d0",
+                                "https://target.scene7.com/is/image/Target/GUEST_b65360bf-1658-47fc-aab0-bf40d8c71cb4",
+                                "https://target.scene7.com/is/image/Target/GUEST_88e5b1ab-6237-496e-803b-f76c2ca64218",
+                                "https://target.scene7.com/is/image/Target/GUEST_7948b2b2-6652-4ae8-8b98-9c6d250e7808",
+                                "https://target.scene7.com/is/image/Target/GUEST_344c9c5b-be51-444a-8e0f-424b5fab21ae",
+                                "https://target.scene7.com/is/image/Target/GUEST_75a9b842-ae41-4ed7-afbc-555634ad2998"
                             ]
                         },
                         "videos": [{
-                            "is_list_page_eligible": false,
-                            "video_files": [{
-                                "mime_type": "video/mp4",
-                                "video_url": "https://target.scene7.com/is/content/Target/GUEST_5949b0d7-53b0-493e-aede-a73dd07d7fb7_Flash9_Autox720p_2600k"
-                            }]
-                        }]
+                                "is_list_page_eligible": false,
+                                "video_files": [{
+                                    "mime_type": "video/mp4",
+                                    "video_url": "https://target.scene7.com/is/content/Target/GUEST_544e41c5-35b2-41cb-a215-5255078a3d67_Flash9_Autox720p_2600k"
+                                }]
+                            },
+                            {
+                                "is_list_page_eligible": false,
+                                "video_files": [{
+                                    "mime_type": "video/mp4",
+                                    "video_url": "https://target.scene7.com/is/content/Target/GUEST_66f7b818-c138-4a2e-b42a-060950a2b7d6_Flash9_Autox720p_2600k"
+                                }]
+                            },
+                            {
+                                "is_list_page_eligible": false,
+                                "video_files": [{
+                                    "mime_type": "video/mp4",
+                                    "video_url": "https://target.scene7.com/is/content/Target/GUEST_753be4d8-8ba2-412c-88d7-1d938d341a81_Flash9_Autox720p_2600k"
+                                }]
+                            }
+                        ]
                     },
                     "compliance": {},
-                    "dpci": "037-05-0142",
+                    "dpci": "037-12-1511",
                     "cart_add_on_threshold": 35.0,
                     "product_description": {
-                        "title": "Burt&#39;s Bees Lip Balm Beeswax - 2ct",
+                        "title": "CeraVe Face Moisturizer with Sunscreen, AM Facial Moisturizing Lotion for Normal to Dry Skin - SPF 30 - 3 fl oz​​",
                         "bullet_descriptions": [
-                            "<B>Health Facts:</B> Sulfate-Free, Formaldehyde-Free, Paraben-Free, Phthalate-Free",
-                            "<B>Product Form:</B> Balm",
-                            "<B>Sustainability Claims:</B> Cruelty-Free",
-                            "<B>Package Quantity:</B> 2",
-                            "<B>Beauty Purpose:</B> Moisturizing",
-                            "<B>Net weight:</B> .3 Ounces"
+                            "<B>Scent:</B> Unscented",
+                            "<B>Health Facts:</B> No Fragrance Added, Phthalate-Free, Oil-Free, Contains Ceramides, Contains Hyaluronic Acid, Dye-Free, Noncomedogenic",
+                            "<B>Product Form:</B> Lotion",
+                            "<B>Beauty Purpose:</B> Anti-Acne, Exfoliating, Sun Protection, Moisturizing",
+                            "<B>Recommended Skin Type:</B> Normal",
+                            "<B>Net weight:</B> 3 fl oz (US)",
+                            "<B>SPF:</B> 30",
+                            "<B>Features:</B> Dermatologist Tested, Dermatologist Recommended"
                         ],
                         "soft_bullets": {
                             "bullets": [
-                                "MOISTURIZING LIP CARE: Bursting with minty freshness, refresh and nourish your lips with Burt's Bees Beeswax Moisturizing Lip Balm",
-                                "COOLING COMFORT: Made with Beeswax, Vitamin E and a hint of peppermint oil, hydrate and nourish dry lips with the original favorite Burt's Bees lip balm",
-                                "LONG LASTING LIP BALM: Just one swipe of this conditioning lip balm leaves your lips smooth and refreshed all day long",
-                                "ALL NATURAL: Enriched with a 100% natural origin formula, this natural lip balm is formulated without parabens, phthalates, petrolatum or SLS",
-                                "BURT’S BEES® LIP CARE: Naturally beautify and revitalize your lips with the refreshing tingle of Original Beeswax Lip Balm"
+                                "CeraVe oil-free, daily face moisturizer with sunscreen for normal to dry skin ​",
+                                "Ultra-fine zinc oxide moisturizer provides broad-spectrum SPF 30 UVA/UVB protection​",
+                                "Non-comedogenic face sunscreen without fragrance absorbs quickly and leaves a non-greasy finish ​",
+                                "Hyaluronic acid to retain the skin’s natural moisture​",
+                                "Ceramides to restore and maintain the skin’s natural barrier​",
+                                "Niacinamide to calm the skin​",
+                                "MVE Technology: This patented delivery system continually releases moisturizing ingredients for 24-hour hydration ​",
+                                "CeraVe face lotion with spf is developed with dermatologists and recommended for daily use by the Skin Cancer Foundation"
                             ]
                         }
                     },
                     "product_vendors": [{
-                        "vendor_name": "BURT'S BEES INC",
-                        "id": "1202467"
-                    }],
+                            "vendor_name": "ACD Mass",
+                            "id": "1978489"
+                        },
+                        {
+                            "vendor_name": "BAUSCH HEALTH AMERICAS",
+                            "id": "1276079"
+                        }
+                    ],
                     "fulfillment": {},
                     "primary_brand": {
-                        "canonical_url": "/b/burt-s-bees/-/N-5xwcx",
-                        "name": "Burt's Bees",
-                        "facet_id": "5xwcx"
+                        "canonical_url": "/b/cerave/-/N-55v99",
+                        "name": "CeraVe",
+                        "facet_id": "55v99"
                     }
                 },
                 "parent": {
                     "__typename": "ParentProductSummary",
-                    "tcin": "14138132",
+                    "tcin": "81616314",
                     "item": {
-                        "relationship_type": "Variation Parent",
-                        "relationship_type_code": "VAP",
+                        "relationship_type": "Variation Parent w/in Collection",
+                        "relationship_type_code": "VPC",
                         "merchandise_classification": {
-                            "class_id": 5,
+                            "class_id": 12,
                             "department_id": 37
                         },
-                        "eligibility_rules": {},
                         "enrichment": {
-                            "buy_url": "https://www.target.com/p/burt-s-bees-lip-balm-2-pack/-/A-14138132",
+                            "buy_url": "https://www.target.com/p/cerave-face-moisturizer-with-sunscreen-am-facial-moisturizing-lotion-for-normal-to-dry-skin-spf-30/-/A-81616314",
                             "images": {
-                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_8edfbb16-1547-4f0f-9b07-470c08d59276",
+                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_c182ebd9-b8e2-4b24-b90f-9a1e45e4a369",
                                 "alternate_image_urls": [
-                                    "https://target.scene7.com/is/image/Target/GUEST_c38586e8-e977-42f1-bbb3-bf14edac0b13",
-                                    "https://target.scene7.com/is/image/Target/GUEST_5c56b439-0947-430d-9327-209ecd91c89b",
-                                    "https://target.scene7.com/is/image/Target/GUEST_9f486128-cf2f-4c4d-abfb-1e87478d9a82",
-                                    "https://target.scene7.com/is/image/Target/GUEST_6ebd8f70-be9a-432e-97ed-bf5e543e792e",
-                                    "https://target.scene7.com/is/image/Target/GUEST_fc258b6e-dbf7-4b92-bc01-035f0c96d17f",
-                                    "https://target.scene7.com/is/image/Target/GUEST_5f124b9f-34a9-4387-9fe5-87e3dd32551d",
-                                    "https://target.scene7.com/is/image/Target/GUEST_bf80a236-385d-4392-807a-d4466a98dfd9"
+                                    "https://target.scene7.com/is/image/Target/GUEST_514520bc-1b72-4ffd-a5d4-090dc07fe949",
+                                    "https://target.scene7.com/is/image/Target/GUEST_07fd63f5-de2b-41f9-9624-6972875e730f",
+                                    "https://target.scene7.com/is/image/Target/GUEST_b6c70f35-81d1-4aa0-8277-d1c0217c4689",
+                                    "https://target.scene7.com/is/image/Target/GUEST_2cce94f9-b7d0-4eab-b0e2-dd484d155963",
+                                    "https://target.scene7.com/is/image/Target/GUEST_584cba70-3988-49e4-810f-66d1259805d0",
+                                    "https://target.scene7.com/is/image/Target/GUEST_b65360bf-1658-47fc-aab0-bf40d8c71cb4",
+                                    "https://target.scene7.com/is/image/Target/GUEST_88e5b1ab-6237-496e-803b-f76c2ca64218",
+                                    "https://target.scene7.com/is/image/Target/GUEST_7948b2b2-6652-4ae8-8b98-9c6d250e7808",
+                                    "https://target.scene7.com/is/image/Target/GUEST_344c9c5b-be51-444a-8e0f-424b5fab21ae",
+                                    "https://target.scene7.com/is/image/Target/GUEST_75a9b842-ae41-4ed7-afbc-555634ad2998",
+                                    "https://target.scene7.com/is/image/Target/GUEST_2d3efce1-43f0-40e4-87a9-72bf13423bba"
                                 ]
                             },
                             "videos": [{
-                                "is_list_page_eligible": false,
-                                "video_files": [{
-                                    "mime_type": "video/mp4",
-                                    "video_url": "https://target.scene7.com/is/content/Target/GUEST_5949b0d7-53b0-493e-aede-a73dd07d7fb7_Flash9_Autox720p_2600k"
-                                }]
-                            }]
+                                    "is_list_page_eligible": false,
+                                    "video_files": [{
+                                        "mime_type": "video/mp4",
+                                        "video_url": "https://target.scene7.com/is/content/Target/GUEST_544e41c5-35b2-41cb-a215-5255078a3d67_Flash9_Autox720p_2600k"
+                                    }]
+                                },
+                                {
+                                    "is_list_page_eligible": false,
+                                    "video_files": [{
+                                        "mime_type": "video/mp4",
+                                        "video_url": "https://target.scene7.com/is/content/Target/GUEST_66f7b818-c138-4a2e-b42a-060950a2b7d6_Flash9_Autox720p_2600k"
+                                    }]
+                                },
+                                {
+                                    "is_list_page_eligible": false,
+                                    "video_files": [{
+                                        "mime_type": "video/mp4",
+                                        "video_url": "https://target.scene7.com/is/content/Target/GUEST_753be4d8-8ba2-412c-88d7-1d938d341a81_Flash9_Autox720p_2600k"
+                                    }]
+                                }
+                            ]
                         },
                         "has_extended_sizing": false,
                         "cart_add_on_threshold": 35.0,
                         "product_description": {
-                            "title": "Burt's Bees Lip Balm - 2 Pack",
+                            "title": "CeraVe Face Moisturizer with Sunscreen, AM Facial Moisturizing Lotion for Normal to Dry Skin - SPF 30",
                             "bullet_descriptions": [
-                                "<B>Health Facts:</B> Sulfate-Free, Formaldehyde-Free, Paraben-Free, Phthalate-Free",
-                                "<B>Product Form:</B> Balm",
-                                "<B>Sustainability Claims:</B> Cruelty-Free",
-                                "<B>Package Quantity:</B> 2",
-                                "<B>Beauty Purpose:</B> Moisturizing",
-                                "<B>Net weight:</B> .3 Ounces"
+                                "<B>Scent:</B> Unscented",
+                                "<B>Health Facts:</B> Contains Ceramides, Oil-Free, Contains Hyaluronic Acid, No Fragrance Added, Noncomedogenic",
+                                "<B>Product Form:</B> Lotion",
+                                "<B>Beauty Purpose:</B> Sun Protection, Exfoliating, Anti-Acne, Moisturizing",
+                                "<B>Recommended Skin Type:</B> Combination, Acne-Prone, Oily, Extra Sensitive, Normal, Sensitive, Dry",
+                                "<B>Net weight:</B> 2 fl oz (US)",
+                                "<B>Features:</B> Dermatologist Tested, Dermatologist Recommended, Moisturizing, Lightweight"
                             ],
                             "soft_bullets": {
                                 "bullets": [
-                                    "LIP CARE: Renew your lips with Burt's Bees Moisturizing Pomegranate Lip Balm packed with antioxidant-rich Pomegranate Oil that moisturizes and gives a hint of color",
-                                    "MOISTURIZER: Hydrate and sooth dry lips with Beeswax and powerful fruit extracts packed into every tube of Burt's Bees lip balm",
-                                    "SMOOTH LIP BALM: Just one swipe of this conditioning lip care leaves your lips smooth and refreshed all day long",
-                                    "ALL NATURAL: Enriched with 100% natural ingredients, this natural lip balm is formulated without parabens, phthalates, petrolatum or SLS",
-                                    "LIP BALM 2 PACK: If you're looking for a pop of fruity flavor, Burt's Bees knows how to naturally beautify and revitalize your lips with this Pomegranate lip balm"
+                                    "CeraVe oil-free, daily face moisturizer with sunscreen for normal to dry skin ​",
+                                    "Ultra-fine zinc oxide moisturizer provides broad-spectrum SPF 30 UVA/UVB protection​",
+                                    "Non-comedogenic face sunscreen without fragrance absorbs quickly and leaves a non-greasy finish ​",
+                                    "Hyaluronic acid to retain the skin’s natural moisture​",
+                                    "Ceramides to restore and maintain the skin’s natural barrier​",
+                                    "Niacinamide to calm the skin​",
+                                    "MVE Technology: This patented delivery system continually releases moisturizing ingredients for 24-hour hydration ​",
+                                    "CeraVe face lotion with spf is developed with dermatologists and recommended for daily use by the Skin Cancer Foundation"
                                 ]
                             }
                         },
                         "primary_brand": {
-                            "canonical_url": "/b/burt-s-bees/-/N-5xwcx",
-                            "name": "Burt's Bees",
-                            "facet_id": "5xwcx"
+                            "canonical_url": "/b/cerave/-/N-55v99",
+                            "name": "CeraVe",
+                            "facet_id": "55v99"
                         }
                     },
                     "promotions": [],
                     "price": {
-                        "formatted_current_price": "$5.99 - $6.79",
+                        "formatted_current_price": "$12.29 - $14.99",
                         "formatted_current_price_type": "reg",
                         "location_id": 3991
                     },
                     "ratings_and_reviews": {
                         "statistics": {
                             "rating": {
-                                "average": 4.67,
-                                "count": 1879,
+                                "average": 4.03,
+                                "count": 4408,
                                 "secondary_averages": [{
-                                        "id": "Effectiveness",
-                                        "label": "effectiveness",
-                                        "value": 4.55
+                                        "id": "lightweight",
+                                        "label": "Lightweight",
+                                        "value": 3.03
                                     },
                                     {
-                                        "id": "Value",
-                                        "label": "value",
-                                        "value": 4.37
+                                        "id": "hydratesSkin",
+                                        "label": "Hydrates Skin",
+                                        "value": 3.1
                                     },
                                     {
-                                        "id": "Quality",
-                                        "label": "quality",
-                                        "value": 4.5
+                                        "id": "moisturizing",
+                                        "label": "Moisturizing",
+                                        "value": 3.11
+                                    },
+                                    {
+                                        "id": "providesSunProtection",
+                                        "label": "Provides Sun Protection",
+                                        "value": 4.05
+                                    },
+                                    {
+                                        "id": "reducesAcne",
+                                        "label": "Reduces Acne",
+                                        "value": 2.83
                                     }
                                 ]
                             }
@@ -347,87 +419,45 @@
                     },
                     "variation_summary": {
                         "themes": [{
-                            "name": "Flavor",
+                            "name": "Size",
                             "has_swatch": true,
                             "swatches": [{
-                                    "value": "Beeswax",
+                                    "value": "2 fl oz",
                                     "first_child": {
-                                        "tcin": "13475659",
-                                        "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_8edfbb16-1547-4f0f-9b07-470c08d59276",
+                                        "tcin": "76545851",
+                                        "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_b853c9dc-fb1b-4935-a724-1aebe8415b91",
                                         "alternate_image_urls": [
-                                            "https://target.scene7.com/is/image/Target/GUEST_c38586e8-e977-42f1-bbb3-bf14edac0b13",
-                                            "https://target.scene7.com/is/image/Target/GUEST_5c56b439-0947-430d-9327-209ecd91c89b",
-                                            "https://target.scene7.com/is/image/Target/GUEST_9f486128-cf2f-4c4d-abfb-1e87478d9a82",
-                                            "https://target.scene7.com/is/image/Target/GUEST_6ebd8f70-be9a-432e-97ed-bf5e543e792e",
-                                            "https://target.scene7.com/is/image/Target/GUEST_fc258b6e-dbf7-4b92-bc01-035f0c96d17f",
-                                            "https://target.scene7.com/is/image/Target/GUEST_5f124b9f-34a9-4387-9fe5-87e3dd32551d",
-                                            "https://target.scene7.com/is/image/Target/GUEST_bf80a236-385d-4392-807a-d4466a98dfd9"
-                                        ],
-                                        "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_056dd147-44b7-48e9-99ff-a90c4af0f303"
+                                            "https://target.scene7.com/is/image/Target/GUEST_e2fe4138-950d-4658-b182-472471e26ef9",
+                                            "https://target.scene7.com/is/image/Target/GUEST_ce1744bb-4bf5-43b1-9183-0bdf7c418e07",
+                                            "https://target.scene7.com/is/image/Target/GUEST_2b0daf69-87f7-42b3-9488-be098fd2682c",
+                                            "https://target.scene7.com/is/image/Target/GUEST_14793c21-ea31-48bd-82d7-307986137da5",
+                                            "https://target.scene7.com/is/image/Target/GUEST_dc099b60-fbc8-423c-a820-6e14fcf67c27",
+                                            "https://target.scene7.com/is/image/Target/GUEST_bcd01e31-1b2a-4413-83c6-03c5c1dbedb2",
+                                            "https://target.scene7.com/is/image/Target/GUEST_8376525a-7e48-4165-8edd-6b6ff7165c25",
+                                            "https://target.scene7.com/is/image/Target/GUEST_a9eeac34-e117-4fcc-8e0f-1599acdb0530",
+                                            "https://target.scene7.com/is/image/Target/GUEST_56cf0ab9-c753-461b-87f0-1eb5063c38dd",
+                                            "https://target.scene7.com/is/image/Target/GUEST_574e4ed5-3e9a-47e5-9efb-61b675922600",
+                                            "https://target.scene7.com/is/image/Target/GUEST_2d3efce1-43f0-40e4-87a9-72bf13423bba"
+                                        ]
                                     }
                                 },
                                 {
-                                    "value": "Coconut & Pear",
+                                    "value": "3 fl oz",
                                     "first_child": {
-                                        "tcin": "52397716",
-                                        "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_834134f3-f14f-4274-adc1-e312a0bf1df8",
+                                        "tcin": "14353569",
+                                        "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_c182ebd9-b8e2-4b24-b90f-9a1e45e4a369",
                                         "alternate_image_urls": [
-                                            "https://target.scene7.com/is/image/Target/GUEST_4b2b9ff6-3f0d-4277-b499-504096a98cd3",
-                                            "https://target.scene7.com/is/image/Target/GUEST_5c56b439-0947-430d-9327-209ecd91c89b",
-                                            "https://target.scene7.com/is/image/Target/GUEST_61dffa3d-ad8f-4d10-b285-2265a4ee7127",
-                                            "https://target.scene7.com/is/image/Target/GUEST_bd197c1e-d9f7-4176-9636-ca567cba190d"
-                                        ],
-                                        "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_ea09b3b4-7039-419d-b4ca-073b194844a2"
-                                    }
-                                },
-                                {
-                                    "value": "Cucumber Mint & Beeswax",
-                                    "first_child": {
-                                        "tcin": "52397624",
-                                        "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_72ef2706-b4dc-4db6-8614-f1a9078bee0e",
-                                        "alternate_image_urls": [
-                                            "https://target.scene7.com/is/image/Target/GUEST_88d86206-f739-42a9-962a-3e86ab89ec04",
-                                            "https://target.scene7.com/is/image/Target/GUEST_5c56b439-0947-430d-9327-209ecd91c89b",
-                                            "https://target.scene7.com/is/image/Target/GUEST_7ccd3d5e-fcce-4f69-8461-020be61b5a4d",
-                                            "https://target.scene7.com/is/image/Target/GUEST_6ce5371e-a3c7-4c3a-b2dc-48564a7d3505",
-                                            "https://target.scene7.com/is/image/Target/GUEST_ad52514d-b5b1-4dc4-bafd-b3334bf404ea",
-                                            "https://target.scene7.com/is/image/Target/GUEST_89535b82-28b0-43bf-87bd-a7e3ff199545",
-                                            "https://target.scene7.com/is/image/Target/GUEST_92762068-ae90-4cd3-a89b-dc112d90459e"
-                                        ],
-                                        "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_63b237dd-0698-4834-8117-fbf45c71a82e"
-                                    }
-                                },
-                                {
-                                    "value": "Vanilla Bean",
-                                    "first_child": {
-                                        "tcin": "52397718",
-                                        "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0887ed42-df54-4a78-ac47-579ba7068556",
-                                        "alternate_image_urls": [
-                                            "https://target.scene7.com/is/image/Target/GUEST_240c647f-e681-4026-83db-98981af5aece",
-                                            "https://target.scene7.com/is/image/Target/GUEST_5c56b439-0947-430d-9327-209ecd91c89b",
-                                            "https://target.scene7.com/is/image/Target/GUEST_77146bc1-9286-41d3-ba9a-136ee530233c",
-                                            "https://target.scene7.com/is/image/Target/GUEST_dc70b286-88f6-4733-9729-0c4dca85e4e0",
-                                            "https://target.scene7.com/is/image/Target/GUEST_b7a2e1bc-d36c-4bcc-8d92-743600b7a950"
-                                        ],
-                                        "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_20a1a941-20c0-4d71-b86a-7cea7593e744"
-                                    }
-                                },
-                                {
-                                    "value": "Watermelon",
-                                    "first_child": {
-                                        "tcin": "76153361",
-                                        "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_8500ef70-0861-44f7-bfbf-74def8f38692",
-                                        "alternate_image_urls": [
-                                            "https://target.scene7.com/is/image/Target/GUEST_46c6e3ce-966b-477c-a0cb-7d672453cdb7",
-                                            "https://target.scene7.com/is/image/Target/GUEST_dc640133-3679-42dd-871e-c69f0e798e40",
-                                            "https://target.scene7.com/is/image/Target/GUEST_5ebafd0c-62aa-4e8e-854c-0fd6f3bd8e43",
-                                            "https://target.scene7.com/is/image/Target/GUEST_5c56b439-0947-430d-9327-209ecd91c89b",
-                                            "https://target.scene7.com/is/image/Target/GUEST_7fc7c567-a2ed-4455-9d67-e9826581c926",
-                                            "https://target.scene7.com/is/image/Target/GUEST_cbe3c11e-8ea4-4230-ad78-c216e8aec970",
-                                            "https://target.scene7.com/is/image/Target/GUEST_8161371b-9d99-4c6a-97d2-385cc448d0cb",
-                                            "https://target.scene7.com/is/image/Target/GUEST_5110a1a2-ab84-427c-838c-9a29c3911652"
-                                        ],
-                                        "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_c29a01cc-a50c-4463-ae53-919f34ae7a38"
+                                            "https://target.scene7.com/is/image/Target/GUEST_514520bc-1b72-4ffd-a5d4-090dc07fe949",
+                                            "https://target.scene7.com/is/image/Target/GUEST_07fd63f5-de2b-41f9-9624-6972875e730f",
+                                            "https://target.scene7.com/is/image/Target/GUEST_b6c70f35-81d1-4aa0-8277-d1c0217c4689",
+                                            "https://target.scene7.com/is/image/Target/GUEST_2cce94f9-b7d0-4eab-b0e2-dd484d155963",
+                                            "https://target.scene7.com/is/image/Target/GUEST_584cba70-3988-49e4-810f-66d1259805d0",
+                                            "https://target.scene7.com/is/image/Target/GUEST_b65360bf-1658-47fc-aab0-bf40d8c71cb4",
+                                            "https://target.scene7.com/is/image/Target/GUEST_88e5b1ab-6237-496e-803b-f76c2ca64218",
+                                            "https://target.scene7.com/is/image/Target/GUEST_7948b2b2-6652-4ae8-8b98-9c6d250e7808",
+                                            "https://target.scene7.com/is/image/Target/GUEST_344c9c5b-be51-444a-8e0f-424b5fab21ae",
+                                            "https://target.scene7.com/is/image/Target/GUEST_75a9b842-ae41-4ed7-afbc-555634ad2998"
+                                        ]
                                     }
                                 }
                             ]
@@ -436,8 +466,8 @@
                 },
                 "promotions": [],
                 "price": {
-                    "current_retail": 5.99,
-                    "formatted_current_price": "$5.99",
+                    "current_retail": 14.99,
+                    "formatted_current_price": "$14.99",
                     "formatted_current_price_type": "reg",
                     "location_id": 3991
                 }

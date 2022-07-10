@@ -1,3 +1,4 @@
+from itertools import starmap
 import pyppeteer
 import bs4
 import asyncio
@@ -693,46 +694,85 @@ def get_products_category(categories):
                 if isinstance(tcin_results, int) and tcin_results > 300:
                     break
                 products_info.append({
-                    "url": url,
+                    "url": str(url),
                     "upc": tcin_results['upc'],
-                    "tcin": tcin,
+                    "tcin": str(tcin),
                     "name": tcin_results['name'],
                     "description": tcin_results['description'],
-                    "image": image,
-                    "category": category_name,
+                    "image": str(image),
+                    "category": str(category_name),
                     "price_max": str(tcin_results['price_max']),
                     "price_min": str(tcin_results['price_min']),
-                    "employee": vender,
+                    "employee": str(vender),
                 })
-                insert_into_table({
-                    "url": url,
-                    "upc": tcin_results['upc'],
-                    "tcin": tcin,
-                    "name": tcin_results['name'],
-                    "description": tcin_results['description'],
-                    "image": image,
-                    "category": category_name,
-                    "price_max": tcin_results['price_max'],
-                    "price_min": tcin_results['price_min'],
-                    "employee": vender,
-                })
-                print("product_info = ", {
-                    "url": url,
-                    "upc": tcin_results['upc'],
-                    "tcin": tcin,
-                    "name": tcin_results['name'],
-                    "description": tcin_results['description'],
-                    "image": image,
-                    "category": category_name,
-                    "price_max": tcin_results['price_max'],
-                    "price_min": tcin_results['price_min'],
-                    "employee": vender,
-                })
+                insert_into_table(products_info[-1])
+                print("product_info = ", products_info[-1])
                 cnt += 1
             offset += count
     return(products_info)        
-        
-
+   
+def get_products_tcin(tcin):
+    params2 = {
+        "key": API_KEY,
+        "tcin": str(tcin),
+        "is_bot": "false",
+        "member_id": "0",
+        "pricing_store_id": "3991",
+        "has_pricing_store_id": "true",
+        "has_financing_options": "true",
+        "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E",
+        "has_size_context": "true",
+        "latitude": "50.130",
+        "longitude": "8.670",
+        "zip": "60323",
+        "state": "HE",
+        "channel": "WEB",
+        "page": "%2Fp%2FA-" + str(tcin)
+    }
+    response = requests.get(API_URL2, params=params2)
+    time.sleep(5)
+    if response.status_code > 300:
+        print("tcin_requests:", response.status_code)
+        return response.status_code
+    product_info = response.json()['data']['product']
+    children = product_info['children']
+    barcode = "Not Found"
+    for child in children:
+        if child['tcin'] == str(tcin):
+            barcode = child['item']['primary_barcode']
+            break
+    category_id = product_info['category']['parent_category_id']
+    # barcode = upc
+    name = product_info['item']['product_description']['title']
+    description = product_info['item']['product_description']['downstream_description']
+    # vender = product_info['item']['product_vendors']['vendor_name']
+    price_max = product_info['price']['reg_retail_max']
+    price_min = product_info['price']['reg_retail_min']
+    # print("product info=", {
+    #     "url": url,
+    #     "upc": barcode,
+    #     "tcin": tcin,
+    #     "name": name,
+    #     "description": description,
+    #     "image": image,
+    #     "category": category,
+    #     "price_max": price_max,
+    #     "price_min": price_min,
+    #     # "employee": vender,
+    # })
+    return {
+        # "url": url,
+        "upc": str(barcode),
+        "tcin": str(tcin),
+        "name": str(name),
+        "description": str(description),
+        # "image": image,
+        # "category": category,
+        "price_max": str(price_max),
+        "price_min": str(price_min),
+        # "employee": vender,
+    }
+    
 def get_products_upc(upc):
     params1 = {
         "key": API_KEY,
@@ -813,68 +853,6 @@ def get_products_upc(upc):
             "price_min": price_min,
             # "employee": vender,
         }
-        
-def get_products_tcin(tcin):
-    params2 = {
-        "key": API_KEY,
-        "tcin": str(tcin),
-        "is_bot": "false",
-        "member_id": "0",
-        "pricing_store_id": "3991",
-        "has_pricing_store_id": "true",
-        "has_financing_options": "true",
-        "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E",
-        "has_size_context": "true",
-        "latitude": "50.130",
-        "longitude": "8.670",
-        "zip": "60323",
-        "state": "HE",
-        "channel": "WEB",
-        "page": "%2Fp%2FA-" + str(tcin)
-    }
-    response = requests.get(API_URL2, params=params2)
-    time.sleep(5)
-    if response.status_code > 300:
-        print("tcin_requests:", response.status_code)
-        return response.status_code
-    product_info = response.json()['data']['product']
-    children = product_info['children']
-    barcode = "Not Found"
-    for child in children:
-        if child['tcin'] == str(tcin):
-            barcode = child['item']['primary_barcode']
-            break
-    category_id = product_info['category']['parent_category_id']
-    # barcode = upc
-    name = product_info['item']['product_description']['title']
-    description = product_info['item']['product_description']['downstream_description']
-    # vender = product_info['item']['product_vendors']['vendor_name']
-    price_max = product_info['price']['reg_retail_max']
-    price_min = product_info['price']['reg_retail_min']
-    # print("product info=", {
-    #     "url": url,
-    #     "upc": barcode,
-    #     "tcin": tcin,
-    #     "name": name,
-    #     "description": description,
-    #     "image": image,
-    #     "category": category,
-    #     "price_max": price_max,
-    #     "price_min": price_min,
-    #     # "employee": vender,
-    # })
-    return {
-        # "url": url,
-        "upc": barcode,
-        "tcin": tcin,
-        "name": name,
-        "description": description,
-        # "image": image,
-        # "category": category,
-        "price_max": price_max,
-        "price_min": price_min,
-        # "employee": vender,
-    }
 
 if __name__ == '__main__':
     # upc = input("Enter UPC:")

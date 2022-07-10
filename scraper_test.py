@@ -634,20 +634,7 @@ def insert_into_table(product_info):
         cur.execute(sql_query)
         conn.commit()
     else:
-        sql_query = 'INSERT INTO products (url, tcin, upc, name, description, image, category, price, employee, open_date, close_date) ' + \
-            " VALUES (" + \
-                '"' + product_info['url'] + '", ' + \
-                '"' + product_info['tcin'] + '", ' + \
-                '"' + product_info['upc'] + '", ' + \
-                '"' + product_info['name'] + '", ' + \
-                '"' + product_info['description'] + '", ' + \
-                '"' + product_info['image'] + '", ' + \
-                '"' + product_info['category'] + '", ' + \
-                '"' + product_info['price_min'] + '", ' + \
-                '"' + product_info['employee'] + '", ' + \
-                '"' + today + '", ' + \
-                '"' + today + '", ' + \
-            ");"
+        sql_query = 'INSERT INTO products (url, tcin, upc, name, description, image, category, price, employee, open_date, close_date) ' + " VALUES (" + '"' + product_info['url'] + '", ' + '"' + product_info['tcin'] + '", ' + '"' + product_info['upc'] + '", ' + '"' + product_info['name'] + '", ' + '"' + product_info['description'] + '", ' + '"' + product_info['image'] + '", ' + '"' + product_info['category'] + '", ' + '"' + product_info['price_min'] + '", ' + '"' + product_info['employee'] + '", ' + '"' + today + '", ' + '"' + today + '"' + ");"
         print(sql_query)
         cur.execute(sql_query)
         conn.commit()

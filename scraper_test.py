@@ -769,7 +769,7 @@ def get_products_tcin(tcin):
             "upc": str(barcode),
             "tcin": str(tcin),
             "name": str(name),
-            "description": str(description),
+            "description": str(description).replace('"', '\''),
             # "image": image,
             # "category": category,
             "price_max": str(price_max),

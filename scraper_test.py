@@ -691,7 +691,9 @@ def get_products_category(categories):
                 "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
             }
             response = requests.get(API_URL1, params=params3)
-            print(response.status_code)
+            if response.status_code > 300:
+                print(response.status_code)
+                break
             searched = response.json()['data']['search']
             overview = searched['search_response']["typed_metadata"]
             print("overview=", overview)
@@ -707,6 +709,8 @@ def get_products_category(categories):
                 vender = product['item']['product_vendors'][0]['vendor_name']
                 tcin = product['tcin']
                 tcin_results = get_products_tcin(tcin)
+                if tcin_results > 300:
+                    break
                 products_info.append({
                     "url": url,
                     "upc": tcin_results['upc'],
@@ -744,6 +748,7 @@ def get_products_category(categories):
                     "employee": vender,
                 })
                 cnt += 1
+                time.sleep(5)
             offset += count
             time.sleep(5)
     return(products_info)        
@@ -849,7 +854,9 @@ def get_products_tcin(tcin):
         "page": "%2Fp%2FA-" + str(tcin)
     }
     response = requests.get(API_URL2, params=params2)
-    print(response.status_code)
+    if response.status_code > 300:
+        print(response.status_code)
+        return response.status_code
     product_info = response.json()['data']['product']
     children = product_info['children']
     barcode = "Not Found"

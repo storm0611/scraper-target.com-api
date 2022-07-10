@@ -736,7 +736,7 @@ def get_products_tcin(tcin):
         return response.status_code
     product_info = response.json()['data']['product']
     if len(product_info):
-        print("len(tcin_product_info)=", product_info)
+        print("len(tcin_product_info)=", len(product_info))
         try:
             children = product_info['children']
             for child in children:

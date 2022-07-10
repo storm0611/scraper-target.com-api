@@ -709,7 +709,7 @@ def get_products_category(categories):
                 vender = product['item']['product_vendors'][0]['vendor_name']
                 tcin = product['tcin']
                 tcin_results = get_products_tcin(tcin)
-                if tcin_results > 300:
+                if isinstance(tcin_results, int) and tcin_results > 300:
                     break
                 products_info.append({
                     "url": url,

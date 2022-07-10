@@ -756,6 +756,8 @@ def get_products_tcin(tcin):
                 if child['tcin'] == str(tcin):
                     barcode = child['item']['primary_barcode']
                     break
+                else:
+                    barcode = 'Not Found'
         except:
             barcode = "Not Found"
         # category_id = product_info['category']['parent_category_id']

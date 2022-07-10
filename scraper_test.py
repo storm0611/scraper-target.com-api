@@ -634,18 +634,8 @@ def insert_into_table(product_info):
         cur.execute(sql_query)
         conn.commit()
     else:
-        sql_query = "INSERT INTO products (" + \
-            "url" + ", " + \
-            "tcin" + ", " + \
-            "upc" + ", " + \
-            "name" + ", " + \
-            "description" + ", " + \
-            "image" + ", " + \
-            "category" + ", " + \
-            "price" + ", " + \
-            "employee" + ", " + \
-            "open_date" + ", " + \
-            "close_date" + ") VALUES (" + \
+        sql_query = 'INSERT INTO products (url, tcin, upc, name, description, image, category, price, employee, open_date, close_date) ' + \
+            " VALUES (" + \
                 '"' + product_info['url'] + '", ' + \
                 '"' + product_info['tcin'] + '", ' + \
                 '"' + product_info['upc'] + '", ' + \
@@ -657,7 +647,10 @@ def insert_into_table(product_info):
                 '"' + product_info['employee'] + '", ' + \
                 '"' + today + '", ' + \
                 '"' + today + '", ' + \
-            ")"
+            ");"
+        print(sql_query)
+        cur.execute(sql_query)
+        conn.commit()
     
 def get_products_category(categories):
     
@@ -691,8 +684,9 @@ def get_products_category(categories):
                 "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
             }
             response = requests.get(API_URL1, params=params3)
+            time.sleep(5)
             if response.status_code > 300:
-                print(response.status_code)
+                print("category_requests:", response.status_code)
                 break
             searched = response.json()['data']['search']
             overview = searched['search_response']["typed_metadata"]
@@ -748,9 +742,7 @@ def get_products_category(categories):
                     "employee": vender,
                 })
                 cnt += 1
-                time.sleep(5)
             offset += count
-            time.sleep(5)
     return(products_info)        
         
 
@@ -854,8 +846,9 @@ def get_products_tcin(tcin):
         "page": "%2Fp%2FA-" + str(tcin)
     }
     response = requests.get(API_URL2, params=params2)
+    time.sleep(5)
     if response.status_code > 300:
-        print(response.status_code)
+        print("tcin_requests:", response.status_code)
         return response.status_code
     product_info = response.json()['data']['product']
     children = product_info['children']

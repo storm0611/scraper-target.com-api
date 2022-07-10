@@ -628,8 +628,8 @@ def insert_into_table(product_info):
     if len(results):
         id = results[0][0]
         sql_query = "UPDATE products SET " + \
-                    "price=" + str(product_info['price_min']) + ", " +  \
-                    "update_date=" + "'" + today + "', " +  \
+                    "price=" + "'" + product_info['price_min'] + "', " +  \
+                    "update_date=" + "'" + today + "' " +  \
                     " WHERE id=" + str(id)
         print(sql_query)
         cur.execute(sql_query)

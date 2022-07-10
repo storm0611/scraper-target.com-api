@@ -1,4 +1,5 @@
 from itertools import starmap
+from pandas import ExcelWriter
 import pyppeteer
 import bs4
 import asyncio
@@ -686,10 +687,22 @@ def get_products_category(categories):
             products = searched['products']
             print("len(products)=", len(products))
             for product in products:
-                url = product['item']['enrichment']['buy_url']
-                image = product['item']['enrichment']['images']['primary_image_url']
-                vender = product['item']['product_vendors'][0]['vendor_name']
-                tcin = product['tcin']
+                try:
+                    url = product['item']['enrichment']['buy_url']
+                except:
+                    url = 'Not Found'
+                try:
+                    image = product['item']['enrichment']['images']['primary_image_url']
+                except:
+                    image = 'Not Found'
+                try:
+                    vender = product['item']['product_vendors'][0]['vendor_name']
+                except:
+                    vender = 'Not Found'
+                try:
+                    tcin = product['tcin']
+                except:
+                    tcin = 'Not Found'
                 tcin_results = get_products_tcin(tcin)
                 if isinstance(tcin_results, int) and tcin_results > 300:
                     break
@@ -745,13 +758,25 @@ def get_products_tcin(tcin):
                     break
         except:
             barcode = "Not Found"
-        category_id = product_info['category']['parent_category_id']
+        # category_id = product_info['category']['parent_category_id']
         # barcode = upc
-        name = product_info['item']['product_description']['title']
-        description = product_info['item']['product_description']['downstream_description']
+        try:
+            name = product_info['item']['product_description']['title']
+        except:
+            name = 'Not Found'
+        try:
+            description = product_info['item']['product_description']['downstream_description']
+        except:
+            description = 'Not Found'
         # vender = product_info['item']['product_vendors']['vendor_name']
-        price_max = product_info['price']['reg_retail_max']
-        price_min = product_info['price']['reg_retail_min']
+        try:
+            price_max = product_info['price']['reg_retail_max']
+        except:
+            price_max = 'Not Found'
+        try:
+            price_min = product_info['price']['reg_retail_min']
+        except:
+            price_min = 'Not Found'
         # print("product info=", {
         #     "url": url,
         #     "upc": barcode,

@@ -81,6 +81,22 @@ import cv2
 # define a video capture object
 vid = cv2.VideoCapture(1400)
 
+def get_device():
+    deviceID = 1
+    cap = cv2.VideoCapture(deviceID)
+    ret, frame = cap.read()
+    while (True):
+        if cv2.waitKey(1) & 0xFF == ord('w'):
+            break
+        if ret:
+            print(deviceID)
+            jsonString = json.dumps({"deviceID": deviceID})
+            jsonFile = open("deviceID.json", "a")
+            jsonFile.write(jsonString)
+            jsonFile.close()
+        deviceID += 1
+            
+
 while(True):
 
     # Capture the video frame

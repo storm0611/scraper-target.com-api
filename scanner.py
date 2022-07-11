@@ -16,8 +16,8 @@ def BarcodeReader():
     print(frame)
     if not ret:
         return 0
-    # time.sleep(2)
-    # cv2.imshow(frame)
+    time.sleep(2)
+    cv2.imshow(cv2.Mat(frame))
     # # Decode the barcode image
     # detectedBarcodes = decode(frame)
 

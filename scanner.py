@@ -9,14 +9,14 @@ def BarcodeReader():
 
     # read the image in numpy array using cv2
     # img = cv2.imread(image)
-    global img
-    img = cv2.VideoCapture(0)
-    if not img:
+    global vid
+    ret, frame = vid.read()
+    if not ret:
         return 0
-    cv2.imshow(img)
+    cv2.imshow(frame)
     time.sleep(2)
     # Decode the barcode image
-    detectedBarcodes = decode(img)
+    detectedBarcodes = decode(frame)
 
     # If not detected then print the message
     if not detectedBarcodes:
@@ -31,7 +31,7 @@ def BarcodeReader():
 
             # Put the rectangle in image using
             # cv2 to heighlight the barcode
-            cv2.rectangle(img, (x-10, y-10),
+            cv2.rectangle(frame, (x-10, y-10),
                           (x + w+10, y + h+10),
                           (255, 0, 0), 2)
 
@@ -42,13 +42,14 @@ def BarcodeReader():
                 print(barcode.type)
 
     #Display the image
-    cv2.imshow("Image", img)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":
       # Take the image from user
-    image = "Img.jpg"
+    global vid
+    vid = cv2.VideoCapture(0)
     while not keyboard.is_pressed("esc"):
         BarcodeReader()
+    vid.release()

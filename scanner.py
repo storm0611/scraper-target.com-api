@@ -2,6 +2,7 @@ import cv2
 from pyzbar.pyzbar import decode
 import keyboard
 import time
+import json
 
 # Make one method to decode the barcode
 
@@ -58,5 +59,9 @@ if __name__ == "__main__":
         sss = BarcodeReader()
         if sss:
             print(deviceID)
+            jsonString = json.dumps({"deviceID": deviceID})
+            jsonFile = open("categories.json", "a")
+            jsonFile.write(jsonString)
+            jsonFile.close()
         deviceID += 1
     

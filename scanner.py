@@ -3,8 +3,6 @@ import cv2
 import keyboard
 import time
 import json
-import PIL.Image as image_
-from pip import main
 
 # from cvzone.HandTrackingModule import HandDetector
 # detector = HandDetector(maxHands=1, detectionCon=0.7)

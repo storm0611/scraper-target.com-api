@@ -78,14 +78,14 @@ import json
 import cv2
 
 
-# define a video capture object
-vid = cv2.VideoCapture(1400)
-
 def get_device():
     deviceID = 1
     cap = cv2.VideoCapture(deviceID)
     ret, frame = cap.read()
     while (True):
+        if deviceID == 700 or deviceID == 1400:
+            deviceID += 1
+            continue
         if cv2.waitKey(1) & 0xFF == ord('w'):
             break
         if ret:
@@ -95,24 +95,29 @@ def get_device():
             jsonFile.write(jsonString)
             jsonFile.close()
         deviceID += 1
-            
 
-while(True):
 
-    # Capture the video frame
-    # by frame
-    ret, frame = vid.read()
+if __name__ == '__main__':
+    # define a video capture object
+    vid = cv2.VideoCapture(1400)
+    get_device()
 
-    # Display the resulting frame
-    cv2.imshow('frame', frame)
+    while(True):
 
-    # the 'q' button is set as the
-    # quitting button you may use any
-    # desired button of your choice
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        break
+        # Capture the video frame
+        # by frame
+        ret, frame = vid.read()
 
-# After the loop release the cap object
-vid.release()
-# Destroy all the windows
-cv2.destroyAllWindows()
+        # Display the resulting frame
+        cv2.imshow('frame', frame)
+
+        # the 'q' button is set as the
+        # quitting button you may use any
+        # desired button of your choice
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+
+    # After the loop release the cap object
+    vid.release()
+    # Destroy all the windows
+    cv2.destroyAllWindows()

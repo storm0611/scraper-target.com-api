@@ -843,6 +843,49 @@ def get_products_tcin(tcin):
             # "employee": vender,
         }
     
+def get_tcin_upc(upc):
+    params1 = {
+        "key": API_KEY,
+        "channel": "WEB",
+        "count": "24",
+        "default_purchasability_filter": "false",
+        "include_sponsored": "true",
+        "keyword": str(upc),
+        "offset": "0",
+        "page": "%2Fs%2F" + str(upc),
+        "platform": "desktop",
+        "pricing_store_id": "3991",
+        "useragent": "Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F103.0.0.0+Safari%2F537.36",
+        "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
+    }
+    response = requests.get(API_URL1, params=params1)
+    if response.status_code > 300:
+        print("upc_requests:", response.status_code)
+        return response.status_code
+    searched = response.json()['data']['search']
+    # print(searched)
+    products = searched['products']
+    try:
+        category = searched['search_response']['facet_list'][0]['details'][0]['display_name']
+    except:
+        category = "Not Found"
+    print("len(products)=", len(products))
+    if len(products):
+        for product in products:
+            try:
+                tcin = product['tcin']
+            except:
+                tcin = "Not Found"
+            return {
+                'tcin': str(tcin),
+                'category': str(category).replace('"', "'")
+            }
+    else:
+        return {
+            'tcin': "Not Found",
+            'category': "Not Found"
+        }
+    
 def get_products_upc(upc):
     params1 = {
         "key": API_KEY,
@@ -859,7 +902,9 @@ def get_products_upc(upc):
         "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
     }
     response = requests.get(API_URL1, params=params1)
-    print(response.status_code)
+    if response.status_code > 300:
+        print("upc_requests:", response.status_code)
+        return response.status_code
     searched = response.json()['data']['search']
     # print(searched)
     products = searched['products']
@@ -886,7 +931,9 @@ def get_products_upc(upc):
             "page": "%2Fp%2FA-" + str(tcin)
         }
         response = requests.get(API_URL2, params=params2)
-        print(response.status_code)
+        if response.status_code > 300:
+            print("tcin_requests:", response.status_code)
+            return response.status_code
         product_info = response.json()['data']['product']
         category_id = product_info['category']['parent_category_id']
         barcode = upc
@@ -923,6 +970,7 @@ def get_products_upc(upc):
             "price_min": price_min,
             # "employee": vender,
         }
+
 
 if __name__ == '__main__':
     # upc = input("Enter UPC:")

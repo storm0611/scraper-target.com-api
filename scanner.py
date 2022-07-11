@@ -8,6 +8,8 @@ def BarcodeReader(image):
 
     # read the image in numpy array using cv2
     img = cv2.imread(image)
+    win = cv2.setWindowTitle("Scanned Barcode")
+    cv2.imshow("Scanned Barcode", img)
 
     # Decode the barcode image
     detectedBarcodes = decode(img)

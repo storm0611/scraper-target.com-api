@@ -9,14 +9,14 @@ def BarcodeReader():
 
     # read the image in numpy array using cv2
     # img = cv2.imread(image)
-    global vid
-    ret, frame = vid.read()
+    cap = cv2.VideoCapture(deviceID)
+    ret, frame = cap.read()
     print(ret)
     print(frame)
     if not ret:
         return 0
-    cv2.imshow(frame)
     time.sleep(2)
+    cv2.imshow(frame)
     # Decode the barcode image
     detectedBarcodes = decode(frame)
 
@@ -46,12 +46,17 @@ def BarcodeReader():
     #Display the image
     cv2.waitKey(0)
     cv2.destroyAllWindows()
+    cap.release()
+    return deviceID
 
 
 if __name__ == "__main__":
       # Take the image from user
-    global vid
-    vid = cv2.VideoCapture(0)
+    global deviceID
+    deviceID = 1
     while not keyboard.is_pressed("esc"):
-        BarcodeReader()
-    vid.release()
+        sss = BarcodeReader()
+        if sss:
+            print(deviceID)
+        deviceID += 1
+    

@@ -11,6 +11,8 @@ def BarcodeReader():
     # img = cv2.imread(image)
     global vid
     ret, frame = vid.read()
+    print(ret)
+    print(frame)
     if not ret:
         return 0
     cv2.imshow(frame)

@@ -1,16 +1,20 @@
 import cv2
 from pyzbar.pyzbar import decode
+import keyboard
+import time
 
 # Make one method to decode the barcode
 
-
-def BarcodeReader(image):
+def BarcodeReader():
 
     # read the image in numpy array using cv2
-    img = cv2.imread(image)
-    win = cv2.setWindowTitle("Scanned Barcode")
+    # img = cv2.imread(image)
+    global img
+    img = cv2.VideoCapture(0)
+    if not img:
+        return 0
     cv2.imshow("Scanned Barcode", img)
-
+    time.sleep(2)
     # Decode the barcode image
     detectedBarcodes = decode(img)
 
@@ -46,4 +50,5 @@ def BarcodeReader(image):
 if __name__ == "__main__":
       # Take the image from user
     image = "Img.jpg"
-    BarcodeReader(image)
+    while not keyboard.is_pressed("esc"):
+        BarcodeReader()

@@ -672,11 +672,11 @@ def get_products_category(categories):
                 "useragent": "Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F103.0.0.0+Safari%2F537.36",
                 "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
             }
-            start_time = datetime.datetime.now()
+            # start_time = datetime.datetime.now()
             response = requests.get(API_URL1, params=params3)
-            print("category response time=", datetime.datetime.now() - start_time)
+            # print("category response time=", datetime.datetime.now() - start_time)
             start_time = datetime.datetime.now()
-            # time.sleep(2)
+            time.sleep(2)
             if response.status_code > 300:
                 print("category_requests:", response.status_code)
                 break
@@ -746,11 +746,11 @@ def get_products_tcin(tcin):
         "channel": "WEB",
         "page": "%2Fp%2FA-" + str(tcin)
     }
-    start_time = datetime.datetime.now()
+    # start_time = datetime.datetime.now()
     response = requests.get(API_URL2, params=params2)
-    print("product response time=", datetime.datetime.now() - start_time)
+    # print("product response time=", datetime.datetime.now() - start_time)
     start_time = datetime.datetime.now()
-    # time.sleep(2)
+    time.sleep(2)
     if response.status_code > 300:
         print("tcin_requests:", response.status_code)
         return response.status_code
@@ -798,7 +798,7 @@ def get_products_tcin(tcin):
         #     "price_min": price_min,
         #     # "employee": vender,
         # })
-        print("product time=", datetime.datetime.now() - start_time)
+        # print("product time=", datetime.datetime.now() - start_time)
         return {
             # "url": url,
             "upc": str(barcode),
@@ -812,7 +812,7 @@ def get_products_tcin(tcin):
             # "employee": vender,
         }
     else:
-        print("product time=", datetime.datetime.now() - start_time)
+        # print("product time=", datetime.datetime.now() - start_time)
         return {
             # "url": url,
             "upc": "Not Found",

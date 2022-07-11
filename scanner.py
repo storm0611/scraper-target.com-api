@@ -13,7 +13,7 @@ def BarcodeReader():
     img = cv2.VideoCapture(0)
     if not img:
         return 0
-    cv2.imshow("Scanned Barcode", img)
+    cv2.imshow(img)
     time.sleep(2)
     # Decode the barcode image
     detectedBarcodes = decode(img)

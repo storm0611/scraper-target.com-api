@@ -650,7 +650,7 @@ def get_products_category(categories):
         category_name = category['name']
         category_url = category['url']
         category_id = category_url.split('-')[-1]
-        print("category_id", category_id)
+        print("category_id=", category_id)
         current_page = total_pages = 1
         total_results = 0
         offset = 0

@@ -1,0 +1,394 @@
+                {
+                    "__typename": "ProductSummary",
+                    "tcin": "54183229",
+                    "original_tcin": "54183229",
+                    "item": {
+                        "relationship_type": "Variation Child",
+                        "relationship_type_code": "VC",
+                        "merchandise_classification": {
+                            "class_id": 6,
+                            "department_id": 20
+                        },
+                        "eligibility_rules": {
+                            "scheduled_delivery": {
+                                "is_active": true
+                            }
+                        },
+                        "enrichment": {
+                            "buy_url": "https://www.target.com/p/women-39-s-beautifully-soft-notch-collar-cropped-pajama-set-stars-above-8482-gray-m/-/A-54183229",
+                            "images": {
+                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0d026503-452f-4327-915e-ff091f50b81b",
+                                "alternate_image_urls": [
+                                    "https://target.scene7.com/is/image/Target/GUEST_e5c9fcb7-cd5c-4d71-afa7-f42070729f93"
+                                ]
+                            }
+                        },
+                        "compliance": {},
+                        "dpci": "020-06-2924",
+                        "cart_add_on_threshold": 35.0,
+                        "product_description": {
+                            "title": "Women&#39;s Beautifully Soft Notch Collar Cropped Pajama Set - Stars Above&#8482; Gray M",
+                            "bullet_descriptions": [
+                                "<B>Number of Pieces:</B> 2",
+                                "<B>Sizing:</B> Womens",
+                                "<B>Piece 1:</B> Solid Pajama T-Shirt Front Button Down",
+                                "<B>Piece 1 Material:</B> 95% Modal & 5% Spandex",
+                                "<B>Piece 1 Garment Length:</B> At Waist",
+                                "<B>Piece 2:</B> Solid Pajama Pant",
+                                "<B>Piece 2 Material:</B> 95% Modal and 5% Spandex",
+                                "<B>Piece 2 Garment Closure:</B> Pull On",
+                                "<B>Piece 2 Garment Length:</B> Crop",
+                                "<B>Inseam Length:</B> 22 Inches",
+                                "<B>Sleeve Length:</B> Cap Sleeve",
+                                "<B>Garment Details:</B> No Pocket",
+                                "<B>Care and Cleaning:</B> Machine Wash & Tumble Dry"
+                            ],
+                            "soft_bullets": {
+                                "bullets": [
+                                    "Model wears size S/4 and is 5'9.5\"",
+                                    "2pc pajama set comes with short-sleeve button-down shirt and crop pajama pants for a complete look",
+                                    "The Beautifully Soft modal-blend fabric is soft and breathable for all-night comfort",
+                                    "Piped edging makes for a classically chic pajama look"
+                                ]
+                            }
+                        },
+                        "product_vendors": [{
+                            "vendor_name": "MAKALOT",
+                            "id": "1066221"
+                        }],
+                        "fulfillment": {},
+                        "primary_brand": {
+                            "canonical_url": "/b/stars-above/-/N-g0mql",
+                            "name": "Stars Above",
+                            "facet_id": "g0mql"
+                        }
+                    },
+                    "parent": {
+                        "__typename": "ParentProductSummary",
+                        "tcin": "54223377",
+                        "item": {
+                            "relationship_type": "Variation Parent",
+                            "relationship_type_code": "VAP",
+                            "merchandise_classification": {
+                                "class_id": 6,
+                                "department_id": 20
+                            },
+                            "eligibility_rules": {},
+                            "enrichment": {
+                                "buy_url": "https://www.target.com/p/women-s-beautifully-soft-notch-collar-cropped-pajama-set-stars-above-153/-/A-54223377",
+                                "images": {
+                                    "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0d026503-452f-4327-915e-ff091f50b81b",
+                                    "alternate_image_urls": [
+                                        "https://target.scene7.com/is/image/Target/GUEST_e5c9fcb7-cd5c-4d71-afa7-f42070729f93"
+                                    ]
+                                }
+                            },
+                            "has_extended_sizing": true,
+                            "cart_add_on_threshold": 35.0,
+                            "product_description": {
+                                "title": "Women's Beautifully Soft Notch Collar Cropped Pajama Set - Stars Above&#153;",
+                                "bullet_descriptions": [
+                                    "<B>Number of Pieces:</B> 2",
+                                    "<B>Sizing:</B> Womens",
+                                    "<B>Piece 1:</B> Solid Pajama T-Shirt Front Button Down",
+                                    "<B>Piece 1 Material:</B> 95% Modal & 5% Spandex",
+                                    "<B>Piece 1 Garment Length:</B> At Waist",
+                                    "<B>Piece 2:</B> Solid Pajama Pant",
+                                    "<B>Piece 2 Material:</B> 95% Modal and 5% Spandex",
+                                    "<B>Piece 2 Garment Closure:</B> Pull On",
+                                    "<B>Piece 2 Garment Length:</B> Crop",
+                                    "<B>Inseam Length:</B> 22 Inches",
+                                    "<B>Sleeve Length:</B> Cap Sleeve",
+                                    "<B>Garment Details:</B> No Pocket",
+                                    "<B>Care and Cleaning:</B> Machine Wash & Tumble Dry"
+                                ],
+                                "soft_bullets": {
+                                    "bullets": [
+                                        "Model wears size S/4 and is 5'9.5\"",
+                                        "2pc pajama set comes with short-sleeve button-down shirt and crop pajama pants for a complete look",
+                                        "The Beautifully Soft modal-blend fabric is soft and breathable for all-night comfort",
+                                        "Piped edging makes for a classically chic pajama look"
+                                    ]
+                                }
+                            },
+                            "primary_brand": {
+                                "canonical_url": "/b/stars-above/-/N-g0mql",
+                                "name": "Stars Above",
+                                "facet_id": "g0mql"
+                            }
+                        },
+                        "promotions": [],
+                        "price": {
+                            "formatted_current_price": "$21.24 - $24.99",
+                            "formatted_current_price_type": "reg",
+                            "location_id": 3991,
+                            "mixed_current_price_type": "mixed_clearance"
+                        },
+                        "ratings_and_reviews": {
+                            "statistics": {
+                                "rating": {
+                                    "average": 4.3,
+                                    "count": 780,
+                                    "secondary_averages": [{
+                                            "id": "Comfort",
+                                            "label": "comfort",
+                                            "value": 4.78
+                                        },
+                                        {
+                                            "id": "Sizing",
+                                            "label": "sizing",
+                                            "value": 1.99
+                                        },
+                                        {
+                                            "id": "Value",
+                                            "label": "value",
+                                            "value": 4.34
+                                        }
+                                    ]
+                                }
+                            }
+                        },
+                        "variation_summary": {
+                            "themes": [{
+                                    "name": "Size Group",
+                                    "has_swatch": true,
+                                    "swatches": [{
+                                            "value": "Womens",
+                                            "first_child": {
+                                                "tcin": "54183218",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0d026503-452f-4327-915e-ff091f50b81b",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_e5c9fcb7-cd5c-4d71-afa7-f42070729f93"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_8fb2a760-3c9d-4177-9c19-64c2e708e01e"
+                                            }
+                                        },
+                                        {
+                                            "value": "Womens Plus",
+                                            "first_child": {
+                                                "tcin": "82485662",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_3b7ab1b2-18a1-4c59-b961-a6836e8906c8",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_bd021258-9462-472e-98f9-b4c3bc5f9f19",
+                                                    "https://target.scene7.com/is/image/Target/GUEST_dd2052a5-fc71-415b-b91d-ccf18b5cc834"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_f5c3f5e7-1bc8-41e0-bc39-5a808f9ebb3c"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Color",
+                                    "has_swatch": true,
+                                    "swatches": [{
+                                            "value": "Gray",
+                                            "first_child": {
+                                                "tcin": "54183218",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0d026503-452f-4327-915e-ff091f50b81b",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_e5c9fcb7-cd5c-4d71-afa7-f42070729f93"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_8fb2a760-3c9d-4177-9c19-64c2e708e01e"
+                                            }
+                                        },
+                                        {
+                                            "value": "Black",
+                                            "first_child": {
+                                                "tcin": "54183237",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_d50bccc5-6155-4f6e-9e32-4b597b6304df",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_a8cbd275-ade2-456a-9bef-91347e08925b"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_fef269e6-d80a-41cd-945e-4823818434ca"
+                                            }
+                                        },
+                                        {
+                                            "value": "Soft Pink",
+                                            "first_child": {
+                                                "tcin": "77774710",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_37a04d32-7295-4f04-8c5b-e2b67e6a36f9",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_a1db6182-b922-4639-9650-132b05617e66"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_35500909-6778-474b-b506-b00c9af2b0df"
+                                            }
+                                        },
+                                        {
+                                            "value": "Navy",
+                                            "first_child": {
+                                                "tcin": "77775181",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_05c374c4-373c-4fbe-81e3-eb3b2084d469",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_69f85d2c-e2b5-4278-a84c-7eb509e2a82a"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_bd5a11a7-9e8e-43eb-a1cd-e1fb4702a48b"
+                                            }
+                                        },
+                                        {
+                                            "value": "Rose Pink",
+                                            "first_child": {
+                                                "tcin": "82485704",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_82b11f35-7260-41de-944d-8db4033a6471",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_74eb0f8c-c32d-429e-861e-daa209bbd946",
+                                                    "https://target.scene7.com/is/image/Target/GUEST_58216c92-28de-4d2b-9dae-e44c9d3b8b4c"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_4e5c0c1d-00b9-47a3-9e06-bce80d0d8956"
+                                            }
+                                        },
+                                        {
+                                            "value": "Heathered Gray",
+                                            "first_child": {
+                                                "tcin": "82485718",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0334dab7-0a2b-407e-b24c-0aecc269dd78",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_7dd5589f-a232-498d-b09a-255314406db5",
+                                                    "https://target.scene7.com/is/image/Target/GUEST_dbf6f645-de8c-48be-9247-ca00f89a3980"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_3594e48c-9c02-4d97-9b16-c6dde85a790d"
+                                            }
+                                        },
+                                        {
+                                            "value": "Pink",
+                                            "first_child": {
+                                                "tcin": "82485761",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_f8be1f02-ba62-4d7a-ae43-d198bab71b07",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_2084a0cf-47f3-4546-b494-dde997da19c1",
+                                                    "https://target.scene7.com/is/image/Target/GUEST_3fe112f3-4993-49d8-a18f-643f7fcd03a5"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_1aaee62e-51c3-4ebb-aa4e-7c7aab997094"
+                                            }
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Size",
+                                    "has_swatch": true,
+                                    "swatches": [{
+                                            "value": "XS",
+                                            "first_child": {
+                                                "tcin": "54183218",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0d026503-452f-4327-915e-ff091f50b81b",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_e5c9fcb7-cd5c-4d71-afa7-f42070729f93"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_8fb2a760-3c9d-4177-9c19-64c2e708e01e"
+                                            }
+                                        },
+                                        {
+                                            "value": "S",
+                                            "first_child": {
+                                                "tcin": "54183221",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0d026503-452f-4327-915e-ff091f50b81b",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_e5c9fcb7-cd5c-4d71-afa7-f42070729f93"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_8fb2a760-3c9d-4177-9c19-64c2e708e01e"
+                                            }
+                                        },
+                                        {
+                                            "value": "M",
+                                            "first_child": {
+                                                "tcin": "54183229",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0d026503-452f-4327-915e-ff091f50b81b",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_e5c9fcb7-cd5c-4d71-afa7-f42070729f93"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_8fb2a760-3c9d-4177-9c19-64c2e708e01e"
+                                            }
+                                        },
+                                        {
+                                            "value": "L",
+                                            "first_child": {
+                                                "tcin": "54183234",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0d026503-452f-4327-915e-ff091f50b81b",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_e5c9fcb7-cd5c-4d71-afa7-f42070729f93"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_8fb2a760-3c9d-4177-9c19-64c2e708e01e"
+                                            }
+                                        },
+                                        {
+                                            "value": "XL",
+                                            "first_child": {
+                                                "tcin": "54183215",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0d026503-452f-4327-915e-ff091f50b81b",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_e5c9fcb7-cd5c-4d71-afa7-f42070729f93"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_8fb2a760-3c9d-4177-9c19-64c2e708e01e"
+                                            }
+                                        },
+                                        {
+                                            "value": "XXL",
+                                            "first_child": {
+                                                "tcin": "54183225",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_0d026503-452f-4327-915e-ff091f50b81b",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_e5c9fcb7-cd5c-4d71-afa7-f42070729f93"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_8fb2a760-3c9d-4177-9c19-64c2e708e01e"
+                                            }
+                                        },
+                                        {
+                                            "value": "1X",
+                                            "first_child": {
+                                                "tcin": "82485662",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_3b7ab1b2-18a1-4c59-b961-a6836e8906c8",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_bd021258-9462-472e-98f9-b4c3bc5f9f19",
+                                                    "https://target.scene7.com/is/image/Target/GUEST_dd2052a5-fc71-415b-b91d-ccf18b5cc834"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_f5c3f5e7-1bc8-41e0-bc39-5a808f9ebb3c"
+                                            }
+                                        },
+                                        {
+                                            "value": "2X",
+                                            "first_child": {
+                                                "tcin": "82485663",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_3b7ab1b2-18a1-4c59-b961-a6836e8906c8",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_bd021258-9462-472e-98f9-b4c3bc5f9f19",
+                                                    "https://target.scene7.com/is/image/Target/GUEST_dd2052a5-fc71-415b-b91d-ccf18b5cc834"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_f5c3f5e7-1bc8-41e0-bc39-5a808f9ebb3c"
+                                            }
+                                        },
+                                        {
+                                            "value": "3X",
+                                            "first_child": {
+                                                "tcin": "82485664",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_3b7ab1b2-18a1-4c59-b961-a6836e8906c8",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_bd021258-9462-472e-98f9-b4c3bc5f9f19",
+                                                    "https://target.scene7.com/is/image/Target/GUEST_dd2052a5-fc71-415b-b91d-ccf18b5cc834"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_f5c3f5e7-1bc8-41e0-bc39-5a808f9ebb3c"
+                                            }
+                                        },
+                                        {
+                                            "value": "4X",
+                                            "first_child": {
+                                                "tcin": "82485665",
+                                                "primary_image_url": "https://target.scene7.com/is/image/Target/GUEST_3b7ab1b2-18a1-4c59-b961-a6836e8906c8",
+                                                "alternate_image_urls": [
+                                                    "https://target.scene7.com/is/image/Target/GUEST_bd021258-9462-472e-98f9-b4c3bc5f9f19",
+                                                    "https://target.scene7.com/is/image/Target/GUEST_dd2052a5-fc71-415b-b91d-ccf18b5cc834"
+                                                ],
+                                                "swatch_image_url": "https://target.scene7.com/is/image/Target/GUEST_f5c3f5e7-1bc8-41e0-bc39-5a808f9ebb3c"
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    },
+                    "promotions": [],
+                    "price": {
+                        "current_retail": 24.99,
+                        "formatted_current_price": "$24.99",
+                        "formatted_current_price_type": "reg",
+                        "location_id": 3991
+                    }
+                },

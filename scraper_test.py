@@ -621,8 +621,8 @@ today = datetime.datetime.today().strftime("%Y-%m-%d")
 def insert_into_table(product_info):
     conn = sqlite3.connect('mydb.db')
     cur = conn.cursor()
-    sql_query = "SELECT * FROM products WHERE upc=" + \
-        "'" + product_info['upc'] + "' or name=" + \
+    sql_query = "SELECT * FROM products WHERE tcin=" + \
+        "'" + product_info['tcin'] + "' or name=" + \
         '"' + product_info['name'] + '"'
     print(sql_query)
     results = cur.execute(sql_query).fetchall()
@@ -636,7 +636,7 @@ def insert_into_table(product_info):
         cur.execute(sql_query)
         conn.commit()
     else:
-        sql_query = 'INSERT INTO products (url, tcin, upc, name, description, image, category, price, employee, open_date, close_date) ' + " VALUES (" + '"' + product_info['url'] + '", ' + '"' + product_info['tcin'] + '", ' + '"' + product_info['upc'] + '", ' + '"' + product_info['name'] + '", ' + '"' + product_info['description'] + '", ' + '"' + product_info['image'] + '", ' + '"' + product_info['category'] + '", ' + '"' + product_info['price_min'] + '", ' + '"' + product_info['employee'] + '", ' + '"' + today + '", ' + '"' + today + '"' + ");"
+        sql_query = 'INSERT INTO products (url, tcin, upc, name, description, image, category, price, employee, open_date, update_date) ' + " VALUES (" + '"' + product_info['url'] + '", ' + '"' + product_info['tcin'] + '", ' + '"", ' + '"' + product_info['name'] + '", ' + '"' + product_info['description'] + '", ' + '"' + product_info['image'] + '", ' + '"' + product_info['category'] + '", ' + '"' + product_info['price_min'] + '", ' + '"' + product_info['employee'] + '", ' + '"' + today + '", ' + '"' + today + '"' + ");"
         print(sql_query)
         cur.execute(sql_query)
         conn.commit()
@@ -676,7 +676,7 @@ def get_products_category(categories):
             response = requests.get(API_URL1, params=params3)
             # print("category response time=", datetime.datetime.now() - start_time)
             start_time = datetime.datetime.now()
-            time.sleep(2)
+            time.sleep(3)
             if response.status_code > 300:
                 print("category_requests:", response.status_code)
                 break
@@ -703,22 +703,39 @@ def get_products_category(categories):
                 except:
                     vender = 'Not Found'
                 try:
+                    name = product['item']['product_description']['title']
+                except:
+                    name = 'Not Found'
+                try:
+                    description = ''.join(str(sub) for sub in product['item']['product_description']['soft_bullets']['bullets'])
+                except:
+                    description = 'Not Found'
+                try:
                     tcin = product['tcin']
                 except:
                     tcin = 'Not Found'
-                tcin_results = get_products_tcin(tcin)
-                if isinstance(tcin_results, int) and tcin_results > 300:
-                    break
+                try:
+                    price_min = product['price']['current_retail']
+                except:
+                    price_min = 'Not Found'
+                    
+                # tcin_results = get_products_tcin(tcin)
+                # if isinstance(tcin_results, int) and tcin_results > 300:
+                #     break
+                
                 products_info.append({
                     "url": str(url),
-                    "upc": tcin_results['upc'],
+                    # "upc": tcin_results['upc'],
                     "tcin": str(tcin),
-                    "name": tcin_results['name'],
-                    "description": tcin_results['description'],
+                    # "name": tcin_results['name'],
+                    # "description": tcin_results['description'],
+                    "name": str(name).replace("\"", " "),
+                    "description": str(description).replace('"', '\''),
                     "image": str(image),
                     "category": str(category_name),
-                    "price_max": str(tcin_results['price_max']),
-                    "price_min": str(tcin_results['price_min']),
+                    # "price_max": str(tcin_results['price_max']),
+                    # "price_min": str(tcin_results['price_min']),
+                    "price_min": str(price_min),
                     "employee": str(vender),
                 })
                 insert_into_table(products_info[-1])
@@ -750,7 +767,7 @@ def get_products_tcin(tcin):
     response = requests.get(API_URL2, params=params2)
     # print("product response time=", datetime.datetime.now() - start_time)
     start_time = datetime.datetime.now()
-    time.sleep(2)
+    time.sleep(3)
     if response.status_code > 300:
         print("tcin_requests:", response.status_code)
         return response.status_code

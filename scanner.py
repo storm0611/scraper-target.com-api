@@ -60,7 +60,7 @@ if __name__ == "__main__":
         if sss:
             print(deviceID)
             jsonString = json.dumps({"deviceID": deviceID})
-            jsonFile = open("categories.json", "a")
+            jsonFile = open("deviceID.json", "a")
             jsonFile.write(jsonString)
             jsonFile.close()
         deviceID += 1

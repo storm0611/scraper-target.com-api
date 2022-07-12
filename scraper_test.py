@@ -656,6 +656,7 @@ def get_products_category(categories):
         total_results = 0
         offset = 0
         cnt = 0
+        time_one_page = 0
         while current_page <= total_pages:
             if cnt > total_results:
                 break
@@ -674,12 +675,14 @@ def get_products_category(categories):
                 "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
             }
             # start_time = datetime.datetime.now()
+            if time_one_page.total_seconds() < 5 :
+                time.sleep(5 - time_one_page.total_seconds())
             response = requests.get(API_URL1, params=params3)
             # print("category response time=", datetime.datetime.now() - start_time)
             start_time = datetime.datetime.now()
-            time.sleep(5)
             if response.status_code > 300:
                 print("category_requests:", response.status_code)
+                time.sleep(5)
                 break
             searched = response.json()['data']['search']
             overview = searched['search_response']["typed_metadata"]
@@ -690,6 +693,11 @@ def get_products_category(categories):
             total_results = overview['total_results']
             products = searched['products']
             print("len(products)=", len(products))
+            if not len(products):
+                print("products not found")
+                offset += count
+                time.sleep(5)
+                break
             for product in products:
                 try:
                     url = product['item']['enrichment']['buy_url']
@@ -744,9 +752,8 @@ def get_products_category(categories):
                 print("product_info = ", products_info[-1])
                 cnt += 1
             offset += count
-            print("one page time=", datetime.datetime.now() - start_time)
-            break
-        break
+            time_one_page = datetime.datetime.now() - start_time
+            print("one page time=", time_one_page)
     return(products_info)
    
 def get_products_tcin(tcin):

@@ -618,10 +618,11 @@ API_URL2 = "https://redsky.target.com/redsky_aggregations/v1/web/pdp_client_v1"
 API_KEY = "9f36aeafbe60771e321a7cc95a78140772ab3e96"
 
 today = datetime.datetime.today().strftime("%Y-%m-%d")
+conn = sqlite3.connect('mydb.db')
+cur = conn.cursor()
 
 def insert_into_table(product_info):
-    conn = sqlite3.connect('mydb.db')
-    cur = conn.cursor()
+    
     disc = "0"
     sql_query = "SELECT discount FROM discounts WHERE category_name=" + \
         "'" + product_info['category'] + "'"
@@ -1016,3 +1017,4 @@ if __name__ == '__main__':
     # print(get_products_upc(upc))
     categories = json.load(open(os.path.join("categories.json")))
     print(len(get_products_category(categories)))
+    conn.close()

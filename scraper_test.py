@@ -656,7 +656,7 @@ def get_products_category(categories):
         total_results = 0
         offset = 0
         cnt = 0
-        time_one_page = 0
+        time_one_page = datetime.timedelta(seconds=0)
         while current_page <= total_pages:
             if cnt > total_results:
                 break

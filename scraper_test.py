@@ -677,7 +677,7 @@ def get_products_category(categories):
             response = requests.get(API_URL1, params=params3)
             # print("category response time=", datetime.datetime.now() - start_time)
             start_time = datetime.datetime.now()
-            time.sleep(3)
+            time.sleep(5)
             if response.status_code > 300:
                 print("category_requests:", response.status_code)
                 break
@@ -708,7 +708,8 @@ def get_products_category(categories):
                 except:
                     name = 'Not Found'
                 try:
-                    description = ''.join(str(sub) for sub in product['item']['product_description']['soft_bullets']['bullets'])
+                    description = ''.join(str(
+                        sub) for sub in product['item']['product_description']['soft_bullets']['bullets'])
                 except:
                     description = 'Not Found'
                 try:
@@ -719,11 +720,11 @@ def get_products_category(categories):
                     price_min = product['price']['current_retail']
                 except:
                     price_min = 'Not Found'
-                    
+
                 # tcin_results = get_products_tcin(tcin)
                 # if isinstance(tcin_results, int) and tcin_results > 300:
                 #     break
-                
+
                 products_info.append({
                     "url": str(url),
                     # "upc": tcin_results['upc'],
@@ -743,8 +744,8 @@ def get_products_category(categories):
                 print("product_info = ", products_info[-1])
                 cnt += 1
             offset += count
-            print("category time=", datetime.datetime.now() - start_time)
-    return(products_info)        
+            print("one page time=", datetime.datetime.now() - start_time)
+    return(products_info)
    
 def get_products_tcin(tcin):
     params2 = {

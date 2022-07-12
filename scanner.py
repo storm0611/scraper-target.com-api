@@ -76,7 +76,7 @@ import json
     
 # import the opencv library
 import cv2
-
+from pyzbar import decode
 
 def get_device():
     deviceID = 1

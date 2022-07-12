@@ -1,3 +1,4 @@
+from email.mime import image
 from itertools import starmap
 from pandas import ExcelWriter
 import pyppeteer
@@ -794,6 +795,14 @@ def get_products_tcin(tcin):
             description = product_info['item']['product_description']['downstream_description']
         except:
             description = 'Not Found'
+        try:
+            image = product_info['item']['enrichment']['images']['primary_image_url']
+        except:
+            image = 'Not Found'
+        try:
+            url = product_info['item']['enrichment']['buy_url']
+        except:
+            url = 'Not Found'
         # vender = product_info['item']['product_vendors']['vendor_name']
         try:
             price_max = product_info['price']['reg_retail_max']
@@ -817,12 +826,12 @@ def get_products_tcin(tcin):
         # })
         # print("product time=", datetime.datetime.now() - start_time)
         return {
-            # "url": url,
+            "url": url,
             "upc": str(barcode),
             "tcin": str(tcin),
             "name": str(name).replace("\"", ""),
             "description": str(description).replace('"', '\''),
-            # "image": image,
+            "image": str(image),
             # "category": category,
             "price_max": str(price_max),
             "price_min": str(price_min),
@@ -831,12 +840,12 @@ def get_products_tcin(tcin):
     else:
         # print("product time=", datetime.datetime.now() - start_time)
         return {
-            # "url": url,
+            "url": 'Not Found',
             "upc": "Not Found",
             "tcin": "Not Found",
             "name": "Not Found",
             "description": "Not Found",
-            # "image": image,
+            "image": "Not Found",
             # "category": category,
             "price_max": "Not Found",
             "price_min": "Not Found",

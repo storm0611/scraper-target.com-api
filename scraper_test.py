@@ -628,7 +628,7 @@ def insert_into_table(product_info):
         "'" + product_info['category'] + "'"
     print(sql_query)
     results = cur.execute(sql_query).fetchall()
-    print(results)
+    # print(results)
     if len(results):
         disc = str(results[0][0])
     sql_query = "SELECT * FROM products WHERE tcin=" + \

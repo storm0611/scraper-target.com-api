@@ -622,22 +622,42 @@ today = datetime.datetime.today().strftime("%Y-%m-%d")
 def insert_into_table(product_info):
     conn = sqlite3.connect('mydb.db')
     cur = conn.cursor()
+    disc = "0"
+    sql_query = "SELECT discount FROM discounts WHERE category_name=" + \
+        "'" + product_info['category'] + "'"
+    print(sql_query)
+    results = cur.execute(sql_query).fetchall()
+    print(results)
+    if len(results):
+        disc = str(results[0][0])
     sql_query = "SELECT * FROM products WHERE tcin=" + \
-        "'" + product_info['tcin'] + "' or name=" + \
-        '"' + product_info['name'] + '"'
+        "'" + product_info['tcin'] + "'"
     print(sql_query)
     results = cur.execute(sql_query).fetchall()
     if len(results):
         id = results[0][0]
         sql_query = "UPDATE products SET " + \
                     "price=" + "'" + product_info['price_min'] + "', " +  \
+                    "disc=" + "'" + disc + "', " +  \
                     "update_date=" + "'" + today + "' " +  \
                     " WHERE id=" + str(id)
         print(sql_query)
         cur.execute(sql_query)
         conn.commit()
     else:
-        sql_query = 'INSERT INTO products (url, tcin, upc, name, description, image, category, price, employee, open_date, update_date) ' + " VALUES (" + '"' + product_info['url'] + '", ' + '"' + product_info['tcin'] + '", ' + '"", ' + '"' + product_info['name'] + '", ' + '"' + product_info['description'] + '", ' + '"' + product_info['image'] + '", ' + '"' + product_info['category'] + '", ' + '"' + product_info['price_min'] + '", ' + '"' + product_info['employee'] + '", ' + '"' + today + '", ' + '"' + today + '"' + ");"
+        sql_query = 'INSERT INTO products (url, tcin, name, description, image, category, price, disc, employee, open_date, update_date) ' + \
+            " VALUES (" + \
+            '"' + product_info['url'] + '", ' + \
+            '"' + product_info['tcin'] + '", ' + \
+            '"' + product_info['name'] + '", ' + \
+            '"' + product_info['description'] + '", ' + \
+            '"' + product_info['image'] + '", ' + \
+            '"' + product_info['category'] + '", ' + \
+            '"' + product_info['price_min'] + '", ' + \
+            '"' + disc + '", ' + \
+            '"' + product_info['employee'] + '", ' + \
+            '"' + today + '", ' + \
+            '"' + today + '"' + ");"
         print(sql_query)
         cur.execute(sql_query)
         conn.commit()
@@ -732,23 +752,23 @@ def get_products_category(categories):
                 # tcin_results = get_products_tcin(tcin)
                 # if isinstance(tcin_results, int) and tcin_results > 300:
                 #     break
-
-                products_info.append({
-                    "url": str(url),
-                    # "upc": tcin_results['upc'],
-                    "tcin": str(tcin),
-                    # "name": tcin_results['name'],
-                    # "description": tcin_results['description'],
-                    "name": str(name).replace("\"", " "),
-                    "description": str(description).replace('"', '\''),
-                    "image": str(image),
-                    "category": str(category_name),
-                    # "price_max": str(tcin_results['price_max']),
-                    # "price_min": str(tcin_results['price_min']),
-                    "price_min": str(price_min),
-                    "employee": str(vender),
-                })
-                insert_into_table(products_info[-1])
+                if tcin != 'Not Found':
+                    products_info.append({
+                        "url": str(url),
+                        # "upc": tcin_results['upc'],
+                        "tcin": str(tcin),
+                        # "name": tcin_results['name'],
+                        # "description": tcin_results['description'],
+                        "name": str(name).replace("\"", " "),
+                        "description": str(description).replace('"', '\''),
+                        "image": str(image),
+                        "category": str(category_name),
+                        # "price_max": str(tcin_results['price_max']),
+                        # "price_min": str(tcin_results['price_min']),
+                        "price_min": str(price_min),
+                        "employee": str(vender),
+                    })
+                    insert_into_table(products_info[-1])
                 print("product_info = ", products_info[-1])
                 cnt += 1
             offset += count

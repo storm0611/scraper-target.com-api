@@ -18,6 +18,8 @@ table_name = ""
 
 def insert_into_table(product_info):
     
+    global table_name
+    
     disc = "0"
     sql_query = "SELECT discount FROM discounts WHERE category_name=" + \
         "'" + product_info['category'] + "'"
@@ -59,6 +61,8 @@ def insert_into_table(product_info):
         conn.commit()
     
 def get_products_category(categories):
+    
+    global table_name
     
     count = 28
     products_info = []

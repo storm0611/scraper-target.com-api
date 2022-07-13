@@ -28,13 +28,13 @@ def insert_into_table(product_info):
     # print(results)
     if len(results):
         disc = str(results[0][0])
-    sql_query = "SELECT * FROM " + table_name + " WHERE tcin=" + \
+    sql_query = "SELECT * FROM " + '"' + table_name + '"' + " WHERE tcin=" + \
         "'" + product_info['tcin'] + "'"
     print(sql_query)
     results = cur.execute(sql_query).fetchall()
     if len(results):
         id = results[0][0]
-        sql_query = "UPDATE " + table_name + " SET " + \
+        sql_query = "UPDATE " + '"' + table_name + '"' + " SET " + \
                     "price=" + "'" + product_info['price_min'] + "', " +  \
                     "disc=" + "'" + disc + "', " +  \
                     "update_date=" + "'" + today + "' " +  \
@@ -43,7 +43,7 @@ def insert_into_table(product_info):
         cur.execute(sql_query)
         conn.commit()
     else:
-        sql_query = 'INSERT INTO ' + table_name + ' (url, tcin, name, description, image, category, price, disc, employee, open_date, update_date) ' + \
+        sql_query = 'INSERT INTO ' + '"' + table_name + '"' + ' (url, tcin, name, description, image, category, price, disc, employee, open_date, update_date) ' + \
             " VALUES (" + \
             '"' + product_info['url'] + '", ' + \
             '"' + product_info['tcin'] + '", ' + \
@@ -72,7 +72,7 @@ def get_products_category(categories):
         table_name = category_name + "_products"
         table_name = table_name.replace(" ", "")
         print(table_name)
-        sql_query = "CREATE TABLE IF NOT EXISTS " + table_name + \
+        sql_query = "CREATE TABLE IF NOT EXISTS " + '"' + table_name + '"' + \
                     " ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " + \
                     "url TEXT," + \
                     "tcin TEXT," + \

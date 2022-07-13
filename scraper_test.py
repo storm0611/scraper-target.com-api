@@ -726,6 +726,7 @@ def get_products_category(categories):
             }
             # start_time = datetime.datetime.now()
             if time_one_page.total_seconds() < 5:
+                print("waiting for ", 5 - time_one_page.total_seconds() + "seconds until next requests")
                 time.sleep(5 - time_one_page.total_seconds())
             response = requests.get(API_URL1, params=params3)
             # print("category response time=", datetime.datetime.now() - start_time)

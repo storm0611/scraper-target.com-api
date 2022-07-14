@@ -677,6 +677,7 @@ def get_products_category(categories):
         print("category=", category)
         category_name = category['name']
         table_name = category_name + "_products"
+        table_name = table_name.replace(" ", "")
         print(table_name)
         sql_query = "CREATE TABLE IF NOT EXISTS " + table_name + \
                     " ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " + \

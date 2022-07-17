@@ -671,7 +671,7 @@ def get_products_category(categories):
 
     global table_name
 
-    count = 28
+    count = 24
     products_info = []
     for category in categories:
         print("category=", category)

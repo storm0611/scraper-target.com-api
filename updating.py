@@ -205,6 +205,7 @@ def get_products_category(categories):
             offset += count
             time_one_page = datetime.datetime.now() - start_time
             print("one page time=", time_one_page)
+        print("cnt=", cnt)
         return []
     return(products_info)
    

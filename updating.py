@@ -199,10 +199,10 @@ def get_products_category(categories):
                 print("product_info = ", products_info[-1])
                 cnt += 1
                 print("cnt=", cnt)
-            return []
             offset += count
             time_one_page = datetime.datetime.now() - start_time
             print("one page time=", time_one_page)
+        return []
     return(products_info)
    
 def get_products_tcin(tcin):

@@ -102,6 +102,7 @@ def get_products_category(categories):
         cnt = 0
         time_one_page = datetime.timedelta(seconds=0)
         while current_page <= total_pages:
+            
             if cnt > total_results:
                 break
             params3 = {
@@ -143,6 +144,7 @@ def get_products_category(categories):
                 offset += count
                 time.sleep(5)
                 break
+            p_cnt = 0
             for product in products:
                 try:
                     url = product['item']['enrichment']['buy_url']
@@ -198,7 +200,8 @@ def get_products_category(categories):
                     print("TCIN not found")
                 print("product_info = ", products_info[-1])
                 cnt += 1
-                print("cnt=", cnt)
+                p_cnt += 1
+            print("p_cnt=", p_cnt)
             offset += count
             time_one_page = datetime.datetime.now() - start_time
             print("one page time=", time_one_page)

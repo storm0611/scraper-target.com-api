@@ -102,7 +102,6 @@ def get_products_category(categories):
         cnt = 0
         time_one_page = datetime.timedelta(seconds=0)
         while current_page <= total_pages:
-            
             if cnt > total_results:
                 break
             params3 = {
@@ -110,14 +109,16 @@ def get_products_category(categories):
                 "category": category_id,
                 "channel": "WEB",
                 "count": str(count),
-                "default_purchasability_filter": "false",
-                "include_sponsored": "true",
+                # "default_purchasability_filter": "true",
+                # "include_sponsored": "true",
                 "offset": str(offset),
                 "page": "%2Fs%2F" + category_id,
-                "platform": "desktop",
-                "pricing_store_id": "3991",
-                "useragent": "Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F103.0.0.0+Safari%2F537.36",
-                "visitor_id": "0181DBA81F220201B2C4F5C04CBA071E"
+                # "platform": "desktop",
+                "pricing_store_id": "1361",
+                # "scheduled_delivery_store_id": "1361",
+                # "store_ids": "1361%2C851%2C2341%2C1242%2C825",
+                # "useragent": "Mozilla%2F5.0+%28Windows+NT+10.0%3B+Win64%3B+x64%29+AppleWebKit%2F537.36+%28KHTML%2C+like+Gecko%29+Chrome%2F103.0.0.0+Safari%2F537.36",
+                "visitor_id": "0181B859D77C02019AFB18B35595F985"
             }
             # start_time = datetime.datetime.now()
             if time_one_page.total_seconds() < 5 :
@@ -143,7 +144,7 @@ def get_products_category(categories):
                 print("products not found")
                 offset += count
                 time.sleep(5)
-                break
+                # break
             p_cnt = 0
             for product in products:
                 try:
@@ -195,18 +196,20 @@ def get_products_category(categories):
                         "price_min": str(price_min),
                         "employee": str(vender),
                     })
-                    # insert_into_table(products_info[-1])
+                    insert_into_table(products_info[-1])
+                    print("product_info = ", products_info[-1])
                 else:
                     print("TCIN not found")
-                print("product_info = ", products_info[-1])
                 cnt += 1
                 p_cnt += 1
+
             print("p_cnt=", p_cnt)
             offset += count
             time_one_page = datetime.datetime.now() - start_time
             print("one page time=", time_one_page)
+
         print("cnt=", cnt)
-        return []
+        
     return(products_info)
    
 def get_products_tcin(tcin):

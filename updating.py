@@ -71,7 +71,7 @@ def get_products_category(categories):
         category_name = category['name']
         table_name = category_name + "_products"
         table_name = table_name.replace(" ", "")
-        print(table_name)
+        print("product table name=", table_name)
         sql_query = "CREATE TABLE IF NOT EXISTS " + '"' + table_name + '"' + \
                     " ( id INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, " + \
                     "url TEXT," + \
@@ -120,6 +120,7 @@ def get_products_category(categories):
             }
             # start_time = datetime.datetime.now()
             if time_one_page.total_seconds() < 5 :
+                print("waiting time=", 5 - time_one_page.total_seconds())
                 time.sleep(5 - time_one_page.total_seconds())
             response = requests.get(API_URL1, params=params3)
             # print("category response time=", datetime.datetime.now() - start_time)
@@ -192,12 +193,15 @@ def get_products_category(categories):
                         "price_min": str(price_min),
                         "employee": str(vender),
                     })
-                    insert_into_table(products_info[-1])
+                    # insert_into_table(products_info[-1])
+                else:
+                    print("TCIN not found")
                 print("product_info = ", products_info[-1])
                 cnt += 1
             offset += count
             time_one_page = datetime.datetime.now() - start_time
             print("one page time=", time_one_page)
+            break
     return(products_info)
    
 def get_products_tcin(tcin):

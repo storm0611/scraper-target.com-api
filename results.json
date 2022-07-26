@@ -194,7 +194,8 @@
                     }]
                 }
             },
-            "products": [{
+            "products": [
+                {
                 "__typename": "ProductSummary",
                 "tcin": "14353569",
                 "original_tcin": "14353569",

@@ -143,6 +143,7 @@ def uploadToInstagram():
 ##            max_timeout = 0
 
     driver.close()
+    return True
 
 def uploadToTikTok(filePath):
     global driver
@@ -248,15 +249,16 @@ def uploadToFacebook():
                 max_timeout = 0
 
 
-        driver.close()
+    driver.close()
+    return True
 
 
-
-        #/li/div[1]/div/div[1]/span/span
+    #/li/div[1]/div/div[1]/span/span
 
 
 if __name__ == '__main__':
-    uploadToInstagram()
+    print(uploadToInstagram())
+    print(uploadToFacebook())
     #uploadToFacebook()
 
 

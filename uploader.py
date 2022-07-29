@@ -23,11 +23,11 @@ path = os.getcwd() + "\\docs\\untitled.mp4" # your video path
 ##FacebookUser = 'Justsendit@live.com'
 ##FacebookPass = 'Temp1234!'
 
-FacebookUser = 'iman.omidvar@live.com'
-FacebookPass = 'ImanShabnam4411'
+FacebookUser = 'Justsendit@live.com'
+FacebookPass = 'Temp1234!!'
 
-InstagramUser = 'iman.omidvar@live.com'
-InstagramPass = 'ImanShabnam4411'
+InstagramUser = 'Mesaliquidation@gmail.com'
+InstagramPass = 'Temp1234'
 
 
 path_to_profile = os.path.abspath(os.getcwd()) + '\chrome'

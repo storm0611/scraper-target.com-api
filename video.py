@@ -10,6 +10,8 @@ img_name = 'Vivitar 3ct Rope Lights'
 img_original_price = '12.75'
 img_our_price = '12.75'
 
+start_time = 6
+stop_time = 10
 
 req = urllib.request.urlopen(img_url)
 arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
@@ -27,47 +29,51 @@ cv2.imshow("dst", img)
 
 if cv2.waitKey() & 0xff == 27: quit()
 
-# # Construct the argument parser and parse the arguments
-# ap = argparse.ArgumentParser()
-# ap.add_argument("-ext", "--extension", required=False,
-#                 default='png', help="extension name. default is 'png'.")
-# ap.add_argument("-o", "--output", required=False,
-#                 default='output.mp4', help="output video file")
-# args = vars(ap.parse_args())
+cap = cv2.VideoCapture('my_baby_dog.mp4')
 
-# # Arguments
-# dir_path = '.'
-# ext = args['extension']
-# output = args['output']
+# Check if camera opened successfully
+if (cap.isOpened() == False):
+    print("Error opening video stream or file")
 
-# images = []
-# for f in os.listdir(dir_path):
-#     if f.endswith(ext):
-#         images.append(f)
+# Read until video is completed
+while (cap.isOpened()):
+    # Capture frame-by-frame
+    ret, frame = cap.read()
+    if ret == True:
+        # OpenCV2 version 2 used "CV_CAP_PROP_FPS"
+        fps = cap.get(cv2.CAP_PROP_FPS)
+        frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        duration = frame_count / fps
 
-# # Determine the width and height from the first image
-# image_path = os.path.join(dir_path, images[0])
-# frame = cv2.imread(image_path)
-# cv2.imshow('video', frame)
-# height, width, channels = frame.shape
+        print('fps = ' + str(fps))
+        print('number of frames = ' + str(frame_count))
+        print('duration (S) = ' + str(duration))
+        minutes = int(duration / 60)
+        seconds = duration % 60
+        print('duration (M:S) = ' + str(minutes) + ':' + str(seconds))
+        # Display the resulting frame
+        frameWidth = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+        frameHeight = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+        # ADD OVERLAY TEXT
+        if start_time < duration < stop_time:
+            cv2.putText(img=frame, text='EKO', org=(int(frameWidth / 2 - 20), int(frameHeight / 2)),
+                        fontFace=cv2.FONT_HERSHEY_DUPLEX, fontScale=3,
+                        color=(0, 255, 0))
+        # cv2.putText(img=frame, text='EKO', org=(int(frameWidth / 2 - 20), int(frameHeight / 2)),
+        #             fontFace=cv2.FONT_HERSHEY_DUPLEX, fontScale=3,
+        #             color=(0, 255, 0))
+        cv2.imshow('Frame', frame)
+        # Press Q on keyboard to  exit
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            break
 
-# # Define the codec and create VideoWriter object
-# fourcc = cv2.VideoWriter_fourcc(*'mp4v')  # Be sure to use lower case
-# out = cv2.VideoWriter(output, fourcc, 20.0, (width, height))
+    # Break the loop
+    else:
+        break
 
-# for image in images:
 
-#     image_path = os.path.join(dir_path, image)
-#     frame = cv2.imread(image_path)
+# When everything done, release the video capture object
+cap.release()
 
-#     out.write(frame)  # Write out frame to video
-
-#     cv2.imshow('video', frame)
-#     if (cv2.waitKey(1) & 0xFF) == ord('q'):  # Hit `q` to exit
-#         break
-
-# # Release everything if job is finished
-# out.release()
-# cv2.destroyAllWindows()
-
-# print("The output video is {}".format(output))
+# Closes all the frames
+cv2.destroyAllWindows()

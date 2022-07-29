@@ -257,10 +257,9 @@ def uploadToFacebook():
 
 
 if __name__ == '__main__':
-    print(uploadToInstagram())
+    # print(uploadToInstagram())
     print(uploadToFacebook())
     #uploadToFacebook()
-
 
 
 

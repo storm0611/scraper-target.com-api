@@ -14,16 +14,30 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 import pyautogui
+import os
 
 #insert full path to your video file here
-path = "D:\Pictures\DMUF9294.MP4" # your video path
-FacebookUser = 'iman.omidvar@live.com'
-FacebookPass = 'ImanShabnam4411'
+current_dir = os.getcwd()
+path = current_dir + "\\docs\\untitled.mp4" # your video path
 
-InstagramUser = 'iman.omidvar@live.com'
-InstagramPass = 'ImanShabnam4411'
+# tiktok: mesaliquidation@gmail.com
+# pass: Temp1234!
+# IG: Mesaliquidation@gmail.com
+# pass: Temp1234
+# FB: Justsendit@live.com
+# pass: Temp1234!
 
+# FacebookUser = 'iman.omidvar@live.com'
+# FacebookPass = 'ImanShabnam4411'
 
+# InstagramUser = 'iman.omidvar@live.com'
+# InstagramPass = 'ImanShabnam4411'
+
+FacebookUser = 'Justsendit@live.com'
+FacebookPass = 'Temp1234!'
+
+InstagramUser = 'Mesaliquidation@gmail.com'
+InstagramPass = 'Temp1234'
 
 def check_exists_by_xpath(xpath):
     try:

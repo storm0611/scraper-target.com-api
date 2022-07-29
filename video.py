@@ -17,11 +17,11 @@ img = cv2.imdecode(arr, -1) # 'Load it as it is'
 # cv2.imshow("src", img)
 
 img = cv2.putText(img, img_name, (10, 40), cv2.FONT_HERSHEY_SIMPLEX,
-                  0.7, (199, 26, 26), 2, cv2.LINE_AA)
-img = cv2.putText(img, "Original: $" + img_original_price, (30, 70), cv2.FONT_HERSHEY_SCRIPT_COMPLEX,
-                  0.6, (120, 14, 156), 2, cv2.LINE_AA)
-img = cv2.putText(img, "Our: $" + img_our_price, (30, 100), cv2.FONT_HERSHEY_SCRIPT_COMPLEX,
-                  0.6, (120, 14, 156), 2, cv2.LINE_AA)
+                  0.7, (120, 14, 156), 2, cv2.LINE_AA)
+img = cv2.putText(img, "Original: $" + img_original_price, (30, 70), cv2.FONT_HERSHEY_SIMPLEX,
+                  0.5, (199, 26, 26), 2, cv2.LINE_AA)
+img = cv2.putText(img, "Our: $" + img_our_price, (30, 100), cv2.FONT_HERSHEY_SIMPLEX,
+                  0.5, (199, 26, 26), 2, cv2.LINE_AA)
 
 cv2.imshow("dst", img)
 

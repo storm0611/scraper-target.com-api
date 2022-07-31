@@ -19,7 +19,7 @@ from pathlib import Path
 
 
 #insert full path to your video file here
-path = os.getcwd() + "\\docs\\untitled.mp4" # your video path
+path = os.getcwd() + "final.mp4" # your video path
 ##FacebookUser = 'Justsendit@live.com'
 ##FacebookPass = 'Temp1234!'
 

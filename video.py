@@ -24,9 +24,6 @@ def create_video(video_name, video_ext, img_url, img_title, original_price, our_
     pos_original = (110, 650)
     pos_our = (400, 660)
 
-    start_time = 6
-    stop_time = 10
-
     # Load background image in OpenCV
     image = cv2.imread("product_background.jpg")
 
@@ -100,11 +97,11 @@ def create_video(video_name, video_ext, img_url, img_title, original_price, our_
         
         copied_img = image.copy()
         copied_img.paste(img, (cposx - int(width / 2), cposy - int(height / 2)))
-        copied_img.save('dst image.jpg')
+        # copied_img.save('dst image.jpg')
         
         final_img = np.asarray(copied_img)
         final_img = cv2.cvtColor(final_img, cv2.COLOR_RGB2BGR)    
-        cv2.imshow("final", final_img)
+        # cv2.imshow("final", final_img)
         rate = rate + 0.005
         
         # write to video file
@@ -118,7 +115,7 @@ def create_video(video_name, video_ext, img_url, img_title, original_price, our_
     
 
 def create_video_ads(prefix, ext, count, dst_name):
-    padding = 1
+    padding = 0.5
     video_clips = []
     for cnt in range(0, count):
         video_clips.append(VideoFileClip(prefix + str(cnt) + ext))
@@ -159,7 +156,7 @@ if __name__ == '__main__':
     results = cur.execute(sql).fetchall()
     cnt = 0
     for row in results:
-        if cnt >= 30:
+        if cnt >= 10:
             break
         
         img_url = str(row[6])
@@ -176,11 +173,11 @@ if __name__ == '__main__':
         cnt += 1
     
     end_time = time.time()
-    print("created 30 video:", end_time - start_time)
+    print("created 10 video:", end_time - start_time)
        
     cv2.destroyAllWindows()
     
-    create_video_ads(dir + prefix, ext, 30, "final.mp4")
+    create_video_ads(dir + prefix, ext, 10, "final.mp4")
     
     print("created final video", time.time() - end_time)
     

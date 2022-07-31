@@ -142,7 +142,7 @@ def create_video_ads(prefix, ext, count, dst_name):
 
 
 if __name__ == '__main__':
-    start_time = time.now()
+    start_time = time.time()
     
     prefix = 'out'
     ext = '.mp4'
@@ -174,9 +174,14 @@ if __name__ == '__main__':
         create_video(dir + prefix + str(cnt), ext, img_url, img_title, original_price, our_price)
         
         cnt += 1
+    
+    end_time = time.time()
+    print("created 30 video:", end_time - start_time)
        
     cv2.destroyAllWindows()
     
     create_video_ads(dir + prefix, ext, 30, "final.mp4")
+    
+    print("created final video", time.time() - end_time)
     
     conn.close()

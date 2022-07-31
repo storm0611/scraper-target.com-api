@@ -10,7 +10,7 @@ from PIL import ImageFont, ImageDraw, Image
 from moviepy.editor import *
 from ffpyplayer.player import MediaPlayer
     
-frameSize = (800, 1280)
+frameSize = (1080, 1920)
 fps = 30
 dir = os.getcwd() + "\\assets\\"
 
@@ -116,6 +116,10 @@ def create_video(video_path, video_ext, img_url, img_title, original_price, our_
         rate = rate + 0.0005
         
         # write to video file
+        final_img = cv2.resize(final_img, (1080, 1920))
+        # cv2.imshow("final", final_img)
+        # cv2.waitKey()
+        # return
         out.write(final_img)
         # key = cv2.waitKey()
         # if key == 27:
@@ -172,7 +176,7 @@ def combine_audio2video(audio_path, video_path, dst_path):
     audioclip = AudioFileClip(audio_path)
     aud_length = int(audioclip.duration + 1)
     # print("aud_length=", aud_length)
-    aud_start = random.randint(0, aud_length - clip_length - 2)
+    # aud_start = random.randint(0, aud_length - clip_length - 2)
     # print("aud_start=", aud_start)
     audioclip = audioclip.subclip(0, clip_length + 1)
     # audioclip = audioclip.subclip(aud_start, aud_start + clip_length + 1)
@@ -187,54 +191,57 @@ def combine_audio2video(audio_path, video_path, dst_path):
 if __name__ == '__main__':
     start_time = time.time()
     
-    # prefix = 'out'
-    # ext = '.mp4'
+    prefix = 'out'
+    ext = '.mp4'
     
-    # # img_url = 'https://target.scene7.com/is/image/Target/GUEST_622fe0b9-af6d-4897-b200-14b609fcd669'
-    # # img_title = 'Vivitar 3ct Rope Lights'
-    # # original_price = '12.75'
-    # # our_price = '12.75'
+    # img_url = 'https://target.scene7.com/is/image/Target/GUEST_622fe0b9-af6d-4897-b200-14b609fcd669'
+    # img_title = 'Vivitar 3ct Rope Lights'
+    # original_price = '12.75'
+    # our_price = '12.75'
     
-    # conn = sqlite3.connect('mydb.db')
-    # cur = conn.cursor()
+    conn = sqlite3.connect('mydb.db')
+    cur = conn.cursor()
     
-    # sql = "SELECT * FROM Shoes_products"
-    # results = cur.execute(sql).fetchall()
+    sql = "SELECT * FROM Shoes_products"
+    results = cur.execute(sql).fetchall()
     
-    # # create sub-video
-    # cnt = 0
-    # for row in results:
-    #     if cnt >= 10:
-    #         break
+    # create sub-video
+    cnt = 0
+    for row in results:
+        if cnt >= 10:
+            break
         
-    #     img_url = str(row[6])
-    #     img_title = str(row[4])
-    #     original_price = str(row[8])
-    #     if row[16]:
-    #         our_price = str(row[16])
-    #     else:
-    #         our_price = str(float(original_price)  / 2)
+        img_url = str(row[6])
+        img_title = str(row[4])
+        original_price = str(row[8])
+        if row[16]:
+            our_price = str(row[16])
+        else:
+            our_price = str(float(original_price)  / 2)
         
-    #     print(img_title, original_price, our_price)
-    #     create_video(dir + prefix + str(cnt), ext, img_url, img_title, original_price, our_price)
+        print(img_title, original_price, our_price)
+        create_video(dir + prefix + str(cnt), ext, img_url, img_title, original_price, our_price)
+        # break
         
-    #     cnt += 1
+        cnt += 1
     
-    # cv2.destroyAllWindows()
+    # quit()    
+
+    cv2.destroyAllWindows()
     
-    # end_time = time.time()
-    # print("created 10 video:", end_time - start_time)
+    end_time = time.time()
+    print("created 10 video:", end_time - start_time)
     
-    # # create final vidoe from sub-video
+    # create final vidoe from sub-video
     final_video_name = "final.mp4"
-    # create_video_ads(dir + prefix, ext, cnt, dir + final_video_name)
+    create_video_ads(dir + prefix, ext, cnt, dir + final_video_name)
     
-    # print("created final video:", time.time() - end_time)
-    # end_time = time.time() - end_time
+    print("created final video:", time.time() - end_time)
+    end_time = time.time() - end_time
     
     # combine audio to final video
     audio_name = "original_audio.mp3"
     combine_audio2video(dir + audio_name, dir + final_video_name, "final.mp4")
     
-    print("combined audio into final video:", time.time() - start_time)
+    print("combined audio into final video:", time.time() - end_time)
     # conn.close()

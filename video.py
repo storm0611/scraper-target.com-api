@@ -8,7 +8,6 @@ import random
 import sqlite3
 from PIL import ImageFont, ImageDraw, Image  
 from moviepy.editor import *
-from ffpyplayer.player import MediaPlayer
     
 frameSize = (1080, 1920)
 fps = 30

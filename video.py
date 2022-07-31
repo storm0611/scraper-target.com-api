@@ -102,7 +102,7 @@ def create_video(video_name, video_ext, img_url, img_title, original_price, our_
         final_img = np.asarray(copied_img)
         final_img = cv2.cvtColor(final_img, cv2.COLOR_RGB2BGR)    
         # cv2.imshow("final", final_img)
-        rate = rate + 0.005
+        rate = rate + 0.001
         
         # write to video file
         out.write(final_img)

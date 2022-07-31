@@ -2,7 +2,7 @@ import time
 import cv2
 import argparse
 import os
-import urllib.request   
+import urllib.request
 import numpy as np
 import random
 import sqlite3
@@ -13,6 +13,15 @@ frameSize = (800, 1280)
 fps = 30
 dir = os.getcwd() + "\\video\\"
 
+cposx0 = random.randint(0, 800 - 630) + 315
+cposy0 = random.randint(0, 1280 - 740) + 370
+
+
+def max(a, b):
+    if a > b:
+        return a
+    else:
+        return b
 
 def zoom(img, zoom_factor=2):    
     return cv2.resize(img, None, fx=zoom_factor, fy=zoom_factor)
@@ -78,13 +87,21 @@ def create_video(video_name, video_ext, img_url, img_title, original_price, our_
     # zoom setting
     rate = 1
     src_img = product_img
+    
+    global cposx0, cposy0
+    
     cposx = random.randint(0, 800 - 630) + 315
     cposy = random.randint(0, 1280 - 740) + 370
-
+    dist = max(abs(cposx - cposx0), abs(cposy - cposy0))
+    while dist > 50:
+        cposx = random.randint(0, 800 - 630) + 315
+        cposy = random.randint(0, 1280 - 740) + 370
+        dist = max(abs(cposx - cposx0), abs(cposy - cposy0))
+    
     # video setting
     global frameSize, fps
         
-    video_length = 3
+    video_length = 4
     out = cv2.VideoWriter(str(video_name) + video_ext,
                         cv2.VideoWriter_fourcc(*'DIVX'), fps, frameSize)
     
@@ -102,7 +119,7 @@ def create_video(video_name, video_ext, img_url, img_title, original_price, our_
         final_img = np.asarray(copied_img)
         final_img = cv2.cvtColor(final_img, cv2.COLOR_RGB2BGR)    
         # cv2.imshow("final", final_img)
-        rate = rate + 0.001
+        rate = rate + 0.0005
         
         # write to video file
         out.write(final_img)
@@ -110,6 +127,8 @@ def create_video(video_name, video_ext, img_url, img_title, original_price, our_
         # if key == 27:
         #     break
 
+    cposx0 = cposx
+    cposy0 = cposy
     print(str(video_name) + video_ext + ":quit")
     out.release()
     
@@ -173,7 +192,7 @@ if __name__ == '__main__':
         cnt += 1
     
     end_time = time.time()
-    print("created 10 video:", end_time - start_time)
+    print("created 20 video:", end_time - start_time)
        
     cv2.destroyAllWindows()
     

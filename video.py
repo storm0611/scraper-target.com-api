@@ -1,4 +1,4 @@
-from tkinter import image_names
+import time
 import cv2
 import argparse
 import os
@@ -7,123 +7,176 @@ import numpy as np
 import random
 import sqlite3
 from PIL import ImageFont, ImageDraw, Image  
-   
-conn = sqlite3.connect('mydb.db')
-cur = conn.cursor()
-
-pos_title = (10, 80)
-pos_img = (60, 130)
-pos_original = (110, 660)
-pos_our = (400, 670)
-
-start_time = 6
-stop_time = 10
-
-# Load background image in OpenCV
-image = cv2.imread("background.jpg")
-
-# Load product image
-img_url = 'https://target.scene7.com/is/image/Target/GUEST_622fe0b9-af6d-4897-b200-14b609fcd669'
-req = urllib.request.urlopen(img_url)
-arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
-img = cv2.imdecode(arr, -1)  # 'Load it as it is'
-# cv2.imshow("src", img)
-img = cv2.resize(img, (500, 480))
-# copied_img = img.copy()
-
-# Load product name, prices
-img_title = 'Vivitar 3ct Rope Lights'
-img_original_price = '12.75'
-img_our_price = '12.75'
-
-# Convert the image to RGB (OpenCV uses BGR)
-image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-
-# Pass the image to PIL
-image = Image.fromarray(image)
-
-draw = ImageDraw.Draw(image)
-
-# Draw the text
-font = ImageFont.truetype("arial.ttf", 36)
-draw.text(pos_title, img_title, font=font, fill=(0, 0, 0))
-font = ImageFont.truetype("arial.ttf", 28)
-draw.text(pos_original, "$" + img_original_price, font=font, fill=(0, 0, 0))
-font = ImageFont.truetype("arial.ttf", 36)
-draw.text(pos_our, "$" + img_our_price, font=font, fill=(0, 0, 0))
-
-# Get back the image to OpenCV
-image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
-
-image = Image.fromarray(image)
-img = Image.fromarray(img)
-copied_img = image.copy()
-copied_img.paste(img, pos_img)
-# copied_img.save('dst image.jpg', quality=95)
-dst_img = np.asarray(copied_img)
-
-cv2.imshow("dst", dst_img)
-
-if cv2.waitKey() & 0xff == 27: quit()
+from moviepy.editor import *
+    
+frameSize = (800, 1280)
+fps = 30
+dir = os.getcwd() + "\\video\\"
 
 
-# img = cv2.putText(img, img_title, (10, 40), cv2.FONT_HERSHEY_SIMPLEX,
-#                   0.7, (120, 14, 156), 2, cv2.LINE_AA)
-# img = cv2.putText(img, "Original: $" + img_original_price, (30, 70), cv2.FONT_HERSHEY_SIMPLEX,
-#                   0.5, (199, 26, 26), 2, cv2.LINE_AA)
-# img = cv2.putText(img, "Our: $" + img_our_price, (30, 100), cv2.FONT_HERSHEY_SIMPLEX,
-#                   0.5, (199, 26, 26), 2, cv2.LINE_AA)
-
-# cv2.imshow("dst", img)
+def zoom(img, zoom_factor=2):    
+    return cv2.resize(img, None, fx=zoom_factor, fy=zoom_factor)
 
 
+def create_video(video_name, video_ext, img_url, img_title, original_price, our_price):
+    pos_title = (10, 80)
+    pos_img = (60, 130)
+    pos_original = (110, 650)
+    pos_our = (400, 660)
 
-# cap = cv2.VideoCapture('my_baby_dog.mp4')
+    start_time = 6
+    stop_time = 10
 
-# # Check if camera opened successfully
-# if (cap.isOpened() == False):
-#     print("Error opening video stream or file")
+    # Load background image in OpenCV
+    image = cv2.imread("product_background.jpg")
 
-# # Read until video is completed
-# while (cap.isOpened()):
-#     # Capture frame-by-frame
-#     ret, frame = cap.read()
-#     if ret == True:
-#         # OpenCV2 version 2 used "CV_CAP_PROP_FPS"
-#         fps = cap.get(cv2.CAP_PROP_FPS)
-#         frame_count = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-#         duration = frame_count / fps
+    # Load product image
+    req = urllib.request.urlopen(img_url)
+    arr = np.asarray(bytearray(req.read()), dtype=np.uint8)
+    img = cv2.imdecode(arr, -1)  # 'Load it as it is'
+    # cv2.imshow("src", img)
+    img = cv2.resize(img, (500, 480))
+    # copied_img = img.copy()
 
-#         print('fps = ' + str(fps))
-#         print('number of frames = ' + str(frame_count))
-#         print('duration (S) = ' + str(duration))
-#         minutes = int(duration / 60)
-#         seconds = duration % 60
-#         print('duration (M:S) = ' + str(minutes) + ':' + str(seconds))
-#         # Display the resulting frame
-#         frameWidth = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-#         frameHeight = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-#         # ADD OVERLAY TEXT
-#         if start_time < duration < stop_time:
-#             cv2.putText(img=frame, text='EKO', org=(int(frameWidth / 2 - 20), int(frameHeight / 2)),
-#                         fontFace=cv2.FONT_HERSHEY_DUPLEX, fontScale=3,
-#                         color=(0, 255, 0))
-#         # cv2.putText(img=frame, text='EKO', org=(int(frameWidth / 2 - 20), int(frameHeight / 2)),
-#         #             fontFace=cv2.FONT_HERSHEY_DUPLEX, fontScale=3,
-#         #             color=(0, 255, 0))
-#         cv2.imshow('Frame', frame)
-#         # Press Q on keyboard to  exit
-#         if cv2.waitKey(25) & 0xFF == ord('q'):
-#             break
+    # Convert the image to RGB (OpenCV uses BGR)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
 
-#     # Break the loop
-#     else:
-#         break
+    # Pass the image to PIL
+    image = Image.fromarray(image)
 
-conn.close()
+    draw = ImageDraw.Draw(image)
 
-# When everything done, release the video capture object
-# cap.release()
+    # Draw the text
+    font = ImageFont.truetype("arial.ttf", 36)
+    draw.text(pos_title, img_title, font=font, fill=(0, 0, 0))
+    font = ImageFont.truetype("arial.ttf", 28)
+    draw.text(pos_original, "$" + original_price, font=font, fill=(0, 0, 0))
+    font = ImageFont.truetype("arial.ttf", 36)
+    draw.text(pos_our, "$" + our_price, font=font, fill=(0, 0, 0))
 
-# Closes all the frames
-cv2.destroyAllWindows()
+    # Get back the image to OpenCV
+    # image = cv2.cvtColor(np.array(image), cv2.COLOR_RGB2BGR)
+
+    # image = Image.fromarray(image)
+    img = Image.fromarray(img)
+    copied_img = image.copy()
+    copied_img.paste(img, pos_img)
+    # copied_img.save('dst image.jpg', quality=95)
+    product_img = np.asarray(copied_img)
+
+    # cv2.imshow("dst", product_img)
+
+    image = cv2.imread('background.jpg')
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+    image = Image.fromarray(image)
+
+    img = Image.fromarray(product_img)
+    copied_img = image.copy()
+    copied_img.paste(img, (random.randint(0, 800 - 630), random.randint(0, 1280 - 740)))
+    # copied_img.save('dst image.jpg', quality=95)
+    final_img = np.asarray(copied_img)
+
+    # cv2.imshow("final", final_img)
+
+    # zoom setting
+    rate = 1
+    src_img = product_img
+    cposx = random.randint(0, 800 - 630) + 315
+    cposy = random.randint(0, 1280 - 740) + 370
+
+    # video setting
+    global frameSize, fps
+        
+    video_length = 3
+    out = cv2.VideoWriter(str(video_name) + video_ext,
+                        cv2.VideoWriter_fourcc(*'DIVX'), fps, frameSize)
+    
+    for cnt_frame in range(0, video_length * fps):
+        # zooming
+        src_img = zoom(product_img, rate)
+        height, width, channel = src_img.shape
+        # print(src_img.shape)
+        img = Image.fromarray(src_img)
+        
+        copied_img = image.copy()
+        copied_img.paste(img, (cposx - int(width / 2), cposy - int(height / 2)))
+        copied_img.save('dst image.jpg')
+        
+        final_img = np.asarray(copied_img)
+        final_img = cv2.cvtColor(final_img, cv2.COLOR_RGB2BGR)    
+        cv2.imshow("final", final_img)
+        rate = rate + 0.005
+        
+        # write to video file
+        out.write(final_img)
+        # key = cv2.waitKey()
+        # if key == 27:
+        #     break
+
+    print(str(video_name) + video_ext + ":quit")
+    out.release()
+    
+
+def create_video_ads(prefix, ext, count, dst_name):
+    padding = 1
+    video_clips = []
+    for cnt in range(0, count):
+        video_clips.append(VideoFileClip(prefix + str(cnt) + ext))
+
+    video_fx_list = [video_clips[0]]
+    idx = video_clips[0].duration - padding
+    for video in video_clips[1:]:
+        video_fx_list.append(video.set_start(idx).crossfadein(padding))
+        # video_fx_list.append(video.crossfadein(padding))
+        idx += video.duration - padding
+
+    global frameSize, fps
+    final_video = CompositeVideoClip(video_fx_list, frameSize)
+
+    # slided_clips = [clip.fx(transfx.slide_out, 1, 'bottom')
+    #                 for clip in video_clips]
+    # print(slided_clips)
+    # final_video = concatenate(slided_clips, padding=-1)
+
+    final_video.write_videofile(dst_name, fps=fps)
+
+
+if __name__ == '__main__':
+    start_time = time.now()
+    
+    prefix = 'out'
+    ext = '.mp4'
+    
+    # img_url = 'https://target.scene7.com/is/image/Target/GUEST_622fe0b9-af6d-4897-b200-14b609fcd669'
+    # img_title = 'Vivitar 3ct Rope Lights'
+    # original_price = '12.75'
+    # our_price = '12.75'
+    
+    conn = sqlite3.connect('mydb.db')
+    cur = conn.cursor()
+    
+    sql = "SELECT * FROM Shoes_products"
+    results = cur.execute(sql).fetchall()
+    cnt = 0
+    for row in results:
+        if cnt >= 30:
+            break
+        
+        img_url = str(row[6])
+        img_title = str(row[4])
+        original_price = str(row[8])
+        if row[16]:
+            our_price = str(row[16])
+        else:
+            our_price = str(float(original_price)  / 2)
+        
+        print(img_title, original_price, our_price)
+        create_video(dir + prefix + str(cnt), ext, img_url, img_title, original_price, our_price)
+        
+        cnt += 1
+       
+    cv2.destroyAllWindows()
+    
+    create_video_ads(dir + prefix, ext, 30, "final.mp4")
+    
+    conn.close()

@@ -8,13 +8,15 @@ import random
 import sqlite3
 from PIL import ImageFont, ImageDraw, Image  
 from moviepy.editor import *
+from ffpyplayer.player import MediaPlayer
     
 frameSize = (800, 1280)
 fps = 30
-dir = os.getcwd() + "\\video\\"
+dir = os.getcwd() + "\\assets\\"
 
-cposx0 = random.randint(0, 800 - 630) + 315
-cposy0 = random.randint(0, 1280 - 740) + 370
+cposx0 = 400
+cposy0 = 640
+offset = 50
 
 
 def max(a, b):
@@ -27,7 +29,7 @@ def zoom(img, zoom_factor=2):
     return cv2.resize(img, None, fx=zoom_factor, fy=zoom_factor)
 
 
-def create_video(video_name, video_ext, img_url, img_title, original_price, our_price):
+def create_video(video_path, video_ext, img_url, img_title, original_price, our_price):
     pos_title = (10, 80)
     pos_img = (60, 130)
     pos_original = (110, 650)
@@ -90,19 +92,11 @@ def create_video(video_name, video_ext, img_url, img_title, original_price, our_
     
     global cposx0, cposy0
     
-    cposx = random.randint(0, 800 - 630) + 315
-    cposy = random.randint(0, 1280 - 740) + 370
-    dist = max(abs(cposx - cposx0), abs(cposy - cposy0))
-    while dist > 50:
-        cposx = random.randint(0, 800 - 630) + 315
-        cposy = random.randint(0, 1280 - 740) + 370
-        dist = max(abs(cposx - cposx0), abs(cposy - cposy0))
-    
     # video setting
     global frameSize, fps
         
     video_length = 4
-    out = cv2.VideoWriter(str(video_name) + video_ext,
+    out = cv2.VideoWriter(str(video_path) + video_ext,
                         cv2.VideoWriter_fourcc(*'DIVX'), fps, frameSize)
     
     for cnt_frame in range(0, video_length * fps):
@@ -113,7 +107,7 @@ def create_video(video_name, video_ext, img_url, img_title, original_price, our_
         img = Image.fromarray(src_img)
         
         copied_img = image.copy()
-        copied_img.paste(img, (cposx - int(width / 2), cposy - int(height / 2)))
+        copied_img.paste(img, (cposx0 - int(width / 2), cposy0 - int(height / 2)))
         # copied_img.save('dst image.jpg')
         
         final_img = np.asarray(copied_img)
@@ -127,17 +121,24 @@ def create_video(video_name, video_ext, img_url, img_title, original_price, our_
         # if key == 27:
         #     break
 
+    global offset
+    cposx = random.randint(cposx0 - offset, cposx0 + offset)
+    cposy = random.randint(cposy0 - offset, cposy0 + offset)
+    while cposx - 315 < 0 or cposx + 315 >= 800 or cposy - 370 < 0 or cposy + 370 >=1280:
+        # print(cposx0, cposy0)
+        cposx = random.randint(cposx0 - offset, cposx0 + offset)
+        cposy = random.randint(cposy0 - offset, cposy0 + offset)
     cposx0 = cposx
     cposy0 = cposy
-    print(str(video_name) + video_ext + ":quit")
+    print(str(video_path) + video_ext + ":quit")
     out.release()
     
 
-def create_video_ads(prefix, ext, count, dst_name):
+def create_video_ads(video_clip_path_prefix, ext, count, dst_name):
     padding = 0.5
     video_clips = []
     for cnt in range(0, count):
-        video_clips.append(VideoFileClip(prefix + str(cnt) + ext))
+        video_clips.append(VideoFileClip(video_clip_path_prefix + str(cnt) + ext))
 
     video_fx_list = [video_clips[0]]
     idx = video_clips[0].duration - padding
@@ -157,47 +158,83 @@ def create_video_ads(prefix, ext, count, dst_name):
     final_video.write_videofile(dst_name, fps=fps)
 
 
+def combine_audio2video(audio_path, video_path, dst_path):
+
+    # loading video dsa gfg intro video
+    clip = VideoFileClip(video_path)
+    clip_length = int(clip.duration + 1)
+    # print("clip_length=", clip_length)
+    
+    # # getting only first 5 seconds
+    # clip = clip.subclip(0, 5)
+
+    # loading audio file
+    audioclip = AudioFileClip(audio_path)
+    aud_length = int(audioclip.duration + 1)
+    # print("aud_length=", aud_length)
+    aud_start = random.randint(0, aud_length - clip_length - 2)
+    # print("aud_start=", aud_start)
+    audioclip = audioclip.subclip(0, clip_length + 1)
+    # audioclip = audioclip.subclip(aud_start, aud_start + clip_length + 1)
+
+    # adding audio to the video clip
+    videoclip = clip.set_audio(audioclip)
+
+    # showing video clip
+    # videoclip.ipython_display()
+    videoclip.write_videofile(dst_path, fps=fps)
+
 if __name__ == '__main__':
     start_time = time.time()
     
-    prefix = 'out'
-    ext = '.mp4'
+    # prefix = 'out'
+    # ext = '.mp4'
     
-    # img_url = 'https://target.scene7.com/is/image/Target/GUEST_622fe0b9-af6d-4897-b200-14b609fcd669'
-    # img_title = 'Vivitar 3ct Rope Lights'
-    # original_price = '12.75'
-    # our_price = '12.75'
+    # # img_url = 'https://target.scene7.com/is/image/Target/GUEST_622fe0b9-af6d-4897-b200-14b609fcd669'
+    # # img_title = 'Vivitar 3ct Rope Lights'
+    # # original_price = '12.75'
+    # # our_price = '12.75'
     
-    conn = sqlite3.connect('mydb.db')
-    cur = conn.cursor()
+    # conn = sqlite3.connect('mydb.db')
+    # cur = conn.cursor()
     
-    sql = "SELECT * FROM Shoes_products"
-    results = cur.execute(sql).fetchall()
-    cnt = 0
-    for row in results:
-        if cnt >= 10:
-            break
+    # sql = "SELECT * FROM Shoes_products"
+    # results = cur.execute(sql).fetchall()
+    
+    # # create sub-video
+    # cnt = 0
+    # for row in results:
+    #     if cnt >= 10:
+    #         break
         
-        img_url = str(row[6])
-        img_title = str(row[4])
-        original_price = str(row[8])
-        if row[16]:
-            our_price = str(row[16])
-        else:
-            our_price = str(float(original_price)  / 2)
+    #     img_url = str(row[6])
+    #     img_title = str(row[4])
+    #     original_price = str(row[8])
+    #     if row[16]:
+    #         our_price = str(row[16])
+    #     else:
+    #         our_price = str(float(original_price)  / 2)
         
-        print(img_title, original_price, our_price)
-        create_video(dir + prefix + str(cnt), ext, img_url, img_title, original_price, our_price)
+    #     print(img_title, original_price, our_price)
+    #     create_video(dir + prefix + str(cnt), ext, img_url, img_title, original_price, our_price)
         
-        cnt += 1
+    #     cnt += 1
     
-    end_time = time.time()
-    print("created 20 video:", end_time - start_time)
-       
-    cv2.destroyAllWindows()
+    # cv2.destroyAllWindows()
     
-    create_video_ads(dir + prefix, ext, 10, "final.mp4")
+    # end_time = time.time()
+    # print("created 10 video:", end_time - start_time)
     
-    print("created final video", time.time() - end_time)
+    # # create final vidoe from sub-video
+    final_video_name = "final.mp4"
+    # create_video_ads(dir + prefix, ext, cnt, dir + final_video_name)
     
-    conn.close()
+    # print("created final video:", time.time() - end_time)
+    # end_time = time.time() - end_time
+    
+    # combine audio to final video
+    audio_name = "original_audio.mp3"
+    combine_audio2video(dir + audio_name, dir + final_video_name, "final.mp4")
+    
+    print("combined audio into final video:", time.time() - start_time)
+    # conn.close()

@@ -15,7 +15,7 @@ options.add_argument('--profile-directory=Default')
 path = os.getcwd() + "\\final.mp4"  # your video path
 
 driver = webdriver.Chrome(options=options)
-driver.get("http://ufile.io")
+driver.get("https://gofile.io/uploadFiles")
 time.sleep(5)
 driver.switch_to.frame(0)
 max_timeout = 10
@@ -24,7 +24,7 @@ while max_timeout > 0:
     time.sleep(1)
     buttons = driver.find_elements(By.XPATH, '//button')
     for button in buttons:
-        if button.get_attribute('id') == 'upload-window':
+        if button.get_attribute('class') == 'uploadButton':
             button.click()
             max_timeout = 0
             print("upload button pressed!")

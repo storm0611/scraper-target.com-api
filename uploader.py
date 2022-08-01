@@ -230,15 +230,15 @@ def uploadToTikTok():
 
 
 def uploadToFacebook():
-    global driver, FacebookUser, FacebookPass, user_data_dir
+        global driver, FacebookUser, FacebookPass, user_data_dir
 
 ##    options = webdriver.ChromeOptions()
 ##    options.add_argument("--user-data-dir={}".format(user_data_dir))
 ##    options.add_argument('--profile-directory=Default')
 ##
 ##    driver = webdriver.Chrome(options = options)
-    driver.get("https://www.facebook.com/")
-    time.sleep(2)
+        driver.get("https://www.facebook.com/")
+        time.sleep(2)
 
 ##    my_email=driver.find_element(By.XPATH,'//*[@id="email"]')
 ##    my_email.send_keys(FacebookUser)
@@ -249,15 +249,15 @@ def uploadToFacebook():
 ##    img_upload=driver.find_element(By.XPATH,'//*[@id="content"]/div/div/div/div[2]/div/div[1]/form/div[2]/button').click()
 ##    time.sleep(5)
 
-    max_timeout = 90
-    while max_timeout>0:
-        max_timeout-=1
-        time.sleep(1)
-        if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[2]/div[3]/div/div[1]/div[1]/ul/li[1]/span/div/a/span'):
-            print("login success!")
-            max_timeout = 0
+    # max_timeout = 90
+    # while max_timeout>0:
+    #     max_timeout-=1
+    #     time.sleep(1)
+    #     if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[2]/div[3]/div/div[1]/div[1]/ul/li[1]/span/div/a/span'):
+    #         print("login success!")
+    #         max_timeout = 0
 
-    if max_timeout==0:
+    # if max_timeout==0:
         max_timeout = 25
         while max_timeout>0:
             max_timeout-=1

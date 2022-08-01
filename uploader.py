@@ -379,8 +379,8 @@ if __name__ == '__main__':
     options.add_argument('--profile-directory=Default')
     driver = webdriver.Chrome(options = options)
 
-    # uploadToInstagram()
-    uploadToFacebook()
+    uploadToInstagram()
+    # uploadToFacebook()
     # uploadToTikTok()
 
     # configBrowser()

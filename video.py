@@ -15,7 +15,7 @@ dir = os.getcwd() + "\\assets\\"
 
 cposx0 = 400
 cposy0 = 640
-offset = 50
+offset = 10
 
 
 def max(a, b):

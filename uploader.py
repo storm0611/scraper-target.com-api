@@ -377,8 +377,8 @@ if __name__ == '__main__':
     driver = webdriver.Chrome(options = options)
 
     # uploadToInstagram()
-    # uploadToFacebook()
-    uploadToTikTok()
+    uploadToFacebook()
+    # uploadToTikTok()
 
     # configBrowser()
 

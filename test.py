@@ -15,7 +15,7 @@ options.add_argument('--profile-directory=Default')
 path = os.getcwd() + "\\final.mp4"  # your video path
 
 driver = webdriver.Chrome(options=options)
-driver.get("https://gofile.io/uploadFiles")
+driver.get("https://gofile.io/uploadFiles/")
 time.sleep(5)
 driver.switch_to.frame(0)
 max_timeout = 10

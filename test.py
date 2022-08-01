@@ -30,7 +30,7 @@ while max_timeout > 0:
             print("upload button pressed!")
             break
 
-time.sleep(3)
+time.sleep(5)
 pyautogui.write(path)
 time.sleep(2)
 pyautogui.press('enter')

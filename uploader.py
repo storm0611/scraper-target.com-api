@@ -307,7 +307,7 @@ def uploadToFacebook():
 ##        time.sleep(2)
 
         element = driver.find_element(
-            By.XPATH, "//*[contains(text(), 'Add Photos/Videos')]")
+            By.XPATH, "//*[text()='Add Photos/Videos']")
         print(element)
         if element:
             element.click()

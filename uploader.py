@@ -315,17 +315,18 @@ def uploadToFacebook():
         #         print("image/video button is visible!")
         #         max_timeout = 0
 
-        elements = driver.find_elements(By.TAG_NAME, 'div')
-        for element in elements: 
-            txt = ""
-            try:
-                txt = element.get_attribute('textContent')
-            except:
-                txt = element.text
-            print(txt)
-            if "Create Post" in txt:
-                print("dfsdfsdfsdfsdf")
-                break
+        elements = driver.find_elements(By.TAG_NAME, 'Modal')
+        print(elements)
+        # for element in elements: 
+        #     txt = ""
+        #     try:
+        #         txt = element.get_attribute('textContent')
+        #     except:
+        #         txt = element.text
+        #     print(txt)
+        #     if "Create Post" in txt:
+        #         print("dfsdfsdfsdfsdf")
+        #         break
         
         return
 
@@ -374,7 +375,7 @@ def uploadToFacebook():
 ##                max_timeout = 0
 
 
-        #driver.close()
+        driver.close()
 
 
 

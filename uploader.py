@@ -314,9 +314,13 @@ def uploadToFacebook():
         #         print("image/video button is visible!")
         #         max_timeout = 0
 
-        element = driver.find_element(By.TAG_NAME, 'body')
-        element = element.get_attribute('innerHTML')
-        print(element)
+        elements = driver.find_elements(By.TAG_NAME, 'div')
+        for element in elements:
+            if "Create Post" in element.get_attribute('textContent'):
+                print(element.get_attribute('innerHTML'))
+                break
+        
+        return
 
         #click image/video button
         upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div')

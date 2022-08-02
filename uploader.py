@@ -306,11 +306,14 @@ def uploadToFacebook():
 ##        upload.click()
 ##        time.sleep(2)
 
-        # element = driver.find_element(
-        #     By.XPATH, "//*[@placeholder='Add to your post']")
-        # print(element)
-        # if element:
-        #     element.click()
+        elements = driver.find_elements(
+            By.XPATH, "//span")
+        print(elements)
+        for element in elements:
+            print(element.get_attribute("textContent"))
+            if "your post" in element.get_attribute("textContent"):
+                print("find!")
+                break
         # jsonString = element.get_attribute('innerHTML').replace("\\", "")
         # sys.stdout = open('output.txt', 'w')
         # print('"' + jsonString + '"')
@@ -318,20 +321,20 @@ def uploadToFacebook():
         # jsonFile.write(str(jsonString))
         # jsonFile.close()
 
-        max_timeout = 120
-        while max_timeout > 0:
-            max_timeout -= 1
-            time.sleep(1)
-            if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div'):
-                print("image/video button is visible!")
-                max_timeout = 0
+        # max_timeout = 120
+        # while max_timeout > 0:
+        #     max_timeout -= 1
+        #     time.sleep(1)
+        #     if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div'):
+        #         print("image/video button is visible!")
+        #         max_timeout = 0
 
         #click image/video button
-        upload = driver.find_elements(
-            By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div')
-        print(upload)
-        upload.click()
-        time.sleep(2)
+        # upload = driver.find_elements(
+        #     By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div')
+        # print(upload)
+        # upload.click()
+        # time.sleep(2)
 
 # ##        #click to show file dialog
 # ##        upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[2]/div[1]/div[2]/div/div[1]/div/div/div/div[1]/div/div')

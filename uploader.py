@@ -315,7 +315,7 @@ def uploadToFacebook():
         #         print("image/video button is visible!")
         #         max_timeout = 0
 
-        elements = driver.find_elements(By.TAG_NAME, 'modal')
+        elements = driver.find_elements(By.XPATH, '//*modal')
         print(elements)
         # for element in elements: 
         #     txt = ""

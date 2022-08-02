@@ -328,6 +328,7 @@ def uploadToFacebook():
         #         print("dfsdfsdfsdfsdf")
         #         break
         
+        driver.close()
         return
 
         #click image/video button

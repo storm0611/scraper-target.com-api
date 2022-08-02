@@ -313,7 +313,7 @@ def uploadToFacebook():
         #open file in write mode with encoding
         f = codecs.open("Page1.html", "w", "utf−8")
         #obtain page source
-        h = driver.find_element(By.XPATH, '//form').get_attribute('innerHTML')
+        h = driver.find_element(By.XPATH, '/html/body').get_attribute('innerHTML')
         #write page source content to file
         f.write(h)
         # elements = driver.find_elements(

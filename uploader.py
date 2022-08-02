@@ -318,19 +318,20 @@ def uploadToFacebook():
         # jsonFile.write(str(jsonString))
         # jsonFile.close()
 
-        max_timeout = 120
-        while max_timeout > 0:
-            max_timeout -= 1
-            time.sleep(1)
-            if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]'):
-                print("image/video button is visible!")
-                max_timeout = 0
+        # max_timeout = 120
+        # while max_timeout > 0:
+        #     max_timeout -= 1
+        #     time.sleep(1)
+        #     if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]'):
+        #         print("image/video button is visible!")
+        #         max_timeout = 0
 
-#         #click image/video button
-#         upload = driver.find_element(
-#             By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div')
-#         upload.click()
-#         time.sleep(2)
+        #click image/video button
+        upload = driver.find_elements(
+            By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]')
+        print(upload)
+        upload.click()
+        time.sleep(2)
 
 # ##        #click to show file dialog
 # ##        upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[2]/div[1]/div[2]/div/div[1]/div/div/div/div[1]/div/div')

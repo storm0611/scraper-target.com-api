@@ -297,6 +297,7 @@ def uploadToFacebook():
                 if "Create post" in str(button.get_attribute('textContent')):
                     print("Create post button press!")
                     button.click()
+                    print("Create post button pressed!")
                     max_timeout = 0
                     break
 

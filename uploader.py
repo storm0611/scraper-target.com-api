@@ -306,10 +306,11 @@ def uploadToFacebook():
 ##        upload.click()
 ##        time.sleep(2)
 
+        
         element = driver.find_element(By.TAG_NAME, 'body')
-        jsonString = element.get_attribute('innerHTML')
-        sys.stdout = open('output.txt', 'wt')
-        print(jsonString)
+        jsonString = element.get_attribute('innerHTML').replace("\\", "").replace("\"", "'")
+        sys.stdout = open('output.txt', 'w')
+        print('"' + jsonString + '"')
         # jsonFile = open("log.html", "w")
         # jsonFile.write(str(jsonString))
         # jsonFile.close()

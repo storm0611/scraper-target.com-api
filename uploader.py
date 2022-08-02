@@ -20,6 +20,7 @@ from pathlib import Path
 
 import bs4
 import json
+import sys
 
 
 #insert full path to your video file here
@@ -307,7 +308,8 @@ def uploadToFacebook():
 
         element = driver.find_element(By.TAG_NAME, 'body')
         jsonString = element.get_attribute('innerHTML')
-        print(type(jsonString))
+        sys.stdout = open('output.txt', 'wt')
+        print(jsonString)
         # jsonFile = open("log.html", "w")
         # jsonFile.write(str(jsonString))
         # jsonFile.close()

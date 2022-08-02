@@ -9,6 +9,7 @@
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
 
+import requests
 import os
 import time
 from selenium import webdriver
@@ -16,6 +17,8 @@ from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 import pyautogui
 from pathlib import Path
+
+import bs4
 
 
 #insert full path to your video file here
@@ -303,13 +306,17 @@ def uploadToFacebook():
 ##        upload=driver.find_element(By.XPATH,'//*[text() = ''Create post'']')
 ##        upload.click()
 ##        time.sleep(2)
-        max_timeout = 120
-        while max_timeout>0:
-            max_timeout-=1
-            time.sleep(1)
-            if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div'):
-                print("image/video button is visible!")
-                max_timeout = 0
+        # max_timeout = 120
+        # while max_timeout>0:
+        #     max_timeout-=1
+        #     time.sleep(1)
+        #     if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div'):
+        #         print("image/video button is visible!")
+        #         max_timeout = 0
+
+        element = driver.find_element(By.TAG_NAME, 'body')
+        element = element.get_attribute('innerHTML')
+        print(element)
 
         #click image/video button
         upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div')

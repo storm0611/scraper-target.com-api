@@ -307,9 +307,10 @@ def uploadToFacebook():
 
         element = driver.find_element(By.TAG_NAME, 'body')
         jsonString = element.get_attribute('innerHTML')
-        jsonFile = open("log.html", "w")
-        jsonFile.write(str(jsonString))
-        jsonFile.close()
+        print(type(jsonString))
+        # jsonFile = open("log.html", "w")
+        # jsonFile.write(str(jsonString))
+        # jsonFile.close()
 
 #         max_timeout = 120
 #         while max_timeout > 0:

@@ -21,6 +21,7 @@ from pathlib import Path
 import bs4
 import json
 import sys
+from selenium.webdriver.remote.webelement import WebElement
 
 
 #insert full path to your video file here
@@ -310,8 +311,8 @@ def uploadToFacebook():
             By.TAG_NAME, "form")
         # print(elements)
         for element in elements:
-            print(element.find_element(By.XPATH, ".//*"))
-            for ele in element.find_element(By.XPATH, ".//*"):
+            print(element.find_elements(By.XPATH, ".//*"))
+            for ele in element.find_elements(By.XPATH, ".//*"):
                 print(ele.text)
             # if "your post" in element.get_attribute("textContent"):
             #     print("find!")

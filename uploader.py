@@ -290,9 +290,9 @@ def uploadToFacebook():
             time.sleep(1)
             allButtons = driver.find_elements(By.XPATH,'//span')
             for button in allButtons:
-                print(button.get_attribute('textContent'))
-                if "Create Post" in str(button.get_attribute('textContent')):
-                    print("Create post button pressed!")
+                # print(button.get_attribute('textContent'))
+                if "Create post" in str(button.get_attribute('textContent')):
+                    print("Create post button press!")
                     button.click()
                     max_timeout = 0
                     break

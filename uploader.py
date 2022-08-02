@@ -324,7 +324,7 @@ def uploadToFacebook():
                 txt = element.text
             print(txt)
             if "Create Post" in txt:
-                print(element.parent.get_attribute('innerHTML'))
+                print("dfsdfsdfsdfsdf")
                 break
         
         return

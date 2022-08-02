@@ -2,3 +2,4 @@
 /chrome
 /assets
 *.mp4
+/__pycache__

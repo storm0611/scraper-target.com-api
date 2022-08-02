@@ -307,8 +307,8 @@ def uploadToFacebook():
 ##        time.sleep(2)
 
         elements = driver.find_elements(
-            By.XPATH, "//span")
-        print(elements)
+            By.XPATH, "//form")
+        # print(elements)
         for element in elements:
             print(element.get_attribute("textContent"))
             if "your post" in element.get_attribute("textContent"):

@@ -307,13 +307,15 @@ def uploadToFacebook():
 ##        time.sleep(2)
 
         elements = driver.find_elements(
-            By.XPATH, "//form")
+            By.TAG_NAME, "form")
         # print(elements)
         for element in elements:
-            print(element.get_attribute("textContent"))
-            if "your post" in element.get_attribute("textContent"):
-                print("find!")
-                break
+            print(element.find_element(By.XPATH, ".//*"))
+            for ele in element.find_element(By.XPATH, ".//*"):
+                print(ele.text)
+            # if "your post" in element.get_attribute("textContent"):
+            #     print("find!")
+            #     break
         # jsonString = element.get_attribute('innerHTML').replace("\\", "")
         # sys.stdout = open('output.txt', 'w')
         # print('"' + jsonString + '"')

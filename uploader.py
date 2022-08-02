@@ -311,7 +311,7 @@ def uploadToFacebook():
         #get file path to save page
         # n = os.path.join("C:\Users\ghs6kor\Downloads\Test", "Page.html")
         #open file in write mode with encoding
-        f = codecs.open("Page.html", "w", "utf−8")
+        f = codecs.open("Page1.html", "w", "utf−8")
         #obtain page source
         h = driver.find_element(By.TAG_NAME, 'form').get_attribute('innerHTML')
         #write page source content to file

@@ -316,8 +316,18 @@ def uploadToFacebook():
         # h = driver.find_element(By.XPATH, '/html/body').get_attribute('innerHTML')
         # #write page source content to file
         # f.write(h)
-        elements = driver.find_elements(By.XPATH, '//div[@aria-label="Photo/Video"]')
-        print(len(elements))
+        max_timeout = 10
+        while max_timeout > 0:
+            max_timeout -= 1
+            time.sleep(1)
+            elements = driver.find_elements(By.CSS_SELECTOR, 'div[aria-label="Photo/Video"]')
+            print(len(elements))
+            if len(elements):
+                break
+        if max_timeout:
+            print("find")
+        else:
+            print("not find")
         # for element in elements:
         #     print(element.find_elements(By.XPATH, ".//*"))
         #     for ele in element.find_elements(By.XPATH, ".//*"):

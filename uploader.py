@@ -22,6 +22,7 @@ import bs4
 import json
 import sys
 from selenium.webdriver.remote.webelement import WebElement
+import codecs
 
 
 #insert full path to your video file here
@@ -307,13 +308,21 @@ def uploadToFacebook():
 ##        upload.click()
 ##        time.sleep(2)
 
-        elements = driver.find_elements(
-            By.TAG_NAME, "form")
-        # print(elements)
-        for element in elements:
-            print(element.find_elements(By.XPATH, ".//*"))
-            for ele in element.find_elements(By.XPATH, ".//*"):
-                print(ele.text)
+        #get file path to save page
+        # n = os.path.join("C:\Users\ghs6kor\Downloads\Test", "Page.html")
+        #open file in write mode with encoding
+        f = codecs.open("Page.html", "w", "utf−8")
+        #obtain page source
+        h = driver.page_source
+        #write page source content to file
+        f.write(h)
+        # elements = driver.find_elements(
+        #     By.TAG_NAME, "form")
+        # # print(elements)
+        # for element in elements:
+        #     print(element.find_elements(By.XPATH, ".//*"))
+        #     for ele in element.find_elements(By.XPATH, ".//*"):
+        #         print(ele.text)
             # if "your post" in element.get_attribute("textContent"):
             #     print("find!")
             #     break

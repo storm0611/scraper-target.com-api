@@ -69,6 +69,7 @@ def uploadToInstagram():
 
 
     upload=driver.find_element(By.XPATH,'//div[@class="_acub"]')
+    print("upload button press!")
     upload.click()
 
 
@@ -83,13 +84,14 @@ def uploadToInstagram():
         allButtons = driver.find_elements(By.XPATH,'//button')
         for button in allButtons:
             if button.text == "Select from computer":
+                print("Select from computer button press!")
                 button.click()
                 max_timeout = 0
                 break
 
     #/html/body/div[8]/div[2]/div/div/div/div[2]/div[1]/div/div/div[2]/div/button
     #/html/body/div[7]/div[2]/div/div/div/div[2]/div[1]/div/div/div[2]/div/button
-    time.sleep(5)
+    time.sleep(8)
 
     global path
     pyautogui.write(path)
@@ -104,26 +106,29 @@ def uploadToInstagram():
         allButtons = driver.find_elements(By.XPATH,'//button')
         for button in allButtons:
             if button.text == "Next":
+                print("Next button press!")
                 button.click()
                 max_timeout = 0
                 break
 
-    time.sleep(2)
+    time.sleep(5)
 
     allButtons = driver.find_elements(By.XPATH,'//button')
     for button in allButtons:
         try:
             if button.text == "Next":
+                print("Next button press!")
                 button.click()
                 break
         except:
             print("pass to another element")
 
-    time.sleep(2)
+    time.sleep(5)
 
     allButtons = driver.find_elements(By.XPATH,'//button')
     for button in allButtons:
         if button.text == "Share":
+            print("Share button press!")
             button.click()
             break
 
@@ -176,12 +181,12 @@ def uploadToTikTok():
         buttons = driver.find_elements(By.XPATH,'//button')
         for button in buttons:
             if button.get_attribute('class') == 'css-xqpvcy':
+                print("upload button press!")
                 button.click()
                 max_timeout = 0
-                print("upload button pressed!")
                 break
 
-    time.sleep(3)
+    time.sleep(5)
 
     global path
     pyautogui.write(path)
@@ -199,6 +204,7 @@ def uploadToTikTok():
         for button in buttons:
             if button.get_attribute('class') == 'css-1ielthz':
                 if button.is_enabled():
+                    print("Post button press!")
                     button.click()
                     max_timeout = 0
                     time.sleep(6)
@@ -307,9 +313,9 @@ def uploadToFacebook():
 
         #click image/video button
         upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div')
+        print("upload button press!") 
         upload.click()
-        print("upload button pressed!")
-        time.sleep(2)
+        time.sleep(5)
 
 ##        #click to show file dialog
 ##        upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[2]/div[1]/div[2]/div/div[1]/div/div/div/div[1]/div/div')
@@ -335,8 +341,8 @@ def uploadToFacebook():
 
         time.sleep(2)
         upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[3]/div')
+        print("Post button press!")
         upload.click()
-        print("Video is posted!")
         time.sleep(5)
 
 ##        #waiting for upload to complete
@@ -379,11 +385,11 @@ if __name__ == '__main__':
     options.add_argument('--profile-directory=Default')
     driver = webdriver.Chrome(options = options)
 
-    # uploadToInstagram()
+    uploadToInstagram()
     # uploadToFacebook()
     # uploadToTikTok()
 
-    configBrowser()
+    # configBrowser()
 
 
 

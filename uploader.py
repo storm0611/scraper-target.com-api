@@ -19,6 +19,7 @@ import pyautogui
 from pathlib import Path
 
 import bs4
+import json
 
 
 #insert full path to your video file here
@@ -303,60 +304,67 @@ def uploadToFacebook():
 ##        upload=driver.find_element(By.XPATH,'//*[text() = ''Create post'']')
 ##        upload.click()
 ##        time.sleep(2)
-        max_timeout = 120
-        while max_timeout > 0:
-            max_timeout -= 1
-            time.sleep(1)
-            if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div'):
-                print("image/video button is visible!")
-                max_timeout = 0
 
-        #click image/video button
-        upload = driver.find_element(
-            By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div')
-        upload.click()
-        time.sleep(2)
+        element = driver.find_element(By.TAG_NAME, 'body')
+        jsonString = element.get_attribute('innerHTML')
+        jsonFile = open("log.html", "w")
+        jsonFile.write(jsonString)
+        jsonFile.close()
 
-##        #click to show file dialog
-##        upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[2]/div[1]/div[2]/div/div[1]/div/div/div/div[1]/div/div')
-##        upload.click()
-##        time.sleep(2)
+#         max_timeout = 120
+#         while max_timeout > 0:
+#             max_timeout -= 1
+#             time.sleep(1)
+#             if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div'):
+#                 print("image/video button is visible!")
+#                 max_timeout = 0
 
-        #enetring file URL
-        global path
-        pyautogui.write(path)
-        time.sleep(2)
-        pyautogui.press('enter')
-        time.sleep(2)
+#         #click image/video button
+#         upload = driver.find_element(
+#             By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div')
+#         upload.click()
+#         time.sleep(2)
 
-        #checking video upload
-        time.sleep(2)
-        max_timeout = 420
-        while max_timeout > 0:
-            max_timeout -= 1
-            time.sleep(1)
-            if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[5]/div/div/div/div/div/div/div/div/span/span') == False:
-                print("Video is uploaded!")
-                max_timeout = 0
+# ##        #click to show file dialog
+# ##        upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[2]/div[1]/div[2]/div/div[1]/div/div/div/div[1]/div/div')
+# ##        upload.click()
+# ##        time.sleep(2)
 
-        time.sleep(2)
-        upload = driver.find_element(
-            By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[3]/div')
-        upload.click()
-        print("Video is posted!")
-        time.sleep(5)
+#         #enetring file URL
+#         global path
+#         pyautogui.write(path)
+#         time.sleep(2)
+#         pyautogui.press('enter')
+#         time.sleep(2)
 
-##        #waiting for upload to complete
-##        print("waiting for video to post")
-##        max_timeout = 90
-##        while max_timeout>0:
-##            max_timeout-=1
-##            time.sleep(1)
-##            if check_exists_by_xpath('//*[@id="facebook"]/body/div[4]/ul/li/div[1]/div/div[1]/span/span'):
-##                print("Video is posted!")
-##                max_timeout = 0
+#         #checking video upload
+#         time.sleep(2)
+#         max_timeout = 420
+#         while max_timeout > 0:
+#             max_timeout -= 1
+#             time.sleep(1)
+#             if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[5]/div/div/div/div/div/div/div/div/span/span') == False:
+#                 print("Video is uploaded!")
+#                 max_timeout = 0
 
-        #driver.close()
+#         time.sleep(2)
+#         upload = driver.find_element(
+#             By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[3]/div')
+#         upload.click()
+#         print("Video is posted!")
+#         time.sleep(5)
+
+# ##        #waiting for upload to complete
+# ##        print("waiting for video to post")
+# ##        max_timeout = 90
+# ##        while max_timeout>0:
+# ##            max_timeout-=1
+# ##            time.sleep(1)
+# ##            if check_exists_by_xpath('//*[@id="facebook"]/body/div[4]/ul/li/div[1]/div/div[1]/span/span'):
+# ##                print("Video is posted!")
+# ##                max_timeout = 0
+
+        driver.close()
 
         #/li/div[1]/div/div[1]/span/span
 

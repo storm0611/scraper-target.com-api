@@ -241,15 +241,15 @@ def uploadToTikTok():
 
 
 def uploadToFacebook():
-    global driver, FacebookUser, FacebookPass, user_data_dir
+        global driver, FacebookUser, FacebookPass, user_data_dir
 
 ##    options = webdriver.ChromeOptions()
 ##    options.add_argument("--user-data-dir={}".format(user_data_dir))
 ##    options.add_argument('--profile-directory=Default')
 ##
 ##    driver = webdriver.Chrome(options = options)
-    driver.get("https://www.facebook.com/")
-    time.sleep(2)
+        driver.get("https://www.facebook.com/")
+        time.sleep(2)
 
 ##    my_email=driver.find_element(By.XPATH,'//*[@id="email"]')
 ##    my_email.send_keys(FacebookUser)
@@ -260,22 +260,22 @@ def uploadToFacebook():
 ##    img_upload=driver.find_element(By.XPATH,'//*[@id="content"]/div/div/div/div[2]/div/div[1]/form/div[2]/button').click()
 ##    time.sleep(5)
 
-    max_timeout = 90
-    while max_timeout > 0:
-        max_timeout -= 1
-        time.sleep(1)
-        if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[2]/div[3]/div/div[1]/div[1]/ul/li[1]/span/div/a/span'):
-            print("login success!")
-            max_timeout = 0
+    # max_timeout = 90
+    # while max_timeout > 0:
+    #     max_timeout -= 1
+    #     time.sleep(1)
+    #     if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[2]/div[3]/div/div[1]/div[1]/ul/li[1]/span/div/a/span'):
+    #         print("login success!")
+    #         max_timeout = 0
 
-    if max_timeout == 0:
-        max_timeout = 25
-        while max_timeout > 0:
-            max_timeout -= 1
-            time.sleep(1)
-            if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[2]/div[3]/div/div[1]/div[1]/ul/li[1]/span/div/a/span'):
-                print("Home button is visible!")
-                max_timeout = 0
+    # if max_timeout == 0:
+    #     max_timeout = 25
+    #     while max_timeout > 0:
+    #         max_timeout -= 1
+    #         time.sleep(1)
+    #         if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[2]/div[3]/div/div[1]/div[1]/ul/li[1]/span/div/a/span'):
+    #             print("Home button is visible!")
+    #             max_timeout = 0
 
         #click home button
 ##        upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[2]/div[3]/div/div[1]/div[1]/ul/li[1]/span/div/a/span')
@@ -306,11 +306,11 @@ def uploadToFacebook():
 ##        upload.click()
 ##        time.sleep(2)
 
-        element = driver.find_element(
-            By.XPATH, "//*[@value='Add to your post']")
-        print(element)
-        if element:
-            element.click()
+        # element = driver.find_element(
+        #     By.XPATH, "//*[@value='Add to your post']")
+        # print(element)
+        # if element:
+        #     element.click()
         # jsonString = element.get_attribute('innerHTML').replace("\\", "")
         # sys.stdout = open('output.txt', 'w')
         # print('"' + jsonString + '"')
@@ -318,13 +318,13 @@ def uploadToFacebook():
         # jsonFile.write(str(jsonString))
         # jsonFile.close()
 
-#         max_timeout = 120
-#         while max_timeout > 0:
-#             max_timeout -= 1
-#             time.sleep(1)
-#             if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div/div'):
-#                 print("image/video button is visible!")
-#                 max_timeout = 0
+        max_timeout = 120
+        while max_timeout > 0:
+            max_timeout -= 1
+            time.sleep(1)
+            if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[1]/div[2]/div[1]/div/span/div/div/div[1]/div'):
+                print("image/video button is visible!")
+                max_timeout = 0
 
 #         #click image/video button
 #         upload = driver.find_element(

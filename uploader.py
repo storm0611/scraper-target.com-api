@@ -297,7 +297,7 @@ def uploadToFacebook():
                 if "Create post" in str(button.get_attribute('textContent')):
                     print("Create post button press!")
                     button.click()
-                    print("Create post button pressed!")
+                    # print("Create post button pressed!")
                     max_timeout = 0
                     break
 
@@ -316,9 +316,15 @@ def uploadToFacebook():
         #         max_timeout = 0
 
         elements = driver.find_elements(By.TAG_NAME, 'div')
-        for element in elements:
-            if "Create Post" in element.get_attribute('textContent'):
-                print(element.get_attribute('innerHTML'))
+        for element in elements: 
+            txt = ""
+            try:
+                txt = element.get_attribute('textContent')
+            except:
+                txt = element.text
+            print(txt)
+            if "Create Post" in txt:
+                print(element.parent.get_attribute('innerHTML'))
                 break
         
         return

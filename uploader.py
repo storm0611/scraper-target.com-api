@@ -307,7 +307,7 @@ def uploadToFacebook():
 ##        time.sleep(2)
 
         element = driver.find_element(
-            By.XPATH, "//input[text()='Add to your post']")
+            By.XPATH, "//*[@value='Add to your post']")
         print(element)
         if element:
             element.click()

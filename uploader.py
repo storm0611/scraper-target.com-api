@@ -321,7 +321,7 @@ def uploadToFacebook():
             max_timeout -= 1
             time.sleep(1)
             elements = driver.find_elements(By.CSS_SELECTOR, 'div[aria-label="Photo/Video"]')
-            print(len(elements))
+            # print(len(elements))
             if len(elements):
                 break
         if not max_timeout:
@@ -331,7 +331,7 @@ def uploadToFacebook():
         
         elements[0].click()
         print("Photo/Video pressed!")
-        time.sleep(3)
+        time.sleep(5)
         # for element in elements:
         #     print(element.find_elements(By.XPATH, ".//*"))
         #     for ele in element.find_elements(By.XPATH, ".//*"):
@@ -379,16 +379,21 @@ def uploadToFacebook():
         while max_timeout > 0:
             max_timeout -= 1
             time.sleep(1)
-            if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[5]/div/div/div/div/div/div/div/div/span/span') == False:
-                print("Video is uploaded!")
-                max_timeout = 0
+            # if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[5]/div/div/div/div/div/div/div/div/span/span') == False:
+            elements = driver.find_elements(By.CSS_SELECTOR, 'div[aria-label="Post"]')
+            if len(elements):
+                if "true" in elements[0].get_attribute('aria-disabled'):
+                    print("Video is uploaded!")
+                    elements[0].click()
+                    print("Video is posted!")
+                    max_timeout = 0
 
-        time.sleep(2)
-        upload = driver.find_element(
-            By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[3]/div')
-        upload.click()
-        print("Video is posted!")
-        time.sleep(5)
+        # time.sleep(2)
+        # upload = driver.find_element(
+        #     By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[3]/div')
+        # upload.click()
+        # print("Video is posted!")
+        # time.sleep(5)
 
 # ##        #waiting for upload to complete
 # ##        print("waiting for video to post")

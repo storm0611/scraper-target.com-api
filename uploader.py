@@ -328,13 +328,13 @@ def uploadToFacebook():
         #get file path to save page
         # n = os.path.join("C:\Users\ghs6kor\Downloads\Test", "Page.html")
         #open file in write mode with encoding
-        f = codecs.open("Page1.html", "w")
+        f = codecs.open("Page1.html", "a")
         # #obtain page source
         h = driver.find_elements(By.CSS_SELECTOR, 'form')
         print(len(h))
         # #write page source content to file
         for hh in h:
-            f.write(hh)
+            f.write(hh.get_attribute('innerHTML'))
         driver.close()
         return
         # for element in elements:

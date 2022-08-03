@@ -383,8 +383,9 @@ def uploadToFacebook():
             elements = driver.find_elements(By.CSS_SELECTOR, 'div[aria-label="Post"]')
             if len(elements):
                 print(len(elements))
-                print(type(elements[0].get_attribute(
-                    'aria-disabled')), elements[0].get_attribute('aria-disabled'))
+                attrs = driver.execute_script(
+                    'var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', elements[0])
+                print(attrs)
                 while "true" in elements[0].get_attribute('aria-disabled') and max_timeout > 0:
                     max_timeout -= 1
                 if max_timeout:

@@ -9,10 +9,12 @@ import time
 
 #insert full path to your video file here
 path = os.getcwd() + "\\final.mp4"  # your video path
-print(path)
+# print(path)
 ##FacebookUser = 'Justsendit@live.com'
 
 usr_data_dir = pathlib.Path.home() / "AppData/Local/Chrome/User Data"
+
+print("--user-data-dir=" + str(usr_data_dir))
 
 options = webdriver.ChromeOptions()
 options.add_argument(

@@ -12,12 +12,15 @@ print(path)
 ##FacebookUser = 'Justsendit@live.com'
 
 options = webdriver.ChromeOptions()
-options.add_argument("--user-data-dir=C:\\Users\\HOPE\\AppData\\Local\\Google\\Chrome\\User Data")
+options.add_argument(
+    "--user-data-dir=C:\\Users\\justs\\AppData\\Local\\Google\\Chrome\\User Data")
 chromedriver = "./chromedriver"
 capabilities = webdriver.DesiredCapabilities.CHROME.copy()
-driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=options, desired_capabilities=capabilities)
-    
-driver.get("https://drive.google.com/drive/my-drive")
+driver = webdriver.Chrome(executable_path=chromedriver,
+                          chrome_options=options, desired_capabilities=capabilities)
+
+driver.get(
+    "https://drive.google.com/drive/folders/1P-qXm0wL8tqKnW3gLI1yQTsTAmQ34LjJ")
     
 elements = driver.find_elements(
         By.CSS_SELECTOR, 'button[aria-label="New"]')

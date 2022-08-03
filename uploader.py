@@ -474,11 +474,12 @@ def configBrowser():
 ##    options.add_argument('--profile-directory=Default')
 ##
 ##    driver = webdriver.Chrome(options = options)
-    driver.get("https://www.facebook.com")
-    driver.execute_script('''window.open("https://www.instagram.com", "_blank");''')
-    driver.execute_script('''window.open("https://www.tiktok.com", "_blank");''')
-    driver.execute_script(
-        '''window.open("https://drive.google.com/drive/folders/1P-qXm0wL8tqKnW3gLI1yQTsTAmQ34LjJ", "_blank");''')
+    # driver.get("https://www.facebook.com")
+    # driver.execute_script('''window.open("https://www.instagram.com", "_blank");''')
+    # driver.execute_script('''window.open("https://www.tiktok.com", "_blank");''')
+    # driver.execute_script(
+    #     '''window.open("https://drive.google.com/drive/folders/1P-qXm0wL8tqKnW3gLI1yQTsTAmQ34LjJ", "_blank");''')
+    driver.get("https://drive.google.com/drive/my-drive")
 
 if __name__ == '__main__':
     global driver

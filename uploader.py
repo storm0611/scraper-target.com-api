@@ -404,6 +404,7 @@ def uploadToFacebook():
             # print(len(elements))
             elements[0].click()
             print("Video is posted!")
+            time.sleep(10)
             
         # max_timeout = 420
         # while max_timeout > 0:

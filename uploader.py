@@ -369,7 +369,7 @@ def uploadToFacebook():
         #enetring file URL
         global path
         pyautogui.write(path)
-        time.sleep(2)
+        time.sleep(5)
         pyautogui.press('enter')
         time.sleep(2)
 

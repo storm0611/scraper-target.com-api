@@ -392,42 +392,49 @@ def uploadToFacebook():
         #enetring file URL
         global path
         pyautogui.write(path)
-        time.sleep(5)
-        pyautogui.press('enter')
         time.sleep(2)
+        pyautogui.press('enter')
+        time.sleep(5)
 
         #checking video upload
-        time.sleep(2)
-        max_timeout = 420
-        while max_timeout > 0:
-            max_timeout -= 1
-            time.sleep(1)
-            # if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[5]/div/div/div/div/div/div/div/div/span/span') == False:
-            elements = driver.find_elements(By.CSS_SELECTOR, 'div[aria-label="Post"]')
-            if len(elements):
-                print(len(elements))
-                # attrs = driver.execute_script(
-                #     'var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', elements[0])
-                # print(attrs)
-                try:
-                    attr = elements[0].get_attribute('aria-disabled')
-                    print(attr)
-                    while attr and max_timeout > 0:
-                        try:
-                            attr = elements[0].get_attribute('aria-disabled')
-                            max_timeout -= 1
-                        except:
-                            break
-                    if max_timeout > 0:
-                        print("Video is uploaded!")
-                        elements[0].click()
-                        print("Video is posted!")
-                        max_timeout = 0
-                except:
-                    print("Video is uploaded!")
-                    elements[0].click()
-                    print("Video is posted!")
-                    max_timeout = 0
+        time.sleep(5)
+        elements = driver.find_elements(
+            By.CSS_SELECTOR, 'div[aria-label="Post"]')
+        if len(elements):
+            # print(len(elements))
+            elements[0].click()
+            print("Video is posted!")
+            
+        # max_timeout = 420
+        # while max_timeout > 0:
+        #     max_timeout -= 1
+        #     time.sleep(1)
+        #     # if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[5]/div/div/div/div/div/div/div/div/span/span') == False:
+        #     elements = driver.find_elements(By.CSS_SELECTOR, 'div[aria-label="Post"]')
+        #     if len(elements):
+        #         print(len(elements))
+        #         # attrs = driver.execute_script(
+        #         #     'var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', elements[0])
+        #         # print(attrs)
+        #         try:
+        #             attr = elements[0].get_attribute('aria-disabled')
+        #             print(attr)
+        #             while attr and max_timeout > 0:
+        #                 try:
+        #                     attr = elements[0].get_attribute('aria-disabled')
+        #                     max_timeout -= 1
+        #                 except:
+        #                     break
+        #             if max_timeout > 0:
+        #                 print("Video is uploaded!")
+        #                 elements[0].click()
+        #                 print("Video is posted!")
+        #                 max_timeout = 0
+        #         except:
+        #             print("Video is uploaded!")
+        #             elements[0].click()
+        #             print("Video is posted!")
+        #             max_timeout = 0
                 # if max_timeout:
                 #     print("Video is uploaded!")
                 #     elements[0].click()

@@ -376,7 +376,7 @@ def uploadToFacebook():
             max_timeout -= 1
             time.sleep(1)
             elements = driver.find_elements(
-                By.CSS_SELECTOR, 'input[type="file"]')
+                By.CSS_SELECTOR, 'div[class="jb3vyjys dflh9lhu qt6c0cv9 scb9dxdr"] input[type="file"]')
             print(len(elements))
             if len(elements):
                 break

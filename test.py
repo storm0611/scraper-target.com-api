@@ -1,42 +1,28 @@
-import os
-import time
+
 from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.by import By
-import undetected_chromedriver as uc
-import pyautogui
-from pathlib import Path
 
-path_to_profile = os.path.abspath(os.getcwd()) + '\chrome'
-user_data_dir = Path("{}/driver/User Data".format(path_to_profile))
+print('Enter the gmailid and password')
+gmailId = 'devstar0611@gmail.com'
+passWord = 'Devstar0611!@#'
+try:
+    driver = webdriver.Chrome(ChromeDriverManager().install())
+    driver.get(r'https://accounts.google.com/signin/v2/identifier?continue=https%3A%2F%2Fmail.google.com%2Fmail%2F&service=mail&sacu=1&rip=1&flowName=GlifWebSignIn&flowEntry = ServiceLogin')
+    driver.implicitly_wait(15)
 
-options = webdriver.ChromeOptions()
-options.add_argument("--user-data-dir={}".format(user_data_dir))
-options.add_argument('--profile-directory=Default')
-path = os.getcwd() + "\\final.mp4"  # your video path
+    loginBox = driver.find_element(By.XPATH, '//*[@id ="identifierId"]')
+    loginBox.send_keys(gmailId)
 
-driver = webdriver.Chrome(options=options)
-driver.get("https://gofile.io/welcome/")
-time.sleep(5)
-# driver.switch_to.frame(0)
-max_timeout = 90
-while max_timeout > 0:
-    max_timeout -= 1
-    time.sleep(1)
-    allButtons = driver.find_elements(By.TAG_NAME, 'span')
-    # print(allButtons)
-    cnt = 0
-    for button in allButtons:
-        cnt += 1
-        print(cnt, button.get_attribute('textContent'))
-        if button.get_attribute('textContent') == "Gofile":
-            print("Gofile button pressed!")
-            button.click()
-            max_timeout = 0
-            break
+    nextButton = driver.find_elements(By.XPATH, '//*[@id ="identifierNext"]')
+    nextButton[0].click()
 
-time.sleep(5)
-pyautogui.write(path)
-time.sleep(2)
-pyautogui.press('enter')
-time.sleep(5)
-print("waiting for file to be uploaded!")
+    passWordBox = driver.find_element(By.XPATH, '//*[@id ="password"]/div[1]/div / div[1]/input')
+    passWordBox.send_keys(passWord)
+
+    nextButton = driver.find_elements(By.XPATH, '//*[@id ="passwordNext"]')
+    nextButton[0].click()
+
+    print('Login Successful...!!')
+except:
+    print('Login Failed')

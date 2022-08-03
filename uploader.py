@@ -385,7 +385,7 @@ def uploadToFacebook():
             driver.close()
             return
 
-        elements[0].click()
+        elements[0].find_element(By.XPATH, '..//div[1]').click()
         print("File dialog opened!")
         time.sleep(5)
 

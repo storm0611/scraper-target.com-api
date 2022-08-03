@@ -469,21 +469,19 @@ def uploadToGoogle():
     global path
     ##FacebookUser = 'Justsendit@live.com'
 
-    import pathlib
-    usr_data_dir = pathlib.Path.home() / "AppData/Local/Chrome/User Data"
-    
+
     options = webdriver.ChromeOptions()
     options.add_argument(
-        "--user-data-dir=" + str(usr_data_dir))
+        "--user-data-dir=C:\\Users\\jsuts\\AppData\\Local\\Google\\Chrome\\User Data")
     chromedriver = "./chromedriver"
     capabilities = webdriver.DesiredCapabilities.CHROME.copy()
     driver = webdriver.Chrome(executable_path=chromedriver,
                             chrome_options=options, desired_capabilities=capabilities)
 
+    driver.get("https://drive.google.com/drive/my-drive")
+
     # driver.get(
     #     "https://drive.google.com/drive/folders/1P-qXm0wL8tqKnW3gLI1yQTsTAmQ34LjJ")
-    driver.get(
-        "https://drive.google.com/drive/my-drive")
 
     elements = driver.find_elements(
         By.CSS_SELECTOR, 'button[aria-label="New"]')

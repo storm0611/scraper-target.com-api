@@ -472,7 +472,7 @@ def uploadToGoogle():
 
     options = webdriver.ChromeOptions()
     options.add_argument(
-        "--user-data-dir=C:\\Users\\jsuts\\AppData\\Local\\Google\\Chrome\\User Data")
+        "--user-data-dir=C:\\Users\\justs\\AppData\\Local\\Google\\Chrome\\User Data")
     chromedriver = "./chromedriver"
     capabilities = webdriver.DesiredCapabilities.CHROME.copy()
     driver = webdriver.Chrome(executable_path=chromedriver,
@@ -480,19 +480,16 @@ def uploadToGoogle():
 
     driver.get("https://drive.google.com/drive/my-drive")
 
-    # driver.get(
-    #     "https://drive.google.com/drive/folders/1P-qXm0wL8tqKnW3gLI1yQTsTAmQ34LjJ")
-
     elements = driver.find_elements(
         By.CSS_SELECTOR, 'button[aria-label="New"]')
     time.sleep(3)
-    print(len(elements))
+    # print(len(elements))
     elements[0].click()
     time.sleep(2)
     elements = driver.find_elements(
         By.CSS_SELECTOR, 'div[role="menuitem"][aria-posinset="2"]')
     time.sleep(3)
-    print(len(elements))
+    # print(len(elements))
     elements[0].click()
     time.sleep(3)
 
@@ -504,10 +501,16 @@ def uploadToGoogle():
 
     #checking video upload
     elements = driver.find_elements(
-        By.CSS_SELECTOR, 'div[role="dialog"][aria-label="Uploading 1 item"]')
+        By.CSS_SELECTOR, 'div[role="dialog"][aria-label="1 upload complete"]')
     time.sleep(2)
     if len(elements):
         print("Video is posted!")
+    else:
+        elements = driver.find_elements(
+            By.CSS_SELECTOR, 'div[role="dialog"][aria-label="Uploading 1 item"]')
+        time.sleep(2)
+        if len(elements):
+            print("Video is posted!")
 
 def configBrowser():
     global driver

@@ -463,6 +463,49 @@ def uploadToFacebook():
 
         #/li/div[1]/div/div[1]/span/span
 
+def uploadToGoogle():
+
+    #insert full path to your video file here
+    path = os.getcwd() + "\\final.mp4"  # your video path
+    print(path)
+    ##FacebookUser = 'Justsendit@live.com'
+
+    options = webdriver.ChromeOptions()
+    options.add_argument(
+        "--user-data-dir=C:\\Users\\HOPE\\AppData\\Local\\Google\\Chrome\\User Data")
+    chromedriver = "./chromedriver"
+    capabilities = webdriver.DesiredCapabilities.CHROME.copy()
+    driver = webdriver.Chrome(executable_path=chromedriver,
+                            chrome_options=options, desired_capabilities=capabilities)
+
+    driver.get("https://drive.google.com/drive/my-drive")
+
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'button[aria-label="New"]')
+    time.sleep(3)
+    print(len(elements))
+    elements[0].click()
+    time.sleep(2)
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'div[role="menuitem"][aria-posinset="2"]')
+    time.sleep(3)
+    print(len(elements))
+    elements[0].click()
+    time.sleep(3)
+
+    # global path
+    pyautogui.write(path)
+    time.sleep(2)
+    pyautogui.press('enter')
+    time.sleep(8)
+
+    #checking video upload
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'div[role="dialog"][aria-label="Uploading 1 item"]')
+    time.sleep(2)
+    if len(elements):
+        print("Video is posted!")
+
 def configBrowser():
     global driver
     from pathlib import Path
@@ -474,12 +517,12 @@ def configBrowser():
 ##    options.add_argument('--profile-directory=Default')
 ##
 ##    driver = webdriver.Chrome(options = options)
-    # driver.get("https://www.facebook.com")
-    # driver.execute_script('''window.open("https://www.instagram.com", "_blank");''')
-    # driver.execute_script('''window.open("https://www.tiktok.com", "_blank");''')
+    driver.get("https://www.facebook.com")
+    driver.execute_script('''window.open("https://www.instagram.com", "_blank");''')
+    driver.execute_script('''window.open("https://www.tiktok.com", "_blank");''')
     # driver.execute_script(
     #     '''window.open("https://drive.google.com/drive/folders/1P-qXm0wL8tqKnW3gLI1yQTsTAmQ34LjJ", "_blank");''')
-    driver.get("https://drive.google.com/drive/my-drive")
+    # driver.get("https://drive.google.com/drive/my-drive")
 
 if __name__ == '__main__':
     global driver
@@ -492,8 +535,9 @@ if __name__ == '__main__':
     # uploadToInstagram()
     # uploadToTikTok()
     # uploadToFacebook()
-
-    configBrowser()
+    uploadToGoogle()
+    
+    # configBrowser()
 
 
 

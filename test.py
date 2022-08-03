@@ -12,7 +12,7 @@ path = os.getcwd() + "\\final.mp4"  # your video path
 ##FacebookUser = 'Justsendit@live.com'
 
 options = webdriver.ChromeOptions()
-options.add_argument("--user-data-dir=C:\\Users\\HOPE\\AppData\\Local\\Google\\Chrome\\User Data")
+options.add_argument("--user-data-dir=C:\\Users\\justs\\AppData\\Local\\Google\\Chrome\\User Data")
 chromedriver = "./chromedriver"
 capabilities = webdriver.DesiredCapabilities.CHROME.copy()
 driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=options, desired_capabilities=capabilities)

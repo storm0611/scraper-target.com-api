@@ -40,9 +40,15 @@ time.sleep(8)
 
     #checking video upload
 elements = driver.find_elements(
-    By.CSS_SELECTOR, 'div[role="dialog"][aria-label="Uploading 1 item"]')
+    By.CSS_SELECTOR, 'div[role="dialog"][aria-label="1 upload complete"]')
 time.sleep(2)
 if len(elements):
     print("Video is posted!")
+else:
+    elements = driver.find_elements(
+        By.CSS_SELECTOR, 'div[role="dialog"][aria-label="Uploading 1 item"]')
+    time.sleep(2)
+    if len(elements):
+        print("Video is posted!")
 
     

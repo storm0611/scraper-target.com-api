@@ -324,10 +324,14 @@ def uploadToFacebook():
             print(len(elements))
             if len(elements):
                 break
-        if max_timeout:
-            print("find")
-        else:
-            print("not find")
+        if not max_timeout:
+            print("Photo/Video button not found")
+            driver.close()
+            return
+        
+        elements[0].click()
+        print("Photo/Video pressed!")
+        time.sleep(3)
         # for element in elements:
         #     print(element.find_elements(By.XPATH, ".//*"))
         #     for ele in element.find_elements(By.XPATH, ".//*"):
@@ -362,29 +366,29 @@ def uploadToFacebook():
 # ##        upload.click()
 # ##        time.sleep(2)
 
-#         #enetring file URL
-#         global path
-#         pyautogui.write(path)
-#         time.sleep(2)
-#         pyautogui.press('enter')
-#         time.sleep(2)
+        #enetring file URL
+        global path
+        pyautogui.write(path)
+        time.sleep(2)
+        pyautogui.press('enter')
+        time.sleep(2)
 
-#         #checking video upload
-#         time.sleep(2)
-#         max_timeout = 420
-#         while max_timeout > 0:
-#             max_timeout -= 1
-#             time.sleep(1)
-#             if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[5]/div/div/div/div/div/div/div/div/span/span') == False:
-#                 print("Video is uploaded!")
-#                 max_timeout = 0
+        #checking video upload
+        time.sleep(2)
+        max_timeout = 420
+        while max_timeout > 0:
+            max_timeout -= 1
+            time.sleep(1)
+            if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[5]/div/div/div/div/div/div/div/div/span/span') == False:
+                print("Video is uploaded!")
+                max_timeout = 0
 
-#         time.sleep(2)
-#         upload = driver.find_element(
-#             By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[3]/div')
-#         upload.click()
-#         print("Video is posted!")
-#         time.sleep(5)
+        time.sleep(2)
+        upload = driver.find_element(
+            By.XPATH, '/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[3]/div')
+        upload.click()
+        print("Video is posted!")
+        time.sleep(5)
 
 # ##        #waiting for upload to complete
 # ##        print("waiting for video to post")

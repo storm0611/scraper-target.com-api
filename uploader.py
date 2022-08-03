@@ -490,7 +490,7 @@ if __name__ == '__main__':
     # uploadToTikTok()
     # uploadToFacebook()
 
-    # configBrowser()
+    configBrowser()
 
 
 

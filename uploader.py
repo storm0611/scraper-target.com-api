@@ -328,15 +328,15 @@ def uploadToFacebook():
         #get file path to save page
         # n = os.path.join("C:\Users\ghs6kor\Downloads\Test", "Page.html")
         #open file in write mode with encoding
-        f = codecs.open("Page1.html", "a")
-        # #obtain page source
-        h = driver.find_elements(By.CSS_SELECTOR, 'form')
-        print(len(h))
-        # #write page source content to file
-        for hh in h:
-            f.write(hh.get_attribute('innerHTML'))
-        driver.close()
-        return
+        # f = codecs.open("Page1.html", "a")
+        # # #obtain page source
+        # h = driver.find_elements(By.CSS_SELECTOR, 'form')
+        # print(len(h))
+        # # #write page source content to file
+        # for hh in h:
+        #     f.write(hh.get_attribute('innerHTML'))
+        # driver.close()
+        # return
         # for element in elements:
         #     print(element.find_elements(By.XPATH, ".//*"))
         #     for ele in element.find_elements(By.XPATH, ".//*"):
@@ -370,6 +370,24 @@ def uploadToFacebook():
 # ##        upload=driver.find_element(By.XPATH,'/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div/div/div[2]/div[1]/div[2]/div/div[1]/div/div/div/div[1]/div/div')
 # ##        upload.click()
 # ##        time.sleep(2)
+
+        max_timeout = 10
+        while max_timeout > 0:
+            max_timeout -= 1
+            time.sleep(1)
+            elements = driver.find_elements(
+                By.CSS_SELECTOR, 'input[type="file"]')
+            print(len(elements))
+            if len(elements):
+                break
+        if not max_timeout:
+            print("Add Photo/Video button not found")
+            driver.close()
+            return
+
+        elements[0].click()
+        print("File dialog opened!")
+        time.sleep(5)
 
         #enetring file URL
         global path

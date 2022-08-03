@@ -22,13 +22,13 @@ driver.get("https://drive.google.com/drive/my-drive")
 elements = driver.find_elements(
         By.CSS_SELECTOR, 'button[aria-label="New"]')
 time.sleep(3)
-print(len(elements))
+# print(len(elements))
 elements[0].click()
 time.sleep(2)
 elements = driver.find_elements(
         By.CSS_SELECTOR, 'div[role="menuitem"][aria-posinset="2"]')
 time.sleep(3)
-print(len(elements))
+# print(len(elements))
 elements[0].click()
 time.sleep(3)
 

@@ -405,12 +405,13 @@ def uploadToFacebook():
             # if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[5]/div/div/div/div/div/div/div/div/span/span') == False:
             elements = driver.find_elements(By.CSS_SELECTOR, 'div[aria-label="Post"]')
             if len(elements):
-                # print(len(elements))
+                print(len(elements))
                 # attrs = driver.execute_script(
                 #     'var items = {}; for (index = 0; index < arguments[0].attributes.length; ++index) { items[arguments[0].attributes[index].name] = arguments[0].attributes[index].value }; return items;', elements[0])
                 # print(attrs)
                 try:
                     attr = elements[0].get_attribute('aria-disabled')
+                    print(attr)
                     while attr and max_timeout > 0:
                         try:
                             attr = elements[0].get_attribute('aria-disabled')

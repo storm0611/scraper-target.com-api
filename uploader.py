@@ -382,6 +382,9 @@ def uploadToFacebook():
             # if check_exists_by_xpath('/html/body/div[1]/div/div[1]/div/div[4]/div/div/div[1]/div/div[2]/div/div/div/form/div/div[1]/div/div[2]/div/div[3]/div[5]/div/div/div/div/div/div/div/div/span/span') == False:
             elements = driver.find_elements(By.CSS_SELECTOR, 'div[aria-label="Post"]')
             if len(elements):
+                print(len(elements))
+                print(type(elements[0].get_attribute(
+                    'aria-disabled')), elements[0].get_attribute('aria-disabled'))
                 while "true" in elements[0].get_attribute('aria-disabled') and max_timeout > 0:
                     max_timeout -= 1
                 if max_timeout:

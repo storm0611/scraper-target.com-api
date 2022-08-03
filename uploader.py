@@ -218,7 +218,7 @@ def uploadToTikTok():
                     print("Video Posted!")
                     break
 
-    driver.close()
+    # driver.close()
 
     #driver = uc.Chrome(use_subprocess=True)
 
@@ -459,7 +459,7 @@ def uploadToFacebook():
 # ##                print("Video is posted!")
 # ##                max_timeout = 0
 
-        driver.close()
+        # driver.close()
 
         #/li/div[1]/div/div[1]/span/span
 

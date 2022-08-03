@@ -308,14 +308,6 @@ def uploadToFacebook():
 ##        upload.click()
 ##        time.sleep(2)
 
-        #get file path to save page
-        # n = os.path.join("C:\Users\ghs6kor\Downloads\Test", "Page.html")
-        #open file in write mode with encoding
-        # f = codecs.open("Page1.html", "w", "utf−8")
-        # #obtain page source
-        # h = driver.find_element(By.XPATH, '/html/body').get_attribute('innerHTML')
-        # #write page source content to file
-        # f.write(h)
         max_timeout = 10
         while max_timeout > 0:
             max_timeout -= 1
@@ -332,6 +324,18 @@ def uploadToFacebook():
         elements[0].click()
         print("Photo/Video pressed!")
         time.sleep(5)
+        
+        #get file path to save page
+        # n = os.path.join("C:\Users\ghs6kor\Downloads\Test", "Page.html")
+        #open file in write mode with encoding
+        f = codecs.open("Page1.html", "w", "utf−8")
+        # #obtain page source
+        h = driver.find_elements(By.CSS_SELECTOR, 'form')
+        print(len(h))
+        # #write page source content to file
+        f.write(h[0])
+        driver.close()
+        return
         # for element in elements:
         #     print(element.find_elements(By.XPATH, ".//*"))
         #     for ele in element.find_elements(By.XPATH, ".//*"):

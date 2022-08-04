@@ -489,7 +489,13 @@ def uploadToGoogle():
     driver = webdriver.Chrome(executable_path=chromedriver,
                             chrome_options=chrome_options, desired_capabilities=capabilities)
 
+    # Open a new window
+    driver.execute_script("window.open('');")
+    # Switch to the new window and open URL B
+    driver.switch_to.window(driver.window_handles[1])
     driver.get("https://drive.google.com/drive/my-drive")
+    # driver.get("https://drive.google.com/drive/my-drive")
+    time.sleep(3)
 
     elements = driver.find_elements(
         By.CSS_SELECTOR, 'button[aria-label="New"]')
@@ -522,6 +528,7 @@ def uploadToGoogle():
         time.sleep(2)
         if len(elements):
             print("Video is posted!")
+
 
 def configBrowser():
     global driver

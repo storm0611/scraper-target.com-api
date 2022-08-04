@@ -1,5 +1,6 @@
 import os
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import undetected_chromedriver as uc
 import pyautogui
@@ -10,12 +11,17 @@ import time
 path = os.getcwd() + "\\final.mp4"  # your video path
 # print(path)
 ##FacebookUser = 'Justsendit@live.com'
+# os.system('cmd /k "\"C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe\" --remote-debugging-port=9222"')
 
-options = webdriver.ChromeOptions()
-options.add_argument("--user-data-dir=C:\\Users\\justs\\AppData\\Local\\Google\\Chrome\\User Data")
+chrome_options = Options()
+chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
+
+# options = webdriver.ChromeOptions()
+# options.add_argument("--user-data-dir=C:\\Users\\justs\\AppData\\Local\\Google\\Chrome\\User Data")
 chromedriver = "./chromedriver"
 capabilities = webdriver.DesiredCapabilities.CHROME.copy()
-driver = webdriver.Chrome(executable_path=chromedriver, chrome_options=options, desired_capabilities=capabilities)
+driver = webdriver.Chrome(executable_path=chromedriver,
+                          chrome_options=chrome_options, desired_capabilities=capabilities)
     
 driver.get("https://drive.google.com/drive/my-drive")
     

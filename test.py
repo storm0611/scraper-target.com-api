@@ -63,4 +63,5 @@ else:
     if len(elements):
         print("Video is posted!")
 
+driver.close()
     

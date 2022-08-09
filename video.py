@@ -1,6 +1,5 @@
 import time
 import cv2
-import argparse
 import os
 import urllib.request
 import numpy as np

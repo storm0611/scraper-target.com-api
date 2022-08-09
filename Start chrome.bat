@@ -1,0 +1,1 @@
+"C:\Program Files\Google\Chrome\Application\chrome.exe" 127.0.0.1:5000 --remote-debugging-port=9222 --user-data-dir="C:\Users\HOPE\AppData\Local\Google\Chrome\User Data"

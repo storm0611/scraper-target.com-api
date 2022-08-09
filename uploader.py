@@ -479,11 +479,11 @@ def uploadToGoogle():
     # driver = webdriver.Chrome(executable_path=chromedriver,
     #                         chrome_options=options, desired_capabilities=capabilities)
 
-    chrome_options = Options()
-    chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
+    # chrome_options = Options()
+    # chrome_options.add_experimental_option("debuggerAddress", "127.0.0.1:9222")
 
-    # options = webdriver.ChromeOptions()
-    # options.add_argument("--user-data-dir=C:\\Users\\justs\\AppData\\Local\\Google\\Chrome\\User Data")
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("--user-data-dir=C:\\Users\\justs\\AppData\\Local\\Google\\Chrome\\User Data")
     chromedriver = "./chromedriver"
     capabilities = webdriver.DesiredCapabilities.CHROME.copy()
     driver = webdriver.Chrome(executable_path=chromedriver,
@@ -556,9 +556,9 @@ if __name__ == '__main__':
     options.add_argument('--profile-directory=Default')
     driver = webdriver.Chrome(options = options)
 
-    # uploadToInstagram()
-    # uploadToTikTok()
-    # uploadToFacebook()
+    uploadToInstagram()
+    uploadToTikTok()
+    uploadToFacebook()
     uploadToGoogle()
     
     # configBrowser()

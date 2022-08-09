@@ -559,9 +559,9 @@ if __name__ == '__main__':
     # uploadToInstagram()
     # uploadToTikTok()
     # uploadToFacebook()
-    # uploadToGoogle()
+    uploadToGoogle()
     
-    configBrowser()
+    # configBrowser()
 
 
 
